@@ -3,7 +3,7 @@ import { list } from "@vercel/blob";
 
 export function Video() {
   const { blobs } = await list({
-    prefix: fileName,
+    prefix: "fileName",
     limit: 1,
   });
   const { url } = blobs[0];

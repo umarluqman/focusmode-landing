@@ -13,6 +13,7 @@
     "@cloudinary/url-gen": "^1.19.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-slot": "^1.0.2",
+    "@vercel/blob": "^0.23.2",
     "cal-sans": "^1.0.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
