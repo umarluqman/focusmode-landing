@@ -3,12 +3,13 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
 import { Testimonials } from "@/components/testimonials";
+// import { Cloudinary } from "@cloudinary/url-gen/index";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
       <div>
-        <title>Acme Inc - The complete platform for building the Web</title>
+        <title>focusmode - stayed focus, be present</title>
         <meta
           content="Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source."
           name="description"

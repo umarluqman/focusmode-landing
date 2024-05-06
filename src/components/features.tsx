@@ -8,11 +8,9 @@ export let Features = () => {
               Features
             </div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              Unlock Your Potential
+              10x Your Productivity
             </h2>
-            <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Discover the tools and features that will transform your workflow.
-            </p>
+            <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400"></p>
           </div>
         </div>
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-2">
@@ -21,10 +19,9 @@ export let Features = () => {
               <BoltIcon className="h-5 w-5 text-primary" />
             </div>
             <div className="space-y-1">
-              <h3 className="text-lg font-bold">Blazing Fast</h3>
+              <h3 className="text-lg font-bold">4 Randomised Interventions</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Our platform is optimized for lightning-fast performance,
-                ensuring your users get the best experience.
+                Choose from 4 different interventions to help you stay mindful.
               </p>
             </div>
           </div>
@@ -33,10 +30,9 @@ export let Features = () => {
               <RocketIcon className="h-5 w-5 text-primary" />
             </div>
             <div className="space-y-1">
-              <h3 className="text-lg font-bold">Effortless Scaling</h3>
+              <h3 className="text-lg font-bold">Customized Interventions</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Easily scale your application to handle any traffic spike,
-                without the hassle of managing infrastructure.
+                Change the title of the interventions to fit your needs.
               </p>
             </div>
           </div>
@@ -45,10 +41,9 @@ export let Features = () => {
               <SettingsIcon className="h-5 w-5 text-primary" />
             </div>
             <div className="space-y-1">
-              <h3 className="text-lg font-bold">Customizable</h3>
+              <h3 className="text-lg font-bold">Schedule</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Tailor our platform to your unique needs, with a wide range of
-                customization options to fit your workflow.
+                Stay mindful to maximise your time on autopilot
               </p>
             </div>
           </div>
