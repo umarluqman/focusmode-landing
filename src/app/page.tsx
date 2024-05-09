@@ -1,3 +1,4 @@
+import SEOHead from "@/components/SEOhead";
 import { CtaSection } from "@/components/cta-section";
 import { Features } from "@/components/features";
 import { Footer } from "@/components/footer";
@@ -5,19 +6,16 @@ import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
 import { Objections } from "@/components/objections";
 import { Testimonials } from "@/components/testimonials";
-// import { Cloudinary } from "@cloudinary/url-gen/index";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
-      <div>
-        <title>focusmode - stayed focus, be present</title>
-        <meta
-          content="Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source."
-          name="description"
-        />
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-      </div>
+      <SEOHead
+        title="focusmode"
+        description="stayed focus, be present"
+        path="/"
+        ogPath="/og-image.png"
+      />
       <Header />
 
       <main className="flex-1 bg-gray-100 dark:bg-gray-950">
