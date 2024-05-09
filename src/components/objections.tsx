@@ -50,17 +50,17 @@ export let Objections = () => {
               className="text-lg tracking-wide sm:text-5xl text-zinc-50 max-w-[700px]"
               style={{ fontFamily: "var(--font-cal-sans)" }}
             >
-              We know what you're thinking
+              We know what you&#39;re thinking
             </h2>
             <p className="max-w-[600px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              {" "}
-              Another productivity tool that promises the world but doesn't
+              Another productivity tool that promises the world but doesn&#39;t
               deliver. focusmode is different.
             </p>
             <p className="max-w-[600px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              It's not about blocking sites entirely, but helping you be more
-              intentional with your browsing. With customizable interventions
-              and breaks, focusmode puts you back in the driver's seat.
+              It&#39;s not about blocking sites entirely, but helping you be
+              more intentional with your browsing. With customizable
+              interventions and breaks, focusmode puts you back in the
+              driver&#39;s seat.
             </p>
           </div>
         </div>

@@ -39,7 +39,7 @@ export let Testimonials = () => {
             className="text-3xl font-bold tracking-wide sm:text-5xl"
             style={{ fontFamily: "var(--font-cal-sans)" }}
           >
-            Don't take it from us
+            Don&#39;t take it from us
           </h2>
           <p className="max-w-[900px] text-gray-500 dark:text-gray-400">
             See what others have to say.
