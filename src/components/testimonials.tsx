@@ -1,66 +1,66 @@
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { ArrowBigRight, MoveRightIcon } from "lucide-react";
+
+const testimonials = [
+  {
+    quote:
+      "this is one of the most cleanest most asthetic and most productive extension ever that too for free.",
+    name: "Aniket Singh Chauhan",
+  },
+  {
+    quote: "The most valuable extension I've ever used! Thank you so much!",
+    name: "林家鋒",
+  },
+  {
+    quote:
+      "New update is great ! with gamification block and more visuals, keep you more aware of NOT entering blocked sites ( instead of mindlessly turning off extention for a second and entering)",
+    name: "Iman Shams M",
+  },
+  {
+    quote:
+      "This is simply perfect, makes you do conscient choices! Version 2.0 is better than before, because it makes you think twice before entering a distracting website with the interventions.",
+    name: "Victor Armbruster",
+  },
+  {
+    quote:
+      "Great extension, it definitely stops me from going down those internet rabbit holes when I should be working on something. Simple, straightforward, and I especially like the new scheduled feature. Just what I needed.",
+    name: "Gabby M",
+  },
+];
 
 export let Testimonials = () => {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container grid grid-cols-1 gap-6 px-4 md:grid-cols-2 lg:grid-cols-3 md:px-6">
-        <div className="flex flex-col items-start rounded-lg bg-white p-6 shadow-sm transition-all hover:bg-gray-50 dark:bg-gray-950 dark:hover:bg-gray-900">
-          <div className="mb-4 flex items-center space-x-4">
-            <Avatar>
-              <AvatarImage alt="@shadcn" src="/placeholder-avatar.jpg" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div>
-              <h4 className="text-lg font-semibold">Olivia Davis</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                CEO, Acme Inc
-              </p>
-            </div>
-          </div>
-          <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-            "The customer service I received was exceptional. The support team
-            went above and beyond to address my concerns."
-          </p>
-        </div>
-        <div className="flex flex-col items-start rounded-lg bg-white p-6 shadow-sm transition-all hover:bg-gray-50 dark:bg-gray-950 dark:hover:bg-gray-900">
-          <div className="mb-4 flex items-center space-x-4">
-            <Avatar>
-              <AvatarImage alt="@jaredpalmer" src="/placeholder-avatar.jpg" />
-              <AvatarFallback>JP</AvatarFallback>
-            </Avatar>
-            <div>
-              <h4 className="text-lg font-semibold">Jared Palmer</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                CTO, Vercel
-              </p>
-            </div>
-          </div>
-          <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-            "The platform has been a game-changer for our team. The seamless
-            deployment and scalability have allowed us to focus on building
-            great products."
-          </p>
-        </div>
-        <div className="flex flex-col items-start rounded-lg bg-white p-6 shadow-sm transition-all hover:bg-gray-50 dark:bg-gray-950 dark:hover:bg-gray-900">
-          <div className="mb-4 flex items-center space-x-4">
-            <Avatar>
-              <AvatarImage alt="@maxleiter" src="/placeholder-avatar.jpg" />
-              <AvatarFallback>ML</AvatarFallback>
-            </Avatar>
-            <div>
-              <h4 className="text-lg font-semibold">Max Leiter</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Developer, Acme Inc
-              </p>
-            </div>
-          </div>
-          <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-            "The developer tools and documentation have been invaluable. I was
-            able to get up and running in no time and build complex applications
-            with ease."
+    <div className="h-[40rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+      <div className="flex flex-col items-center justify-center space-y-4 text-center">
+        <div className="space-y-2 mb-8">
+          <h2
+            className="text-3xl font-bold tracking-wide sm:text-5xl"
+            style={{ fontFamily: "var(--font-cal-sans)" }}
+          >
+            Don't take it from us
+          </h2>
+          <p className="max-w-[900px] text-gray-500 dark:text-gray-400">
+            See what others have to say.
           </p>
         </div>
       </div>
-    </section>
+      <InfiniteMovingCards
+        items={testimonials}
+        direction="right"
+        speed="slow"
+      />
+      <Button variant={"outline"} className="mt-20">
+        <Link
+          href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex space-x-3 items-center"
+        >
+          <span>More reviews</span> <MoveRightIcon />
+        </Link>
+      </Button>
+    </div>
   );
 };

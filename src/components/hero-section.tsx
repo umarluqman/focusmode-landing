@@ -1,37 +1,74 @@
-import { Button } from "@/components/ui/button";
-import { Cloudinary } from "@cloudinary/url-gen/index";
-import { AdvancedVideo } from "@cloudinary/react";
-import { Video } from "./video";
-import { Suspense } from "react";
+"use client";
 
-const cld = new Cloudinary({
-  cloud: {
-    cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+import { Button } from "@/components/ui/button";
+import { CldVideoPlayer } from "next-cloudinary";
+import { LandingSocialProof } from "./social-proof/landing-social-proof";
+import Link from "next/link";
+
+const avatarItems = [
+  {
+    imageSrc: "/users/6.png",
+    name: "Khang Nguyen Duy",
   },
-});
+  {
+    imageSrc: "/users/3.png",
+    name: "Stan Olery",
+  },
+  {
+    imageSrc: "/users/4.jpeg",
+    name: "Julio Santirachi",
+  },
+  {
+    imageSrc: "/users/8.jpeg",
+    name: "Cristian Andrei Grigore",
+  },
+];
 
 export let HeroSection = () => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container grid items-center gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_550px]">
+      <div className="container grid items-center gap-6 lg:grid-cols-[500px_1fr] lg:gap-12 xl:grid-cols-[550px_1fr]">
         <div className="flex flex-col justify-center space-y-4">
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold tracking-wide sm:text-5xl xl:text-6xl/none">
-              Get Distracted When Distracted
+          <div className="space-y-8">
+            <h1
+              className="text-4xl font-bold tracking-wide sm:text-5xl xl:text-6xl/none"
+              style={{ fontFamily: "var(--font-cal-sans)" }}
+            >
+              Reduce Mindless Browsing By 10x
             </h1>
-            <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400 mb-8">
-              focusmode helps you to get out of the loop and stay mindful when
-              accessing distracting websites. No more wasting time for hours
-              unconsciously.
+            <p className="max-w-[600px] m:text-xl text-zinc-500 dark:text-zinc-400 mb-8 leading-8">
+              Get out of the loop and stay mindful when accessing distracting
+              websites. No more wasting time for hours unconsciously.
+              {/* Stop mindless browsing and take control of your time online */}
             </p>
-            <Button className="">Download Now</Button>
+            <LandingSocialProof
+              showRating
+              avatarItems={avatarItems}
+              numberOfUsers={12000}
+            />
+            <Button>
+              <Link
+                href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download Now
+              </Link>
+            </Button>
           </div>
         </div>
         <div className="aspect-video overflow-hidden rounded-lg">
-          <span className="h-full w-full object-cover rounded-md bg-muted">
-            <Suspense>
-              <Video />
-            </Suspense>
+          <span className="h-full w-full object-cover rounded-md bg-muted shadow-2xl">
+            <CldVideoPlayer
+              autoplay
+              controls={false}
+              muted
+              loop
+              id="intro"
+              width={529}
+              height={344}
+              src={"focusmode-intro"}
+            />
           </span>
         </div>
       </div>

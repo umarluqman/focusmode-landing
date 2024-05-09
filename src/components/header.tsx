@@ -1,57 +1,39 @@
 import { MountainIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 
 export let Header = () => {
   return (
-    <header className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-6 bg-white dark:bg-gray-900">
+    <header className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-6 bg-white dark:bg-zinc-900">
       <Link className="flex items-center" href="#">
-        <div className="flex space-x-3">
-          <MountainIcon className="h-6 w-6 text-gray-900 dark:text-gray-50" />
-          {/* <img
-          src="/public/focusmode-logo.png"
-          alt="focusmode logo"
-          width={32}
-          height={32}
-        /> */}
-          <span className="sr-only">foscusmode</span>
-          <div>focusmode</div>
+        <div className="flex space-x-3 items-center">
+          <Image
+            src="/focusmode-logo.png"
+            alt="focusmode logo"
+            width={32}
+            height={32}
+          />
+          <span className="sr-only">focusmode</span>
+          <div
+            className="tracking-wide"
+            style={{ fontFamily: "var(--font-cal-sans)" }}
+          >
+            focusmode
+          </div>
         </div>
       </Link>
-      <nav className="hidden justify-center gap-4 sm:flex md:gap-6">
-        {/* <Link
-          className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 hover:underline underline-offset-4"
-          href="#"
-        >
-          Features
-        </Link>
-        <Link
-          className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 hover:underline underline-offset-4"
-          href="#"
-        >
-          Pricing
-        </Link>
-        <Link
-          className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 hover:underline underline-offset-4"
-          href="#"
-        >
-          About
-        </Link>
-        <Link
-          className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 hover:underline underline-offset-4"
-          href="#"
-        >
-          Contact
-        </Link> */}
-      </nav>
+      <nav className="hidden justify-center gap-4 sm:flex md:gap-6"></nav>
       <div className="ml-auto">
-        <Link
-          className="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-          href="#"
-        >
-          Download Now
-        </Link>
+        <Button>
+          <Link
+            href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download Now
+          </Link>
+        </Button>
       </div>
     </header>
   );

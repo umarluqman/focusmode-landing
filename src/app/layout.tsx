@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
+import "next-cloudinary/dist/cld-video-player.css";
 
 const CalSans = localFont({
   src: "../../public/fonts/CalSans-SemiBold.otf",

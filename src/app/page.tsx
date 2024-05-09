@@ -1,7 +1,9 @@
+import { CtaSection } from "@/components/cta-section";
 import { Features } from "@/components/features";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
+import { Objections } from "@/components/objections";
 import { Testimonials } from "@/components/testimonials";
 // import { Cloudinary } from "@cloudinary/url-gen/index";
 
@@ -20,8 +22,10 @@ export default function Home() {
 
       <main className="flex-1 bg-gray-100 dark:bg-gray-950">
         <HeroSection />
+        <Objections />
         <Features />
         <Testimonials />
+        <CtaSection />
       </main>
       <Footer />
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
+import { PopiconsHomeLine } from "@popicons/react";
 // import {
 //   IconClipboardCopy,
 //   IconFileBroken,
@@ -28,23 +29,26 @@ const Skeleton = () => (
 );
 const items = [
   {
-    title: "The Dawn of Innovation",
-    description: "Explore the birth of groundbreaking ideas and inventions.",
-    header: <Skeleton />,
+    title: "Structured Breaks",
+    description:
+      "When you visit a distracting site, focusmode presents a calming intervention. Breathe, stretch, and decide mindfully how long you want to spend there.",
+    header: <PopiconsHomeLine />,
     className: "md:col-span-2",
     // icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "The Digital Revolution",
-    description: "Dive into the transformative power of technology.",
-    header: <Skeleton />,
+    title: "Personalized Prompts",
+    description:
+      "Create your own intervention messages that resonate with you. Choose break durations that fit your workflow. FocusMode adapts to you.",
+    header: <PopiconsHomeLine />,
     className: "md:col-span-1",
     // icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
   },
   {
-    title: "The Art of Design",
-    description: "Discover the beauty of thoughtful and functional design.",
-    header: <Skeleton />,
+    title: "Automatic Scheduling",
+    description:
+      "Set focusmode to activate during your most productive hours, and turn off when it's time to unwind. Strike the perfect balance effortlessly.",
+    header: <PopiconsHomeLine />,
     className: "md:col-span-1",
     // icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
@@ -52,7 +56,7 @@ const items = [
     title: "The Power of Communication",
     description:
       "Understand the impact of effective communication in our lives.",
-    header: <Skeleton />,
+    header: <PopiconsHomeLine />,
     className: "md:col-span-2",
     // icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
   },
