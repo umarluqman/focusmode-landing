@@ -10,12 +10,6 @@ import { Testimonials } from "@/components/testimonials";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
-      <SEOHead
-        title="focusmode"
-        description="stayed focus, be present"
-        path="/"
-        ogPath="/og-image.png"
-      />
       <Header />
 
       <main className="flex-1 bg-gray-100 dark:bg-gray-950">
