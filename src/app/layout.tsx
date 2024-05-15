@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://focusmode.app"),
   title: {
-    default: "focusmode",
+    default: "focusmode - Stay focused, be present",
     template: "%s | focusmode",
   },
   description: "Reduce Mindless Browsing by 10x.",
