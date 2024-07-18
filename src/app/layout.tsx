@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next/types";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
 import "next-cloudinary/dist/cld-video-player.css";
+import Providers from "@/components/providers";
 
 const CalSans = localFont({
   src: "../../public/fonts/CalSans-SemiBold.otf",
@@ -68,7 +69,7 @@ export default function RootLayout({
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#ffffff"></meta>
       <body className={`${inter.className} ${CalSans.variable}`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
       <script async src="https://cdn.splitbee.io/sb.js"></script>
     </html>
