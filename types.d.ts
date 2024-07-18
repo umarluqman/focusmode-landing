@@ -15,3 +15,14 @@ declare module "next-auth" {
     isSubscribed?: boolean;
   }
 }
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    stripeCustomerId?: string;
+    isSubscribed?: boolean;
+    accessToken?: string;
+    refreshToken?: string;
+    accessTokenExpires?: number;
+    error?: "RefreshAccessTokenError";
+  }
+}

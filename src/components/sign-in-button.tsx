@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { GoogleIcon } from "./google-icon";
 import { Button } from "./ui/button";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { TestRefresh } from "./test-refresh";
 // import secureLocalStorage from "react-secure-storage";
 
 export function SignInButton() {
@@ -22,6 +23,7 @@ export function SignInButton() {
   if (session) {
     return (
       <>
+        <TestRefresh />
         Signed in as {session.user.email} <br />
         <Button onClick={() => signOut()}>Sign out</Button>
       </>
