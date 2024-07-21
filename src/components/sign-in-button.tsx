@@ -23,7 +23,7 @@ export function SignInButton() {
   if (session) {
     return (
       <>
-        <TestRefresh />
+        {/* <TestRefresh /> */}
         Signed in as {session.user.email} <br />
         <Button onClick={() => signOut()}>Sign out</Button>
       </>

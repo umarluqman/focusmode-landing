@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { CldVideoPlayer } from "next-cloudinary";
 import { LandingSocialProof } from "./social-proof/landing-social-proof";
 import Link from "next/link";
-
+import Image from "next/image";
+import { motion } from "framer-motion";
 const avatarItems = [
   {
     imageSrc: "/users/6.png",
@@ -46,13 +47,21 @@ export let HeroSection = () => {
               avatarItems={avatarItems}
               numberOfUsers={12000}
             />
+
             <Button>
               <Link
                 href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="flex items-center gap-2"
               >
-                Download Now
+                <Image
+                  src="/chrome.png"
+                  alt="chrome logo"
+                  width={24}
+                  height={24}
+                />
+                Install Now
               </Link>
             </Button>
           </div>
