@@ -36,6 +36,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.8",
     "@prisma/client": "^5.17.0",
     "@types/chrome": "^0.0.268",
     "@types/jsonwebtoken": "^9.0.6",
