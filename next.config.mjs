@@ -7,6 +7,9 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
   output: "standalone",
 };
 
