@@ -4,6 +4,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import "next-cloudinary/dist/cld-video-player.css";
 import Providers from "@/components/providers";
+// import { eudoxusSans } from "@/lib/font";
 
 const CalSans = localFont({
   src: "../../public/fonts/CalSans-SemiBold.otf",

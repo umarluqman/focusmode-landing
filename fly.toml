@@ -19,7 +19,7 @@ primary_region = 'sin'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
-  custom_domains = ["focusmode.app"]
+ custom_domains = ["focusmode.app", "www.focusmode.app"]
 
 [[vm]]
   memory = '1gb'
