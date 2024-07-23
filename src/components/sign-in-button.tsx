@@ -1,11 +1,8 @@
 "use client";
 
-import router from "next/router";
-import { useEffect } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { GoogleIcon } from "./google-icon";
 import { Button } from "./ui/button";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { TestRefresh } from "./test-refresh";
 // import secureLocalStorage from "react-secure-storage";
 
 export function SignInButton() {
