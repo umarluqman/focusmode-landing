@@ -43,27 +43,27 @@ const PartnershipPage: React.FC = () => {
               />
             </a>
             {/* <img src={merlinLogo} alt="merlin logo" width={40} height={40} /> */}
-            <a
-              href="https://coda.io/@foyer/merlin-marketing-kit?tap_a=128832-a2ce08&ref=yjlloth"
-              target="_BLANK"
-              rel="nofollow"
+            <Link
+              href="https://fas.st/t/VLPPjGbB"
+              target="_blank"
+              rel="noopener noreferrer"
               className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
             >
               Merlin AI
-            </a>{" "}
+            </Link>{" "}
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-row space-x-8 w-full">
           <div className="flex-1 space-y-6 text-base text-zinc-700">
             <p>
-              <a
-                href="https://coda.io/@foyer/merlin-marketing-kit?tap_a=128832-a2ce08&ref=yjlloth"
-                target="_BLANK"
-                rel="nofollow"
+              <Link
+                href="https://fas.st/t/VLPPjGbB"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
               >
                 Merlin AI
-              </a>{" "}
+              </Link>{" "}
               complements focusmode perfectly by enhancing your productivity
               when you are in or out of a focus session. It&apos;s an AI-powered
               Chrome extension that helps you work smarter and faster.
@@ -75,14 +75,14 @@ const PartnershipPage: React.FC = () => {
               <p className="font-bold">Special Offer</p>
               <p>
                 Get 20% off on{" "}
-                <a
-                  href="https://coda.io/@foyer/merlin-marketing-kit?tap_a=128832-a2ce08&ref=yjlloth"
-                  target="_BLANK"
-                  rel="nofollow"
+                <Link
+                  href="https://fas.st/t/VLPPjGbB"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
                 >
                   Merlin AI
-                </a>{" "}
+                </Link>{" "}
                 by using the code: <span className="font-bold">MERLIN20</span>
               </p>
             </div>
@@ -91,7 +91,7 @@ const PartnershipPage: React.FC = () => {
               <p className="mb-2">
                 Here&apos;s the{" "}
                 <a
-                  href="https://coda.io/@foyer/merlin-marketing-kit?tap_a=128832-a2ce08&ref=yjlloth"
+                  href="https://fas.st/t/VLPPjGbB"
                   target="_BLANK"
                   rel="nofollow"
                   className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
