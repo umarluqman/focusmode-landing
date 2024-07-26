@@ -9,7 +9,16 @@ const nextConfig = {
   },
   images: {
     domains: ["res.cloudinary.com"],
+
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "static.tapfiliate.com",
+        pathname: "/**",
+      },
+    ],
   },
+  optimizeFonts: true,
   output: "standalone",
 };
 
