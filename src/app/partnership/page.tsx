@@ -68,6 +68,11 @@ const PartnershipPage: React.FC = () => {
               when you are in or out of a focus session. It&apos;s an AI-powered
               Chrome extension that helps you work smarter and faster.
             </p>
+            <p>
+              This is the chrome extension I use myself and I recommend it. I
+              may earn a commission if you make a purchase through these links,
+              at no extra cost to you.
+            </p>
             <div
               className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4"
               role="alert"
