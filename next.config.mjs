@@ -9,7 +9,6 @@ const nextConfig = {
   },
   images: {
     domains: ["res.cloudinary.com"],
-
     remotePatterns: [
       {
         protocol: "https",
@@ -17,6 +16,10 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+  },
+  env: {
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
+      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   },
   optimizeFonts: true,
   output: "standalone",
