@@ -7,12 +7,20 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  server: {
+    hostname: "0.0.0.0",
+    port: 3000,
+  },
   images: {
-    domains: ["res.cloudinary.com"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "static.tapfiliate.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
         pathname: "/**",
       },
     ],

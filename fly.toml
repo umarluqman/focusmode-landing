@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for focusmode-landing on 2024-07-22T14:24:17+08:00
+# fly.toml app configuration file generated for focusmode-landing on 2024-08-19T06:45:45+08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,25 +7,16 @@ app = 'focusmode-landing'
 primary_region = 'sin'
 
 [build]
-  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = "du9fijpsh"
-
-[[mounts]]
-  source = 'sqlite_data'
-  destination = '/data'
 
 [http_service]
   internal_port = 3000
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
- custom_domains = ["focusmode.app", "www.focusmode.app"]
 
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-
-[env]
-  DATABASE_URL = "file:/data/dev.db"
