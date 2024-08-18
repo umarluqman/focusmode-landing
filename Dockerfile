@@ -37,6 +37,8 @@ RUN npx prisma generate
 
 # Copy application code
 COPY --link . .
+COPY --link prisma ./prisma
+RUN npx prisma generate
 
 # Build application
 RUN pnpm run build
@@ -55,6 +57,7 @@ RUN apt-get update -qq && \
 
 # Copy built application
 COPY --from=build /app/.next/standalone /app
+COPY --from=build /app/prisma /app/prisma
 COPY --from=build /app/.next/static /app/.next/static
 COPY --from=build /app/public /app/public
 COPY --from=build /app/docker-entrypoint.js /app/docker-entrypoint.js
