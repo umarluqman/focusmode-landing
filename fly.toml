@@ -10,7 +10,7 @@ primary_region = 'sin'
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = "du9fijpsh"
 
 [[mounts]]
-  source = 'data'
+  source = 'sqlite_data'
   destination = '/data'
 
 [http_service]
@@ -26,3 +26,6 @@ primary_region = 'sin'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+
+[env]
+  DATABASE_URL = "file:/data/dev.db"
