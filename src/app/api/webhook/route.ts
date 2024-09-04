@@ -30,14 +30,11 @@ export async function POST(req: NextRequest) {
   }
 
   switch (event.type) {
-    case "payment_intent.succeeded":
-      const paymentIntent = event.data.object as Stripe.PaymentIntent;
-      await handleSuccessfulPayment(paymentIntent);
+    case "checkout.session.completed":
+      const session = event.data.object as Stripe.Checkout.Session;
+      await handleSuccessfulCheckout(session);
       break;
-    case "payment_intent.payment_failed":
-      const failedPaymentIntent = event.data.object as Stripe.PaymentIntent;
-      await handleFailedPayment(failedPaymentIntent);
-      break;
+
     // ... you can add more event types as needed ...
     default:
       console.log(`Unhandled event type ${event.type}`);
@@ -46,36 +43,35 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ received: true });
 }
 
-const handleSuccessfulPayment = async (paymentIntent: Stripe.PaymentIntent) => {
-  const customerId = paymentIntent.customer as string;
+const handleSuccessfulCheckout = async (session: Stripe.Checkout.Session) => {
+  if (session.customer && typeof session.customer === "string") {
+    const customerId = session.customer;
 
-  try {
-    const customer = await stripe.customers.retrieve(customerId);
-    if ("deleted" in customer) {
-      console.error("Customer has been deleted");
-      return;
+    try {
+      const customer = await stripe.customers.retrieve(customerId);
+      if ("deleted" in customer) {
+        console.error("Customer has been deleted");
+        return;
+      }
+      const email = customer.email;
+      if (!email) {
+        console.error("Customer email not found");
+        return;
+      }
+
+      await prisma.user.update({
+        where: { email: email },
+        data: {
+          isSubscribed: true,
+          stripeCustomerId: customerId,
+        },
+      });
+
+      console.log(`Subscription activated for user ${email}`);
+    } catch (error) {
+      console.error("Error updating user subscription status:", error);
     }
-    const email = customer.email;
-    if (!email) {
-      console.error("Customer email not found");
-      return;
-    }
-
-    await prisma.user.update({
-      where: { email: email },
-      data: {
-        isSubscribed: true,
-        stripeCustomerId: customerId,
-      },
-    });
-
-    console.log(`Payment recorded for user ${email}`);
-  } catch (error) {
-    console.error("Error updating user payment status:", error);
+  } else {
+    console.error("Invalid customer ID in session");
   }
-};
-
-const handleFailedPayment = async (paymentIntent: Stripe.PaymentIntent) => {
-  // Implement logic for failed payments
-  console.log(`Payment failed for PaymentIntent: ${paymentIntent.id}`);
 };
