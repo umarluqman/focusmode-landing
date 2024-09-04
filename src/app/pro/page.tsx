@@ -15,17 +15,19 @@ import { Check } from "lucide-react";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ProtectedRoute } from "@/components/protected-route";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function ProVersionPage() {
   const [isHovered, setIsHovered] = useState(false);
 
   const features = [
     "Unlimited interventions",
-    "Priority customer support",
+    "Customizable interventions",
     "Ad-free experience",
-    "Browsing analytics - coming soon",
+    "Browsing analytics",
   ];
-
+  const { data: session } = useSession();
   return (
     <ProtectedRoute>
       <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
@@ -38,8 +40,8 @@ export default function ProVersionPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl font-bold mb-4">Upgrade Pro</h1>
-            <p className="text-xl text-gray-600">Unlimited Interventions</p>
+            {/* <h1 className="text-4xl font-bold mb-4">Upgrade Now</h1> */}
+            {/* <p className="text-xl text-gray-600">Unlimited Interventions</p> */}
           </motion.div>
 
           <motion.div
@@ -52,17 +54,19 @@ export default function ProVersionPage() {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <CardHeader>
-                <CardTitle className="text-3xl font-bold">
-                  focusmode Pro
-                </CardTitle>
+              <CardHeader className="relative">
+                <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold py-1 px-2 rounded-bl-lg rounded-tr-lg transform rotate-12 shadow-md">
+                  LIFETIME
+                </div>
+                <CardTitle className="text-3xl font-bold">Pro</CardTitle>
                 <CardDescription>
-                  Take your experience to the next level
+                  Reclaim your focus and 10x your productivity
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold mb-6">
-                  $10.99<span className="text-xl font-normal">/year</span>
+                  $15.70
+                  <span className="text-xl font-normal"></span>
                 </div>
                 <ul className="space-y-2">
                   {features.map((feature, index) => (
@@ -85,9 +89,19 @@ export default function ProVersionPage() {
                   whileTap={{ scale: 0.95 }}
                   className="w-full"
                 >
-                  <Button className="w-full" size="lg">
-                    Upgrade Now
-                  </Button>
+                  <Link
+                    href={`${
+                      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+                    }?client_reference_id=${
+                      session?.user?.id
+                    }&prefilled_email=${encodeURIComponent(
+                      session?.user?.email || ""
+                    )}`}
+                  >
+                    <Button className="w-full" size="lg">
+                      Upgrade Now
+                    </Button>
+                  </Link>
                 </motion.div>
               </CardFooter>
             </Card>
@@ -101,7 +115,10 @@ export default function ProVersionPage() {
           >
             <p>
               Have questions?{" "}
-              <a href="#" className="text-blue-500 hover:underline">
+              <a
+                href="mailto:focusmode.app@gmail.com"
+                className="text-blue-500 hover:underline"
+              >
                 Contact our sales team
               </a>
             </p>
