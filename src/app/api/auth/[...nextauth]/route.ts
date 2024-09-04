@@ -71,15 +71,10 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      // Check if the URL is the default sign-in callback
-      if (url.startsWith(`${baseUrl}/api/auth/callback/google`)) {
-        return baseUrl + "/pro";
-      }
-      // For other cases, keep the original logic
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
+      // Always redirect to /pro after sign in
+      return baseUrl + "/pro";
     },
+    alwa,
   },
 
   events: {
