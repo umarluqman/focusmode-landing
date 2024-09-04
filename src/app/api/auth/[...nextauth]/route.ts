@@ -74,7 +74,6 @@ export const authOptions: NextAuthOptions = {
       // Always redirect to /pro after sign in
       return baseUrl + "/pro";
     },
-    alwa,
   },
 
   events: {
