@@ -30,15 +30,15 @@ export async function POST(req: NextRequest) {
   }
 
   switch (event.type) {
-    case "customer.subscription.created":
-    case "customer.subscription.updated":
-      const subscription = event.data.object as Stripe.Subscription;
-      await handleSubscriptionChange(subscription, true);
+    case "payment_intent.succeeded":
+      const paymentIntent = event.data.object as Stripe.PaymentIntent;
+      await handleSuccessfulPayment(paymentIntent);
       break;
-    case "customer.subscription.deleted":
-      const deletedSubscription = event.data.object as Stripe.Subscription;
-      await handleSubscriptionChange(deletedSubscription, false);
+    case "payment_intent.payment_failed":
+      const failedPaymentIntent = event.data.object as Stripe.PaymentIntent;
+      await handleFailedPayment(failedPaymentIntent);
       break;
+    // ... you can add more event types as needed ...
     default:
       console.log(`Unhandled event type ${event.type}`);
   }
@@ -46,11 +46,8 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ received: true });
 }
 
-const handleSubscriptionChange = async (
-  subscription: Stripe.Subscription,
-  isSubscribed: boolean
-) => {
-  const customerId = subscription.customer as string;
+const handleSuccessfulPayment = async (paymentIntent: Stripe.PaymentIntent) => {
+  const customerId = paymentIntent.customer as string;
 
   try {
     const customer = await stripe.customers.retrieve(customerId);
@@ -67,13 +64,18 @@ const handleSubscriptionChange = async (
     await prisma.user.update({
       where: { email: email },
       data: {
-        isSubscribed: isSubscribed,
+        isSubscribed: true,
         stripeCustomerId: customerId,
       },
     });
 
-    console.log(`Subscription updated for user ${email}`);
+    console.log(`Payment recorded for user ${email}`);
   } catch (error) {
-    console.error("Error updating user subscription:", error);
+    console.error("Error updating user payment status:", error);
   }
+};
+
+const handleFailedPayment = async (paymentIntent: Stripe.PaymentIntent) => {
+  // Implement logic for failed payments
+  console.log(`Payment failed for PaymentIntent: ${paymentIntent.id}`);
 };
