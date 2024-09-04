@@ -6,7 +6,7 @@ import { StarHalfIcon, StarIcon } from "lucide-react";
  */
 export const LandingRating = ({
   className,
-  rating = 4.7,
+  rating = 4.8,
   maxRating = 5,
   size = "medium",
 }: {

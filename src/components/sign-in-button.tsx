@@ -19,11 +19,13 @@ export function SignInButton() {
 
   if (session) {
     return (
-      <>
+      <div className="flex flex-col space-y-8">
         {/* <TestRefresh /> */}
-        Signed in as {session.user.email} <br />
+        <div className="text-sm text-gray-500">
+          Signed in as {session.user.email}{" "}
+        </div>
         <Button onClick={() => signOut()}>Sign out</Button>
-      </>
+      </div>
     );
   }
   return (
