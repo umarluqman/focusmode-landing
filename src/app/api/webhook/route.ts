@@ -44,9 +44,20 @@ export async function POST(req: NextRequest) {
 }
 
 const handleSuccessfulCheckout = async (session: Stripe.Checkout.Session) => {
-  if (session.customer && typeof session.customer === "string") {
-    const customerId = session.customer;
+  console.log("Received session:", JSON.stringify(session, null, 2));
 
+  let customerId = session.customer as string;
+
+  if (!customerId && session.client_reference_id) {
+    // If customer ID is not in the session, try to get it from the user's Stripe customer ID
+    const user = await prisma.user.findUnique({
+      where: { id: session.client_reference_id },
+      select: { stripeCustomerId: true },
+    });
+    customerId = user?.stripeCustomerId || "";
+  }
+
+  if (customerId) {
     try {
       const customer = await stripe.customers.retrieve(customerId);
       if ("deleted" in customer) {
@@ -72,6 +83,6 @@ const handleSuccessfulCheckout = async (session: Stripe.Checkout.Session) => {
       console.error("Error updating user subscription status:", error);
     }
   } else {
-    console.error("Invalid customer ID in session");
+    console.error("Customer ID not found in session or user record");
   }
 };
