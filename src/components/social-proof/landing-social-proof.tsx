@@ -2,6 +2,7 @@ import clsx from "clsx";
 
 import { SocialProofItem, LandingAvatar } from "./landing-avatar";
 import { LandingRating } from "./landing-rating";
+import Image from "next/image";
 
 /**
  * Shows social proof with avatars, number of users and an optional rating.
@@ -33,7 +34,7 @@ export const LandingSocialProof = ({
   return (
     <div className={clsx("group flex flex-wrap gap-2", className)}>
       <div className={clsx("flex gap-1")}>
-        {avatarItems.map((avatarItem, index) => (
+        {/* {avatarItems.map((avatarItem, index) => (
           <LandingAvatar
             key={index}
             imageSrc={avatarItem.imageSrc}
@@ -48,9 +49,9 @@ export const LandingSocialProof = ({
               index > 3 ? `-ml-6` : ""
             )}
           />
-        ))}
+        ))} */}
 
-        <div
+        {/* <div
           className={clsx(
             !disableAnimation
               ? "md:group-hover:-ml-0.5 transition-all duration-300"
@@ -59,13 +60,25 @@ export const LandingSocialProof = ({
           )}
         >
           {numberText}+
-        </div>
+        </div> */}
+        <Image
+          src="/chrome copy.png"
+          width={48}
+          height={48}
+          alt="chrome logo"
+          className="filter grayscale"
+        ></Image>
       </div>
 
-      <div className="flex flex-col justify-center gap-1">
-        {showRating ? <LandingRating /> : null}
+      <div className="flex flex-col justify-center gap-1 ">
+        {showRating ? (
+          <div className="flex items-center gap-2">
+            <LandingRating />
+            on Chrome Web Store
+          </div>
+        ) : null}
         {!children ? (
-          <p className="text-xs max-w-sm">
+          <p className="text-sm max-w-sm">
             from {numberText}+ {suffixText}
           </p>
         ) : (

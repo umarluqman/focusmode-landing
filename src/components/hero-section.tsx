@@ -5,8 +5,7 @@ import { CldVideoPlayer } from "next-cloudinary";
 import { LandingSocialProof } from "./social-proof/landing-social-proof";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-const avatarItems = [
+export const avatarItems = [
   {
     imageSrc: "/users/6.png",
     name: "Khang Nguyen Duy",

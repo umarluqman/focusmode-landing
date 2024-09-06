@@ -17,6 +17,10 @@ import { Header } from "@/components/header";
 import { ProtectedRoute } from "@/components/protected-route";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { LandingSocialProof } from "@/components/social-proof/landing-social-proof";
+import { avatarItems } from "@/components/hero-section";
 
 export default function ProVersionPage() {
   const [isHovered, setIsHovered] = useState(false);
@@ -26,12 +30,31 @@ export default function ProVersionPage() {
     "Customizable interventions",
     "Ad-free experience",
     "Browsing analytics",
+    "Support Indie Developer",
   ];
   const { data: session } = useSession();
+  const [promoCode, setPromoCode] = useState("");
+  const [value, setValue] = useState("");
+  const onSubmit = () => {
+    setPromoCode(value);
+  };
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
   return (
     <ProtectedRoute>
       <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
         <Header showCta={false} />
+        {/* <div className="py-4 px-6">
+          <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
+            <div className="text-center mb-4 md:mb-0">
+              <h2 className="text-6xl font-bold max-w-2xl leading-normal">
+                Stay Mindful With Browsing Analytics
+              </h2>
+              <p className="text-sm mt-1"></p>
+            </div>
+          </div>
+        </div> */}
 
         <div className="container mx-auto px-4 py-16">
           <motion.div
@@ -48,7 +71,13 @@ export default function ProVersionPage() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col items-center justify-center gap-20 w-full"
           >
+            <LandingSocialProof
+              showRating
+              avatarItems={avatarItems}
+              numberOfUsers={13000}
+            />
             <Card
               className="max-w-md mx-auto"
               onMouseEnter={() => setIsHovered(true)}
@@ -65,8 +94,12 @@ export default function ProVersionPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold mb-6">
-                  $15.70
-                  <span className="text-xl font-normal"></span>
+                  {promoCode ? "$10.99" : "$15.70"}
+                  {promoCode && (
+                    <span className="text-xl font-normal ml-4 line-through text-zinc-400">
+                      <s>$15.70</s>
+                    </span>
+                  )}
                 </div>
                 <ul className="space-y-2">
                   {features.map((feature, index) => (
@@ -96,7 +129,7 @@ export default function ProVersionPage() {
                       session?.user?.id
                     }&prefilled_email=${encodeURIComponent(
                       session?.user?.email || ""
-                    )}`}
+                    )}&prefilled_promo_code=${promoCode}`}
                   >
                     <Button className="w-full" size="lg">
                       Upgrade Now
@@ -105,6 +138,31 @@ export default function ProVersionPage() {
                 </motion.div>
               </CardFooter>
             </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-6 w-full max-w-md mx-auto space-y-2"
+          >
+            {promoCode && (
+              <Badge className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-semibold">
+                Promo code applied
+              </Badge>
+            )}
+            <div className="flex items-center space-x-2">
+              <Input
+                type="text"
+                placeholder="Enter promo code"
+                className="flex-grow"
+                onChange={onChange}
+                value={value}
+              />
+              <Button variant="outline" onClick={onSubmit}>
+                Apply
+              </Button>
+            </div>
           </motion.div>
 
           <motion.div
