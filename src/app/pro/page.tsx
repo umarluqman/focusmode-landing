@@ -33,8 +33,8 @@ export default function ProVersionPage() {
     "Support Indie Developer",
   ];
   const { data: session } = useSession();
-  const [promoCode, setPromoCode] = useState("");
-  const [value, setValue] = useState("");
+  const [promoCode, setPromoCode] = useState("LAUNCH50");
+  const [value, setValue] = useState("LAUNCH50");
   const onSubmit = () => {
     setPromoCode(value);
   };
@@ -93,12 +93,17 @@ export default function ProVersionPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold mb-6">
-                  {promoCode ? "$10.99" : "$15.70"}
+                <div className="text-4xl font-bold mb-6 flex items-center space-x-4">
+                  <div>{promoCode ? "$10.99" : "$15.70"}</div>
                   {promoCode && (
-                    <span className="text-xl font-normal ml-4 line-through text-zinc-400">
-                      <s>$15.70</s>
-                    </span>
+                    <div className="flex flex-col">
+                      <span className="text-base font-normal line-through text-zinc-400">
+                        <s>$15.70</s>
+                      </span>
+                      <span className="text-xs font-semibold text-green-500">
+                        Save ${(15.7 - 10.99).toFixed(2)}
+                      </span>
+                    </div>
                   )}
                 </div>
                 <ul className="space-y-2">
