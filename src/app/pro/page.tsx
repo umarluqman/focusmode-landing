@@ -31,7 +31,6 @@ export default function ProVersionPage() {
     "Ad-free experience",
     "Browsing analytics",
     "Lifetime updates",
-    "Priority support",
     "Support Indie Developer",
   ];
   const { data: session } = useSession();
