@@ -23,10 +23,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: "focusmode",
     description: "Reduce Mindless Browsing by 10x.",
-    url: "https://focusmode.app/og-image.png",
+    url: "/public/focusmode-og-img.png",
     siteName: "focusmode",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/public/focusmode-og-img.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   robots: {
     index: true,
