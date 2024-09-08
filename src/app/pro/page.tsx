@@ -96,14 +96,14 @@ export default function ProVersionPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold mb-6 flex items-center space-x-4">
-                  <div>{promoCode ? "$10.99" : "$15.70"}</div>
+                  <div>{promoCode ? "$20.99" : "$29.99"}</div>
                   {promoCode && (
                     <div className="flex flex-col">
                       <span className="text-base font-normal line-through text-zinc-400">
-                        <s>$15.70</s>
+                        <s>$29.99</s>
                       </span>
                       <span className="text-xs font-semibold text-green-500">
-                        Save ${(15.7 - 10.99).toFixed(2)}
+                        Save ${(29.99 - 20.99).toFixed(2)}
                       </span>
                     </div>
                   )}
