@@ -4,6 +4,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import "next-cloudinary/dist/cld-video-player.css";
 import Providers from "@/components/providers";
+import SEOHead from "@/components/SEOhead";
 // import { eudoxusSans } from "@/lib/font";
 
 const CalSans = localFont({
@@ -59,6 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="canonical" href="https://focusmode.app" />
       <link rel="icon" href="/favicon.ico" />
       <link
         rel="icon"
