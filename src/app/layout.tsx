@@ -20,11 +20,13 @@ export const metadata: Metadata = {
     default: "focusmode - Stay focused, be present",
     template: "%s | focusmode",
   },
-  description: "Reduce Mindless Browsing by 10x.",
+  description:
+    "Reclaim 2-3 hours daily with focusmode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
   openGraph: {
     title: "focusmode",
-    description: "Reduce Mindless Browsing by 10x.",
-    url: "/public/focusmode-og-img.png",
+    description:
+      "Reclaim 2-3 hours daily with focusmode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
+    url: "https://focusmode.app",
     siteName: "focusmode",
     locale: "en_US",
     type: "website",
