@@ -1,10 +1,8 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
-import { CldVideoPlayer } from "next-cloudinary";
 import { LandingSocialProof } from "./social-proof/landing-social-proof";
 import Link from "next/link";
 import Image from "next/image";
+import PreviewSection from "./preview-section";
 export const avatarItems = [
   {
     imageSrc: "/users/6.png",
@@ -65,20 +63,7 @@ export let HeroSection = () => {
             </Button>
           </div>
         </div>
-        <div className="aspect-video overflow-hidden rounded-lg">
-          <span className="h-full w-full object-cover rounded-md bg-muted shadow-2xl">
-            <CldVideoPlayer
-              autoplay
-              controls={false}
-              muted
-              loop
-              id="intro"
-              width={529}
-              height={344}
-              src={"focusmode-intro"}
-            />
-          </span>
-        </div>
+        <PreviewSection />
       </div>
     </section>
   );
