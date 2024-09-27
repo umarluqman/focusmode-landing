@@ -42,7 +42,7 @@ export let HeroSection = () => {
             <LandingSocialProof
               showRating
               avatarItems={avatarItems}
-              numberOfUsers={12000}
+              numberOfUsers={13000}
             />
 
             <Button>
