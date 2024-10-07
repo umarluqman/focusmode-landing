@@ -11,8 +11,6 @@ export function SignInButton() {
   };
   const { data: session, status } = useSession();
 
-  console.log("Session data:", session);
-
   if (status === "loading") {
     return <div>Loading...</div>;
   }

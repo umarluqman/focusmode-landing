@@ -1,10 +1,13 @@
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]/route";
-import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { authOptions } from "../auth/[...nextauth]/route";
 
-export async function GET() {
+export { PATCH as PATCH } from "./free-trial";
+
+export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
+
   if (!session || !session.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -19,6 +22,7 @@ export async function GET() {
         image: true,
         stripeCustomerId: true,
         isSubscribed: true,
+        hasUsedFreeTrial: true,
       },
     });
 
@@ -26,11 +30,11 @@ export async function GET() {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ user });
+    return NextResponse.json({ user }, { status: 200 });
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.error("Error fetching user:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }
