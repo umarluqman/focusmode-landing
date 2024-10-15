@@ -1,8 +1,12 @@
 "use client";
 
-// import { motion } from "framer-motion";
-import { CldVideoPlayer } from "next-cloudinary";
+import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
+
+const CldVideoPlayer = dynamic(
+  () => import("next-cloudinary").then((mod) => mod.CldVideoPlayer),
+  { ssr: false }
+);
 
 const tabs = ["Slide In Out", "Hold to Complete", "Pixel"];
 
@@ -24,11 +28,7 @@ const Tab = ({ text, selected, setSelected }: TabProps) => {
     >
       <span className="relative z-10">{text}</span>
       {selected && (
-        <span
-          //   layoutId="tab"
-          //   transition={{ type: "spring", duration: 0.4 }}
-          className="absolute inset-0 z-0 rounded-md bg-zinc-950"
-        ></span>
+        <span className="absolute inset-0 z-0 rounded-md bg-zinc-950"></span>
       )}
     </button>
   );
@@ -46,6 +46,7 @@ const ButtonShapeTabs = () => {
       width: 529,
       height: 298,
       quality: "auto",
+      preload: "none" as const,
     };
 
     let src = "";
@@ -74,7 +75,7 @@ const ButtonShapeTabs = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-2">
-        {tabs.map((tab, index) => (
+        {tabs.map((tab) => (
           <Tab
             text={tab}
             selected={selected === tab}
