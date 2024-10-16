@@ -2,7 +2,6 @@ import type { Metadata } from "next/types";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
-import "next-cloudinary/dist/cld-video-player.css";
 import Providers from "@/components/providers";
 import SEOHead from "@/components/SEOhead";
 // import { eudoxusSans } from "@/lib/font";

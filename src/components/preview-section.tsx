@@ -2,11 +2,10 @@
 
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
-
-const CldVideoPlayer = dynamic(
-  () => import("next-cloudinary").then((mod) => mod.CldVideoPlayer),
-  { ssr: false }
-);
+import Video from "next-video";
+import slideInOut from "/videos/1 Clip 2.mp4";
+import holdToComplete from "/videos/0 Clip 1.mp4";
+import pixel from "/videos/2 Clip 3.mp4";
 
 const tabs = ["Slide In Out", "Hold to Complete", "Pixel"];
 
@@ -66,7 +65,20 @@ const ButtonShapeTabs = () => {
     return (
       <div className="aspect-video overflow-hidden rounded-lg" key={selected}>
         <span className="h-full w-full object-cover rounded-md bg-muted shadow-2xl">
-          <CldVideoPlayer {...videoProps} id={id} src={src} />
+          <Video
+            autoPlay={true}
+            muted={true}
+            loop={true}
+            controls={false}
+            src={
+              selected === "Slide In Out"
+                ? slideInOut
+                : selected === "Hold to Complete"
+                ? holdToComplete
+                : pixel
+            }
+          />
+          ;
         </span>
       </div>
     );
