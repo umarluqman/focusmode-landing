@@ -37,7 +37,7 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
       </Link>
       <nav className="hidden justify-center gap-4 sm:flex md:gap-6">
         {" "}
-        <Link className="flex items-center" href="/">
+        <Link className="flex items-center" href="/pro">
           <div className="flex space-x-3 items-center">
             <div className="tracking-wide">PRO Version</div>
           </div>
