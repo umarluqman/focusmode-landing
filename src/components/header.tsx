@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
+import { usePathname } from "next/navigation";
 
 export let Header = ({ showCta = true }: { showCta?: boolean }) => {
   const { data: session } = useSession();
@@ -12,9 +13,11 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
   const handleSignIn = () => {
     signIn("google");
   };
+  const pathname = usePathname();
+  const isProPage = pathname === "/pro";
   const isLoggedIn = !!session;
   return (
-    <header className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-6 bg-white dark:bg-zinc-900">
+    <header className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-12 bg-white dark:bg-zinc-900">
       <Link className="flex items-center" href="/">
         <div className="flex space-x-3 items-center">
           <Image
@@ -23,18 +26,25 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
             width={32}
             height={32}
           />
-          <span className="sr-only">focusmode</span>
+          <span className="sr-only">FocusMode</span>
           <div
             className="tracking-wide"
             style={{ fontFamily: "var(--font-cal-sans)" }}
           >
-            focusmode
+            FocusMode
           </div>
         </div>
       </Link>
-      <nav className="hidden justify-center gap-4 sm:flex md:gap-6"></nav>
+      <nav className="hidden justify-center gap-4 sm:flex md:gap-6">
+        {" "}
+        <Link className="flex items-center" href="/">
+          <div className="flex space-x-3 items-center">
+            <div className="tracking-wide">PRO Version</div>
+          </div>
+        </Link>
+      </nav>
       <div className="ml-auto">
-        {showCta ? (
+        {!isProPage ? (
           <Button>
             <Link
               href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"

@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
-import SEOHead from "@/components/SEOhead";
+import { Navbar } from "@/components/navbar";
+import { Header } from "@/components/header";
 // import { eudoxusSans } from "@/lib/font";
 
 const CalSans = localFont({
@@ -16,15 +17,15 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://focusmode.app"),
   title: {
-    default: "focusmode - Stay focused, be present",
-    template: "%s | focusmode",
+    default: "FocusMode - Stay focused, be present",
+    template: "%s | FocusMode",
   },
   description:
-    "Reclaim 2-3 hours daily with focusmode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
+    "Reclaim 2-3 hours daily with FocusMode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
   openGraph: {
     title: "focusmode",
     description:
-      "Reclaim 2-3 hours daily with focusmode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
+      "Reclaim 2-3 hours daily with FocusMode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
     url: "https://focusmode.app",
     siteName: "focusmode",
     locale: "en_US",
@@ -80,7 +81,12 @@ export default function RootLayout({
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#ffffff"></meta>
       <body className={`${inter.className} ${CalSans.variable}`}>
-        <Providers>{children}</Providers>
+        {/* <Navbar /> */}
+
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
       <script async src="https://cdn.splitbee.io/sb.js"></script>
     </html>

@@ -39,11 +39,7 @@ export let HeroSection = () => {
               websites. No more wasting time for hours unconsciously.
               {/* Stop mindless browsing and take control of your time online */}
             </p>
-            <LandingSocialProof
-              showRating
-              avatarItems={avatarItems}
-              numberOfUsers={13000}
-            />
+            <LandingSocialProof showRating avatarItems={avatarItems} />
 
             <Button>
               <Link

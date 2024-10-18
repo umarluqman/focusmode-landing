@@ -10,8 +10,6 @@ import { Testimonials } from "@/components/testimonials";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
-      <Header />
-
       <main className="flex-1 bg-gray-100 dark:bg-gray-950">
         <HeroSection />
         <Objections />

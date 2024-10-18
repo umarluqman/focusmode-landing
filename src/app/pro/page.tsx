@@ -45,7 +45,7 @@ export default function ProVersionPage() {
   };
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
-      <Header showCta={false} />
+      {/* <Header showCta={false} /> */}
       {/* <div className="py-4 px-6">
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
             <div className="text-center mb-4 md:mb-0">
@@ -74,11 +74,7 @@ export default function ProVersionPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex flex-col items-center justify-center gap-20 w-full"
         >
-          <LandingSocialProof
-            showRating
-            avatarItems={avatarItems}
-            numberOfUsers={13000}
-          />
+          <LandingSocialProof showRating avatarItems={avatarItems} />
           <Card
             className="max-w-md mx-auto"
             onMouseEnter={() => setIsHovered(true)}
