@@ -15,6 +15,9 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
   };
   const pathname = usePathname();
   const isProPage = pathname === "/pro";
+  const isHomePage = pathname === "/";
+  const isSignInPage = pathname === "/sign-in";
+
   const isLoggedIn = !!session;
   return (
     <header className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-12 bg-white dark:bg-zinc-900">
@@ -44,7 +47,7 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
         </Link>
       </nav>
       <div className="ml-auto">
-        {!isProPage ? (
+        {!isProPage || !isSignInPage ? (
           <Button>
             <Link
               href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
