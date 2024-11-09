@@ -1,14 +1,12 @@
 import { withNextVideo } from "next-video/process";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
     ignoreBuildErrors: true,
   },
   images: {
+    unoptimized: true, // Required for Amplify deployment
     remotePatterns: [
       {
         protocol: "https",
@@ -21,10 +19,6 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-  },
-  env: {
-    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
-      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   },
   optimizeFonts: true,
   output: "standalone",
