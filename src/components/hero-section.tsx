@@ -3,6 +3,7 @@ import { LandingSocialProof } from "./social-proof/landing-social-proof";
 import Link from "next/link";
 import Image from "next/image";
 import PreviewSection from "./preview-section";
+import { LucideArrowRight } from "lucide-react";
 export const avatarItems = [
   {
     imageSrc: "/users/6.png",
@@ -32,16 +33,21 @@ export let HeroSection = () => {
               className="text-4xl font-bold tracking-wide sm:text-5xl xl:text-6xl/none"
               style={{ fontFamily: "var(--font-cal-sans)" }}
             >
-              Reduce Mindless Browsing By 10x
+              Stop Getting Distracted Online
             </h1>
             <p className="max-w-[600px] m:text-xl text-zinc-500 dark:text-zinc-400 mb-8 leading-8">
-              Get out of the loop and stay mindful when accessing distracting
-              websites. No more wasting time for hours unconsciously.
+              Browse with intention, efforlessly with our browser extension. No
+              more wasting time for hours unconsciously.
               {/* Stop mindless browsing and take control of your time online */}
             </p>
             <LandingSocialProof showRating avatarItems={avatarItems} />
 
-            <Button>
+            <Button
+              variant={"expandIcon"}
+              size={"lg"}
+              iconPlacement="right"
+              Icon={LucideArrowRight}
+            >
               <Link
                 href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
                 target="_blank"
@@ -54,7 +60,7 @@ export let HeroSection = () => {
                   width={24}
                   height={24}
                 />
-                Install Now
+                Add to Chrome
               </Link>
             </Button>
           </div>

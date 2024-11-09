@@ -24,7 +24,8 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
       <Link className="flex items-center" href="/">
         <div className="flex space-x-3 items-center">
           <Image
-            src="/focusmode-logo.png"
+            className="scale-[3]"
+            src="/logo.svg"
             alt="focusmode logo"
             width={32}
             height={32}
@@ -61,7 +62,7 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
                 width={24}
                 height={24}
               />
-              Install Now
+              Add to Chrome
             </Link>
           </Button>
         ) : isLoggedIn ? (

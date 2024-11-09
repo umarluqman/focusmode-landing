@@ -81,10 +81,9 @@ export default function RootLayout({
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#ffffff"></meta>
       <body className={`${inter.className} ${CalSans.variable}`}>
-        {/* <Navbar /> */}
-
         <Providers>
-          <Header />
+          {/* <Header /> */}
+          <Navbar />
           {children}
         </Providers>
       </body>
