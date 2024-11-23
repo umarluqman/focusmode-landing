@@ -43,6 +43,19 @@ export default function ProVersionPage() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
+
+  if (session?.user?.isSubscribed) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-950">
+        <p className="text-center text-xl">
+          You have already subscribed the PRO version. Please click on the
+          FocusMode extension and you can use the PRO version now, thank you for
+          your trust.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
       {/* <Header showCta={false} /> */}
