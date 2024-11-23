@@ -47,7 +47,7 @@ export default function ProVersionPage() {
   if (session?.user?.isSubscribed) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-950">
-        <p className="text-center text-xl">
+        <p className="text-center text-xl max-w-lg">
           You have already subscribed the PRO version. Please click on the
           FocusMode extension and you can use the PRO version now, thank you for
           your trust.
