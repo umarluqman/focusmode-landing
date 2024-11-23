@@ -46,12 +46,24 @@ export default function ProVersionPage() {
 
   if (session?.user?.isSubscribed) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-950">
-        <p className="text-center text-xl max-w-lg">
-          You have already subscribed the PRO version. Please click on the
-          FocusMode extension and you can use the PRO version now, thank you for
-          your trust.
-        </p>
+      <div className="flex min-h-screen flex-col items-start pt-24 bg-gray-100 dark:bg-gray-950">
+        <Card
+          className="max-w-md mx-auto"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <CardHeader className="relative">
+            <CardTitle className="text-3xl font-bold">
+              You have already subscribed to FocusMode PRO version.
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-center">
+              Please click on the FocusMode extension and you will see PRO
+              features, thank you for your trust.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     );
   }
