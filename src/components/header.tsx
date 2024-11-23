@@ -19,6 +19,7 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
   const isSignInPage = pathname === "/sign-in";
 
   const isLoggedIn = !!session;
+
   return (
     <header className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-12 bg-white dark:bg-zinc-900">
       <Link className="flex items-center" href="/">
@@ -47,7 +48,23 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
         </Link>
       </nav>
       <div className="ml-auto">
-        {!isProPage || !isSignInPage ? (
+        {isLoggedIn ? (
+          <div className="flex items-center gap-2">
+            <Button variant={"outline"} onClick={() => signOut()}>
+              Sign Out
+            </Button>
+            <Avatar>
+              <AvatarImage src={session?.user?.image ?? ""} />
+              <AvatarFallback>
+                {session?.user?.name?.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+        ) : isProPage || isSignInPage ? (
+          <Button variant={"outline"} onClick={handleSignIn}>
+            Sign In
+          </Button>
+        ) : (
           <Button>
             <Link
               href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
@@ -63,22 +80,6 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
               />
               Install Now
             </Link>
-          </Button>
-        ) : isLoggedIn ? (
-          <div className="flex items-center gap-2">
-            <Button variant={"outline"} onClick={() => signOut()}>
-              Sign Out
-            </Button>
-            <Avatar>
-              <AvatarImage src={session?.user?.image ?? ""} />
-              <AvatarFallback>
-                {session?.user?.name?.slice(0, 2).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-          </div>
-        ) : (
-          <Button variant={"outline"} onClick={handleSignIn}>
-            Sign In
           </Button>
         )}
       </div>
