@@ -111,7 +111,7 @@ export default function ProVersionPage() {
               </div>
               <CardTitle className="text-3xl font-bold">Pro</CardTitle>
               <CardDescription>
-                Reclaim your focus and 10x your productivity
+                Won&apos;t get cheaper than this ever again.
               </CardDescription>
             </CardHeader>
             <CardContent>
