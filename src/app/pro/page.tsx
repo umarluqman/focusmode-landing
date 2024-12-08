@@ -35,8 +35,8 @@ export default function ProVersionPage() {
     "Support Indie Developer",
   ];
   const { data: session } = useSession();
-  const [promoCode, setPromoCode] = useState("BLACKFRIDAY");
-  const [value, setValue] = useState("BLACKFRIDAY");
+  const [promoCode, setPromoCode] = useState("");
+  const [value, setValue] = useState("");
   const onSubmit = () => {
     setPromoCode(value);
   };
@@ -102,7 +102,7 @@ export default function ProVersionPage() {
           >
             <div className="flex flex-col gap-8 lg:w-1/2 items-center text-center">
               <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Black Friday Deal
+                Buy Once, Use Forever
               </h1>
               <LandingSocialProof showRating avatarItems={avatarItems} />
             </div>
@@ -116,9 +116,12 @@ export default function ProVersionPage() {
                 <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold py-1 px-2 rounded-bl-lg rounded-tr-lg transform rotate-12 shadow-md">
                   LIFETIME
                 </div>
-                <CardTitle className="text-3xl font-bold">Pro</CardTitle>
+                <CardTitle className="text-3xl font-bold">
+                  FocusMode Pro
+                </CardTitle>
                 <CardDescription>
-                  Won&apos;t get this price ever again.
+                  Stop mindless browsing for good.
+                  {/* Won&apos;t get this price ever again. */}
                 </CardDescription>
               </CardHeader>
               <CardContent>
