@@ -35,8 +35,8 @@ export default function ProVersionPage() {
     "Support Indie Developer",
   ];
   const { data: session } = useSession();
-  const [promoCode, setPromoCode] = useState("");
-  const [value, setValue] = useState("");
+  const [promoCode, setPromoCode] = useState("LAUNCH30");
+  const [value, setValue] = useState("LAUNCH30");
   const onSubmit = () => {
     setPromoCode(value);
   };
