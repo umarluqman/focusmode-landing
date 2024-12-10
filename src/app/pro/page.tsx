@@ -126,7 +126,7 @@ export default function ProVersionPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold mb-6 flex items-center space-x-4">
-                  <div>{promoCode ? "$10.99" : "$29.99"}</div>
+                  <div>{promoCode ? "$20.99" : "$29.99"}</div>
                   {promoCode && (
                     <div className="flex flex-col">
                       <span className="text-base font-normal line-through text-zinc-400">
