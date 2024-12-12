@@ -133,7 +133,7 @@ export default function ProVersionPage() {
                         <s>$29.99</s>
                       </span>
                       <span className="text-xs font-semibold text-green-500">
-                        Save ${(29.99 - 10.99).toFixed(2)}
+                        Save ${(29.99 - 20.99).toFixed(2)}
                       </span>
                     </div>
                   )}
