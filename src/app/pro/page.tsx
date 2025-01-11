@@ -43,6 +43,31 @@ export default function ProVersionPage() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
+
+  if (session?.user?.isSubscribed) {
+    return (
+      <div className="flex min-h-screen flex-col items-start pt-24 bg-gray-100 dark:bg-gray-950">
+        <Card
+          className="max-w-md mx-auto"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <CardHeader className="relative">
+            <CardTitle className="text-3xl font-bold">
+              You have already subscribed to FocusMode PRO version.
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-center">
+              Please click on the FocusMode extension and you will see PRO
+              features, thank you for your trust.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
       {/* <Header showCta={false} /> */}
@@ -68,112 +93,123 @@ export default function ProVersionPage() {
           {/* <p className="text-xl text-gray-600">Unlimited Interventions</p> */}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col items-center justify-center gap-20 w-full"
-        >
-          <LandingSocialProof showRating avatarItems={avatarItems} />
-          <Card
-            className="max-w-md mx-auto"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col lg:flex-row items-center justify-between gap-20 w-full"
           >
-            <CardHeader className="relative">
-              <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold py-1 px-2 rounded-bl-lg rounded-tr-lg transform rotate-12 shadow-md">
-                LIFETIME
-              </div>
-              <CardTitle className="text-3xl font-bold">Pro</CardTitle>
-              <CardDescription>
-                Reclaim your focus and 10x your productivity
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-4xl font-bold mb-6 flex items-center space-x-4">
-                <div>{promoCode ? "$20.99" : "$29.99"}</div>
-                {promoCode && (
-                  <div className="flex flex-col">
-                    <span className="text-base font-normal line-through text-zinc-400">
-                      <s>$29.99</s>
-                    </span>
-                    <span className="text-xs font-semibold text-green-500">
-                      Save ${(29.99 - 20.99).toFixed(2)}
-                    </span>
-                  </div>
-                )}
-              </div>
-              <ul className="space-y-2">
-                {features.map((feature, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="flex items-center"
-                  >
-                    <Check className="mr-2 h-5 w-5 text-green-500" />
-                    {feature}
-                  </motion.li>
-                ))}
-              </ul>
-            </CardContent>
-            <CardFooter>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full"
-              >
-                {session?.user ? (
-                  <Link
-                    href={`${
-                      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-                    }?client_reference_id=${
-                      session.user.id
-                    }&prefilled_email=${encodeURIComponent(
-                      session.user.email || ""
-                    )}&prefilled_promo_code=${promoCode}`}
-                  >
-                    <Button className="w-full" size="lg">
-                      Upgrade Now
-                    </Button>
-                  </Link>
-                ) : (
-                  <Link href="/sign-in">
-                    <Button className="w-full" size="lg">
-                      Upgrade Now
-                    </Button>
-                  </Link>
-                )}
-              </motion.div>
-            </CardFooter>
-          </Card>
-        </motion.div>
+            <div className="flex flex-col gap-8 lg:w-1/2 items-center text-center">
+              <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Buy Once, Use Forever
+              </h1>
+              <LandingSocialProof showRating avatarItems={avatarItems} />
+            </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-6 w-full max-w-md mx-auto space-y-2"
-        >
-          {promoCode && (
-            <Badge className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-semibold">
-              Promo code applied
-            </Badge>
-          )}
-          <div className="flex items-center space-x-2">
-            <Input
-              type="text"
-              placeholder="Enter promo code"
-              className="flex-grow"
-              onChange={onChange}
-              value={value}
-            />
-            <Button variant="outline" onClick={onSubmit}>
-              Apply
-            </Button>
-          </div>
-        </motion.div>
+            <Card
+              className="w-full lg:w-[450px]"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <CardHeader className="relative">
+                <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold py-1 px-2 rounded-bl-lg rounded-tr-lg transform rotate-12 shadow-md">
+                  LIFETIME
+                </div>
+                <CardTitle className="text-3xl font-bold">
+                  FocusMode Pro
+                </CardTitle>
+                <CardDescription>
+                  Stop mindless browsing for good.
+                  {/* Won&apos;t get this price ever again. */}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-4xl font-bold mb-6 flex items-center space-x-4">
+                  <div>{promoCode ? "$20.99" : "$29.99"}</div>
+                  {promoCode && (
+                    <div className="flex flex-col">
+                      <span className="text-base font-normal line-through text-zinc-400">
+                        <s>$29.99</s>
+                      </span>
+                      <span className="text-xs font-semibold text-green-500">
+                        Save ${(29.99 - 20.99).toFixed(2)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <ul className="space-y-2">
+                  {features.map((feature, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="flex items-center"
+                    >
+                      <Check className="mr-2 h-5 w-5 text-green-500" />
+                      {feature}
+                    </motion.li>
+                  ))}
+                </ul>
+              </CardContent>
+              <CardFooter>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full"
+                >
+                  {session?.user ? (
+                    <Link
+                      href={`${
+                        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+                      }?client_reference_id=${
+                        session.user.id
+                      }&prefilled_email=${encodeURIComponent(
+                        session.user.email || ""
+                      )}&prefilled_promo_code=${promoCode}`}
+                    >
+                      <Button className="w-full" size="lg">
+                        Upgrade Now
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Link href="/sign-in">
+                      <Button className="w-full" size="lg">
+                        Upgrade Now
+                      </Button>
+                    </Link>
+                  )}
+                </motion.div>
+              </CardFooter>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-6 w-full lg:w-[450px] ml-auto space-y-2"
+          >
+            {promoCode && (
+              <Badge className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-semibold">
+                Promo code applied
+              </Badge>
+            )}
+            <div className="flex items-center space-x-2">
+              <Input
+                type="text"
+                placeholder="Enter promo code"
+                className="flex-grow"
+                onChange={onChange}
+                value={value}
+              />
+              <Button variant="outline" onClick={onSubmit}>
+                Apply
+              </Button>
+            </div>
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}

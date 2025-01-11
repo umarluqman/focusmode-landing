@@ -53,6 +53,9 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
             <Button variant={"outline"} onClick={() => signOut()}>
               Sign Out
             </Button>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              {session?.user?.email}
+            </div>
             <Avatar>
               <AvatarImage src={session?.user?.image ?? ""} />
               <AvatarFallback>
