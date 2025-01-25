@@ -22,7 +22,9 @@ const nextConfig = {
   },
   optimizeFonts: true,
   output: "standalone",
+  trailingSlash: true, // Recommended for Amplify routing
   experimental: {
+    esmExternals: "loose", // Required for Lambda compatibility
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
   },
 };
