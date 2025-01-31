@@ -27,6 +27,43 @@ const nextConfig = {
     esmExternals: "loose", // Required for Lambda compatibility
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
   },
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type, stripe-signature',
+          },
+        ],
+      },
+    ];
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/api/webhook',
+          destination: '/api/webhook',
+          has: [
+            {
+              type: 'header',
+              key: 'stripe-signature',
+            },
+          ],
+        },
+      ],
+    };
+  },
 };
 
 export default withNextVideo(nextConfig);
