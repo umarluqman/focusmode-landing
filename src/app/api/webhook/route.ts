@@ -6,10 +6,14 @@ import { stripe } from "@/lib/stripe";
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 export async function POST(req: NextRequest) {
+  console.log('Webhook received:', req.url);
+  console.log('Headers:', JSON.stringify(Object.fromEntries(req.headers.entries()), null, 2));
+  
   const body = await req.text();
   const sig = req.headers.get("stripe-signature");
 
   if (!sig || !webhookSecret) {
+    console.error('Missing signature or webhook secret');
     return NextResponse.json(
       { error: "Missing signature or webhook secret" },
       { status: 400 }
@@ -20,6 +24,7 @@ export async function POST(req: NextRequest) {
 
   try {
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
+    console.log('Event constructed successfully:', event.type);
   } catch (err: unknown) {
     const error = err as Stripe.errors.StripeError;
     console.error(`Webhook Error: ${error.message}`);
