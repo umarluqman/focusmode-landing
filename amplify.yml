@@ -48,3 +48,20 @@ frontend:
           value: '1; mode=block'
         - key: 'X-Content-Type-Options'
           value: 'nosniff'
+  customRules:
+    - pattern: '/api/webhook'
+      target: '/api/webhook'
+      status: '200'
+      condition: 'if(method == "POST" || method == "OPTIONS")'
+    - pattern: 'ALL'
+      target: '/index.html'
+      status: '404-200'
+      condition: >
+        if(
+          !path.matches("\\.well-known(/.*)?") &&
+          !path.matches("^/.*/static/.*") &&
+          !path.matches("^/static/.*") &&
+          !path.matches("^/api/.*") &&
+          !path.matches("^/_next/.*") &&
+          !path.matches("^/.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|json)")
+        )
