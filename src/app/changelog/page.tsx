@@ -93,7 +93,7 @@ export default function Changelog() {
             </span>
             <div>
               <h3 className="text-xl font-bold text-gray-800">
-                PRO Interventions Now FREE for Everyone!
+                PRO Interventions Now FREE + New Features!
               </h3>
               <p className="text-gray-700 mt-2">
                 All advanced interventions including{" "}
