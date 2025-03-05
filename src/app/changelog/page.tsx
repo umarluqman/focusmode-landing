@@ -16,10 +16,10 @@ export default function Changelog() {
           title:
             "FREE PRO Interventions, PIN Protection, Confirmation Before Turning OFF and Schedule limit",
           imageSrc: [
-            "/changelog/pro.png",
-            "/changelog/confirmation.png",
-            "/changelog/pin.png",
-            "/changelog/alert.png",
+            "/changelog/pro.webp",
+            "/changelog/confirmation.webp",
+            "/changelog/pin.webp",
+            "/changelog/alert.webp",
           ],
           description: [
             "PRO interventions are now FREE for all users! Enjoy advanced interventions like Slide In Out, Hold to Complete and Pixelated.",
@@ -40,7 +40,7 @@ export default function Changelog() {
           description: [
             "Introducing the advanced list for power users. User can now filter website with advanced rules to block websites with pattern matching",
           ],
-          imageSrc: ["/changelog/advanced-list.png"],
+          imageSrc: ["/changelog/advanced-list.webp"],
         },
       ],
     },
