@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { LandingSocialProof } from "@/components/social-proof/landing-social-proof";
 import { avatarItems } from "@/components/hero-section";
+import { PopiconsCircleCheckLine } from "@popicons/react";
 
 export default function ProVersionPage() {
   const [isHovered, setIsHovered] = useState(false);
@@ -101,7 +102,7 @@ export default function ProVersionPage() {
             className="flex flex-col lg:flex-row items-center justify-between gap-20 w-full"
           >
             <div className="flex flex-col gap-8 lg:w-1/2 items-center text-center">
-              <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <h1 className="text-6xl font-bold text-zinc-900 bg-clip-text text-transparent leading-snug">
                 Buy Once, Use Forever
               </h1>
               <LandingSocialProof showRating avatarItems={avatarItems} />
@@ -113,11 +114,11 @@ export default function ProVersionPage() {
               onMouseLeave={() => setIsHovered(false)}
             >
               <CardHeader className="relative">
-                <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold py-1 px-2 rounded-bl-lg rounded-tr-lg transform rotate-12 shadow-md">
+                <div className="absolute top-0 right-0 bg-[#adfa1b] text-zinc-950 text-xs font-bold py-1 px-2 rounded-bl-lg rounded-tr-lg transform rotate-12 shadow-md">
                   LIFETIME
                 </div>
                 <CardTitle className="text-3xl font-bold">
-                  FocusMode Pro
+                  FocusMode PRO
                 </CardTitle>
                 <CardDescription>
                   Stop mindless browsing for good.
@@ -147,7 +148,7 @@ export default function ProVersionPage() {
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       className="flex items-center"
                     >
-                      <Check className="mr-2 h-5 w-5 text-green-500" />
+                      <PopiconsCircleCheckLine className="mr-2 h-5 w-5 text-green-500" />
                       {feature}
                     </motion.li>
                   ))}
@@ -175,7 +176,10 @@ export default function ProVersionPage() {
                     </Link>
                   ) : (
                     <Link href="/sign-in">
-                      <Button className="w-full" size="lg">
+                      <Button
+                        className="w-full text-zinc-950 bg-[#adfa1b] hover:bg-[#adfa1b]"
+                        size="lg"
+                      >
                         Upgrade Now
                       </Button>
                     </Link>
@@ -185,7 +189,7 @@ export default function ProVersionPage() {
             </Card>
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -208,7 +212,7 @@ export default function ProVersionPage() {
                 Apply
               </Button>
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
 
         <motion.div

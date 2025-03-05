@@ -21,7 +21,7 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
   const isLoggedIn = !!session;
 
   return (
-    <header className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-12 bg-white dark:bg-zinc-900">
+    <nav className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-12 bg-white dark:bg-zinc-900">
       <Link className="flex items-center" href="/">
         <div className="flex space-x-3 items-center">
           <Image
@@ -39,15 +39,12 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
           </div>
         </div>
       </Link>
-      <nav className="hidden justify-center gap-4 sm:flex md:gap-6">
-        {" "}
+      <div className="flex space-x-6 ml-auto">
         <Link className="flex items-center" href="/pro">
           <div className="flex space-x-3 items-center">
             <div className="tracking-wide">PRO Version</div>
           </div>
         </Link>
-      </nav>
-      <div className="ml-auto">
         {isLoggedIn ? (
           <div className="flex items-center gap-2">
             <Button variant={"outline"} onClick={() => signOut()}>
@@ -86,6 +83,6 @@ export let Header = ({ showCta = true }: { showCta?: boolean }) => {
           </Button>
         )}
       </div>
-    </header>
+    </nav>
   );
 };
