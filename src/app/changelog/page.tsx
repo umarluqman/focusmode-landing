@@ -12,6 +12,25 @@ export default function Changelog() {
       date: "March 2025",
       updates: [
         {
+          version: "2.7.1",
+          title:
+            "Dark Mode for PRO users, Confirmation Prompt Toggle & Bug Fixed and Improvements",
+          imageSrc: [
+            "/changelog/dark.webp",
+            "/changelog/confirmation-prompt.webp",
+            "/changelog/chart-dark.webp",
+            "/changelog/theme.webp",
+          ],
+          description: [
+            "Dark mode theme is now available exclusively for PRO users",
+            "Added option to toggle confirmation dialog when disabling FocusMode",
+            "Theme colors for charts. More charts are coming to PRO users.",
+            "Resolved an issue with Advanced List website blocking functionality",
+            "Fixed a bug preventing websites from being unblocked when FocusMode is disabled",
+            "Restored missing website usage statistics",
+          ],
+        },
+        {
           version: "2.7.0",
           title:
             "FREE PRO Interventions, PIN Protection, Confirmation Before Turning OFF and Schedule limit",
@@ -93,15 +112,8 @@ export default function Changelog() {
             </span>
             <div>
               <h3 className="text-xl font-bold text-gray-800">
-                PRO Interventions Now FREE + New Features!
+                Dark Mode is here for PRO users!
               </h3>
-              <p className="text-gray-700 mt-2">
-                All advanced interventions including{" "}
-                <span className="font-semibold">Slide In Out</span>,{" "}
-                <span className="font-semibold">Hold to Complete</span>, and{" "}
-                <span className="font-semibold">Pixelated</span> are now
-                available to all users at no cost!
-              </p>
               <div className="mt-3 rounded-lg relative">
                 <div className="flex items-center">
                   <div className="flex items-center">
@@ -144,7 +156,7 @@ export default function Changelog() {
                       <h3 className="text-lg font-semibold text-gray-500">
                         {update.version}
                       </h3>
-                      {idx === 0 && (
+                      {index === 0 && (
                         <span
                           className="px-2 py-0.5 text-xs font-medium rounded"
                           style={{ backgroundColor: "#adfa1b" }}
@@ -174,10 +186,10 @@ export default function Changelog() {
                               {update.imageSrc.map((src, i) => (
                                 <div key={i} className="flex justify-center">
                                   <Image
-                                    className="rounded-lg shadow-md"
+                                    className="rounded-lg shadow-md object-contain bg-black"
                                     src={src}
                                     alt={`${update.title} ${i + 1}`}
-                                    width={300}
+                                    width={500}
                                     height={600}
                                     style={{ maxWidth: "100%", height: "auto" }}
                                     priority
