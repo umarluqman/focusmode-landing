@@ -28,6 +28,7 @@ export default function Changelog() {
             "Resolved an issue with Advanced List website blocking functionality",
             "Fixed a bug preventing websites from being unblocked when FocusMode is disabled",
             "Restored missing website usage statistics",
+            "Save the charts setting",
           ],
         },
         {
