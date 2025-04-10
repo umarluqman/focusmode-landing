@@ -12,6 +12,15 @@ export default function Changelog() {
       date: "March 2025",
       updates: [
         {
+          version: "2.7.2",
+          title: "Bug Fixed and Improvements",
+          imageSrc: [],
+          description: [
+            "Confirmation prompt before toggle FocusMode OFF is now working fine",
+            "Other minor improvements",
+          ],
+        },
+        {
           version: "2.7.1",
           title:
             "Dark Mode for PRO users, Confirmation Prompt Toggle & Bug Fixed and Improvements",
