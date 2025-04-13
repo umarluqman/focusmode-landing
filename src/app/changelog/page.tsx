@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Changelog() {
   const changes = [
     {
-      date: "March 2025",
+      date: "April 2025",
       updates: [
         {
           version: "2.7.2",
@@ -20,6 +20,11 @@ export default function Changelog() {
             "Other minor improvements",
           ],
         },
+      ],
+    },
+    {
+      date: "March 2025",
+      updates: [
         {
           version: "2.7.1",
           title:
@@ -166,7 +171,7 @@ export default function Changelog() {
                       <h3 className="text-lg font-semibold text-gray-500">
                         {update.version}
                       </h3>
-                      {index === 0 && (
+                      {index === 0 && idx === 0 && (
                         <span
                           className="px-2 py-0.5 text-xs font-medium rounded"
                           style={{ backgroundColor: "#adfa1b" }}
