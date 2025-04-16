@@ -20,6 +20,12 @@ export default function Changelog() {
             "Other minor improvements",
           ],
         },
+        {
+          version: "2.7.3",
+          title: "Bug Fixed and Improvements",
+          imageSrc: [],
+          description: ["Dark mode theme in certain websites is now fixed"],
+        },
       ],
     },
     {
