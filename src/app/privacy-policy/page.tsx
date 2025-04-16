@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
               1. Information We Collect
             </h2>
             <p>
-              Our Chrome extension collects and uses the following information:
+              Our browser extension collects and uses the following information:
             </p>
             <ul className="list-disc list-inside ml-4">
               <li>
