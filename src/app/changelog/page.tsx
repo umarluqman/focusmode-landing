@@ -12,6 +12,12 @@ export default function Changelog() {
       date: "April 2025",
       updates: [
         {
+          version: "2.7.3",
+          title: "Bug Fixed for Dark Mode",
+          imageSrc: [],
+          description: ["Dark mode theme in certain websites is now fixed"],
+        },
+        {
           version: "2.7.2",
           title: "Bug Fixed and Improvements",
           imageSrc: [],
@@ -19,12 +25,6 @@ export default function Changelog() {
             "Confirmation prompt before toggle FocusMode OFF is now working fine",
             "Other minor improvements",
           ],
-        },
-        {
-          version: "2.7.3",
-          title: "Bug Fixed and Improvements",
-          imageSrc: [],
-          description: ["Dark mode theme in certain websites is now fixed"],
         },
       ],
     },
@@ -169,7 +169,7 @@ export default function Changelog() {
                 {period.date}
               </h2>
             </div>
-            <div className="mt-6 space-y-8">
+            <div className="mt-6 space-y-2">
               {period.updates.map((update, index) => (
                 <div key={index} className="relative">
                   <div className="relative flex gap-6 items-start">
@@ -200,8 +200,8 @@ export default function Changelog() {
                           );
                         })}
                       </ul>
-                      {update.imageSrc && (
-                        <div className="relative mt-8 -mx-4 sm:-mx-12 md:-mx-16 lg:-mx-32 xl:-mx-48 2xl:-mx-64 overflow-x-hidden">
+                      {update.imageSrc && update.imageSrc.length > 0 && (
+                        <div className="relative mt-8 -mx-4 sm:-mx-12 md:-mx-16 lg:-mx-32 xl:-mx-48 2xl:-mx-64 overflow-x-hidden mb-6">
                           {Array.isArray(update.imageSrc) ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-[1400px] mx-auto px-4 sm:px-12">
                               {update.imageSrc.map((src, i) => (
