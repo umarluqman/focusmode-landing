@@ -14,7 +14,10 @@ export default function Changelog() {
         {
           version: "2.7.4",
           title: "Breathing intervetions is here for PRO users!",
-          imageSrc: [],
+          imageSrc: [
+            "/changelog/breathing-intervetion.webp",
+            "/changelog/breathing-setting.webp",
+          ],
           description: [
             "4 different breathing intervention is now available for PRO users. Try it in the intervetion options.",
           ],

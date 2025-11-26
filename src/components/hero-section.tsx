@@ -35,7 +35,7 @@ export let HeroSection = () => {
               className="inline-block hover:opacity-80 transition-opacity"
             >
               <Badge className="mb-2 px-3 py-1 text-xs font-medium cursor-pointer bg-[#adfa1b] hover:bg-[#adfa1b] text-black flex items-center gap-1 transition-colors">
-                New Version 2.7.2
+                New Version 2.7.4
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="12"
