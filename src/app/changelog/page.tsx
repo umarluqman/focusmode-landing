@@ -9,6 +9,19 @@ export const metadata: Metadata = {
 export default function Changelog() {
   const changes = [
     {
+      date: "November 2025",
+      updates: [
+        {
+          version: "2.7.4",
+          title: "Breathing intervetions is here for PRO users!",
+          imageSrc: [],
+          description: [
+            "4 different breathing intervention is now available for PRO users. Try it in the intervetion options.",
+          ],
+        },
+      ],
+    },
+    {
       date: "April 2025",
       updates: [
         {
@@ -66,7 +79,7 @@ export default function Changelog() {
             "PIN Protection is now available for all users. Try it in the Settings.",
             "Confirmation dialog added when turning off FocusMode. When confirmed, FocusMode will stay off eventhough the scheduled is ON.",
             "Schedule feature is now limited to 3 days (Sun, Mon, Tue) per week for free users. Upgrade to PRO for unlimited scheduling.",
-            // "More features are coming! Promo code 'LAUNCH30' for 30% OFF will expired soon",
+            // "More features are coming! Promo code 'BF2025' for 30% OFF will expired soon",
           ],
         },
       ],
@@ -133,7 +146,8 @@ export default function Changelog() {
             </span>
             <div>
               <h3 className="text-xl font-bold text-gray-800">
-                Dark Mode is here for PRO users!
+                Black Friday Special - Breathing intervetion is here for PRO
+                users!
               </h3>
               <div className="mt-3 rounded-lg relative">
                 <div className="flex items-center">
@@ -148,9 +162,9 @@ export default function Changelog() {
                             "0 0 0 1px #95d800, 0 2px 4px rgba(173, 250, 27, 0.3)",
                         }}
                       >
-                        LAUNCH30
+                        BF2025
                       </span>{" "}
-                      for <span className="font-semibold">30% OFF</span> will
+                      for <span className="font-semibold">$24 OFF</span> will
                       expire soon
                     </p>
                   </div>
