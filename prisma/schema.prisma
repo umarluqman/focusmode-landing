@@ -40,18 +40,18 @@ model Session {
 }
 
 model User {
-  id                  String    @id @default(cuid())
-  name                String?
-  email               String?   @unique
-  emailVerified       DateTime? @map("email_verified")
-  image               String?
-  stripeCustomerId    String?   @unique
-  isSubscribed        Boolean   @default(false)
-  hasUsedFreeTrial    Boolean   @default(false)
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
-  accounts            Account[]
-  sessions            Session[]
+  id               String    @id @default(cuid())
+  name             String?
+  email            String?   @unique
+  emailVerified    DateTime? @map("email_verified")
+  image            String?
+  stripeCustomerId String?   @unique
+  isSubscribed     Boolean   @default(false)
+  hasUsedFreeTrial Boolean   @default(false)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  accounts         Account[]
+  sessions         Session[]
 
   @@map("users")
 }
