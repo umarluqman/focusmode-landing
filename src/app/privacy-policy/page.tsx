@@ -87,7 +87,7 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-semibold mb-3">7. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please
-              contact us at hey@focusmode.app.
+              contact us at focusmode.app@gmail.com
             </p>
           </section>
         </div>

@@ -224,7 +224,7 @@ export default function ProVersionPage() {
           <p>
             Have questions?{" "}
             <a
-              href="mailto:hey@focusmode.app"
+              href="mailto:focusmode.app@gmail.com"
               className="text-blue-500 hover:underline"
             >
               Contact our sales team
