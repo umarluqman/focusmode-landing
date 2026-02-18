@@ -19,8 +19,14 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { LandingSocialProof } from "@/components/social-proof/landing-social-proof";
-import { avatarItems } from "@/components/hero-section";
 import { PopiconsCircleCheckLine } from "@popicons/react";
+
+const avatarItems = [
+  { imageSrc: "/users/6.png", name: "Khang Nguyen Duy" },
+  { imageSrc: "/users/3.png", name: "Stan Olery" },
+  { imageSrc: "/users/4.jpeg", name: "Julio Santirachi" },
+  { imageSrc: "/users/8.jpeg", name: "Cristian Andrei Grigore" },
+];
 
 export default function ProVersionPage() {
   const [isHovered, setIsHovered] = useState(false);

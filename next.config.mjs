@@ -1,12 +1,10 @@
-import { withNextVideo } from "next-video/process";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true, // Required for Amplify deployment
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -22,9 +20,9 @@ const nextConfig = {
   },
   optimizeFonts: true,
   output: "standalone",
-  trailingSlash: true, // Recommended for Amplify routing
+  trailingSlash: true,
   experimental: {
-    esmExternals: "loose", // Required for Lambda compatibility
+    esmExternals: "loose",
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
   },
   async headers() {
@@ -66,4 +64,4 @@ const nextConfig = {
   },
 };
 
-export default withNextVideo(nextConfig);
+export default nextConfig;
