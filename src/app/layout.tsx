@@ -1,38 +1,38 @@
 import type { Metadata } from "next/types";
-import { Inter } from "next/font/google";
+import { Nunito, Fraunces } from "next/font/google";
 import "./globals.css";
-import localFont from "next/font/local";
 import Providers from "@/components/providers";
-import { Navbar } from "@/components/navbar";
 import { Header } from "@/components/header";
-// import { eudoxusSans } from "@/lib/font";
 
-const CalSans = localFont({
-  src: "../../public/fonts/CalSans-SemiBold.otf",
-  variable: "--font-cal-sans",
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-body",
 });
 
-const inter = Inter({ subsets: ["latin"] });
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://focusmode.app"),
   title: {
-    default: "FocusMode - Stay focused, be present",
+    default: "FocusMode - Website Blocker & Focus Mode Chrome Extension",
     template: "%s | FocusMode",
   },
   description:
-    "Reclaim 2-3 hours daily with FocusMode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
+    "Block distracting websites mindfully with FocusMode. 4 intervention types, break management, streak tracking & analytics. Free Chrome extension used by 15k+ people.",
   openGraph: {
-    title: "focusmode",
+    title: "FocusMode — Mindful Website Blocker for Chrome",
     description:
-      "Reclaim 2-3 hours daily with FocusMode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
+      "Gentle interventions that help you stay focused. Not a blunt blocker — a mindful browsing companion. Free with optional $20.99 PRO.",
     url: "https://focusmode.app",
-    siteName: "focusmode",
+    siteName: "FocusMode",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/public/focusmode-og-img.png",
+        url: "/focusmode-og-img.png",
         width: 1200,
         height: 630,
       },
@@ -50,8 +50,11 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "focusmode",
+    title: "FocusMode — Mindful Website Blocker for Chrome",
+    description:
+      "Block distracting websites mindfully with FocusMode. 4 intervention types, break management, streak tracking & analytics. Free Chrome extension.",
     card: "summary_large_image",
+    images: ["/focusmode-og-img.png"],
   },
 };
 
@@ -62,33 +65,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="canonical" href="https://focusmode.app" />
-      <link rel="icon" href="/favicon.ico" />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png"
-      />
-      <link rel="manifest" href="/site.webmanifest" />
-      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-      <meta name="msapplication-TileColor" content="#da532c" />
-      <meta name="theme-color" content="#ffffff"></meta>
-      <body className={`${inter.className} ${CalSans.variable}`}>
-        {/* <Navbar /> */}
-
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4A9075" />
+        <meta name="msapplication-TileColor" content="#4A9075" />
+        <meta name="theme-color" content="#FAF9F6" />
+      </head>
+      <body className={`${nunito.variable} ${fraunces.variable} font-sans`}>
         <Providers>
           <Header />
           {children}
         </Providers>
       </body>
-      <script async src="https://cdn.splitbee.io/sb.js"></script>
     </html>
   );
 }

@@ -7,6 +7,17 @@ frontend:
         - npx prisma generate
     build:
       commands:
+        - echo "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID" >> .env
+        - echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET" >> .env
+        - echo "NEXTAUTH_SECRET=$NEXTAUTH_SECRET" >> .env
+        - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env
+        - echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY" >> .env
+        - echo "STRIPE_WEBHOOK_SECRET=$STRIPE_WEBHOOK_SECRET" >> .env
+        - echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY" >> .env
+        - echo "NEXT_PUBLIC_WEBSITE_URL=$NEXT_PUBLIC_WEBSITE_URL" >> .env
+        - echo "DATABASE_URL=$DATABASE_URL" >> .env
+        - echo "MUX_TOKEN_ID=$MUX_TOKEN_ID" >> .env
+        - echo "MUX_TOKEN_SECRET=$MUX_TOKEN_SECRET" >> .env
         - npm run build
   artifacts:
     baseDirectory: .next
@@ -16,3 +27,41 @@ frontend:
     paths:
       - node_modules/**/*
       - .next/cache/**/*
+  customHeaders:
+    - pattern: '/api/webhook'
+      headers:
+        - key: 'Cache-Control'
+          value: 'no-store, no-cache, must-revalidate'
+        - key: 'Pragma'
+          value: 'no-cache'
+    - pattern: '/api/**/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'no-store'
+    - pattern: '**/*'
+      headers:
+        - key: 'Strict-Transport-Security'
+          value: 'max-age=31536000; includeSubDomains'
+        - key: 'X-Frame-Options'
+          value: 'SAMEORIGIN'
+        - key: 'X-XSS-Protection'
+          value: '1; mode=block'
+        - key: 'X-Content-Type-Options'
+          value: 'nosniff'
+  customRules:
+    - pattern: '/api/webhook'
+      target: '/api/webhook'
+      status: '200'
+      condition: 'if(method == "POST" || method == "OPTIONS")'
+    - pattern: 'ALL'
+      target: '/index.html'
+      status: '404-200'
+      condition: >
+        if(
+          !path.matches("\\.well-known(/.*)?") &&
+          !path.matches("^/.*/static/.*") &&
+          !path.matches("^/static/.*") &&
+          !path.matches("^/api/.*") &&
+          !path.matches("^/_next/.*") &&
+          !path.matches("^/.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|json)")
+        )
