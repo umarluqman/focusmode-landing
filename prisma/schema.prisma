@@ -64,3 +64,18 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verificationtokens")
 }
+
+model LicenseKey {
+  id                   String    @id @default(cuid())
+  key                  String    @unique
+  email                String
+  stripeCustomerId     String?
+  stripeSubscriptionId String?   @unique
+  stripeSessionId      String    @unique
+  status               String    @default("granted")
+  expiresAt            DateTime?
+  emailedAt            DateTime?
+  createdAt            DateTime  @default(now())
+
+  @@map("license_keys")
+}
