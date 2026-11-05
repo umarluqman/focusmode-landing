@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
+import { issueKey } from "@/lib/license";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -10,6 +11,7 @@ export async function POST(req: NextRequest) {
   const sig = req.headers.get("stripe-signature");
 
   if (!sig || !webhookSecret) {
+    console.error("Missing signature or webhook secret");
     return NextResponse.json(
       { error: "Missing signature or webhook secret" },
       { status: 400 }
@@ -29,27 +31,34 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  switch (event.type) {
-    case "checkout.session.completed":
-      const session = event.data.object as Stripe.Checkout.Session;
-      await handleSuccessfulCheckout(session);
-      break;
-
-    // ... you can add more event types as needed ...
-    default:
-      console.log(`Unhandled event type ${event.type}`);
+  try {
+    switch (event.type) {
+      case "checkout.session.completed":
+      case "checkout.session.async_payment_succeeded":
+        await issueKey(event.data.object);
+        await handleSuccessfulCheckout(event.data.object);
+        break;
+      case "customer.subscription.deleted":
+        await handleSubscriptionDeleted(event.data.object);
+        break;
+      case "charge.refunded":
+        await handleRefund(event.data.object);
+        break;
+      default:
+        console.log(`Unhandled event type ${event.type}`);
+    }
+  } catch (error) {
+    console.error(`Error handling ${event.type} (${event.id}):`, error);
+    return NextResponse.json({ error: "Webhook handler failed" }, { status: 500 });
   }
 
   return NextResponse.json({ received: true });
 }
 
 const handleSuccessfulCheckout = async (session: Stripe.Checkout.Session) => {
-  console.log("Received session:", JSON.stringify(session, null, 2));
-
   let customerId = session.customer as string;
 
   if (!customerId && session.client_reference_id) {
-    // If customer ID is not in the session, try to get it from the user's Stripe customer ID
     const user = await prisma.user.findUnique({
       where: { id: session.client_reference_id },
       select: { stripeCustomerId: true },
@@ -57,32 +66,57 @@ const handleSuccessfulCheckout = async (session: Stripe.Checkout.Session) => {
     customerId = user?.stripeCustomerId || "";
   }
 
-  if (customerId) {
-    try {
-      const customer = await stripe.customers.retrieve(customerId);
-      if ("deleted" in customer) {
-        console.error("Customer has been deleted");
-        return;
-      }
-      const email = customer.email;
-      if (!email) {
-        console.error("Customer email not found");
-        return;
-      }
-
-      await prisma.user.update({
-        where: { email: email },
-        data: {
-          isSubscribed: true,
-          stripeCustomerId: customerId,
-        },
-      });
-
-      console.log(`Subscription activated for user ${email}`);
-    } catch (error) {
-      console.error("Error updating user subscription status:", error);
-    }
-  } else {
+  if (!customerId) {
     console.error("Customer ID not found in session or user record");
+    return;
   }
+
+  const customer = await stripe.customers.retrieve(customerId);
+  if ("deleted" in customer) {
+    console.error("Customer has been deleted");
+    return;
+  }
+  const email = customer.email;
+  if (!email) {
+    console.error("Customer email not found");
+    return;
+  }
+
+  await prisma.user.updateMany({
+    where: { email },
+    data: { isSubscribed: true, stripeCustomerId: customerId },
+  });
+};
+
+const handleSubscriptionDeleted = async (subscription: Stripe.Subscription) => {
+  await prisma.licenseKey.updateMany({
+    where: { stripeSubscriptionId: subscription.id },
+    data: { status: "revoked" },
+  });
+
+  const customerId =
+    typeof subscription.customer === "string"
+      ? subscription.customer
+      : subscription.customer.id;
+  await prisma.user.updateMany({
+    where: { stripeCustomerId: customerId },
+    data: { isSubscribed: false },
+  });
+};
+
+const handleRefund = async (charge: Stripe.Charge) => {
+  if (!charge.refunded || !charge.payment_intent) return;
+
+  const paymentIntent =
+    typeof charge.payment_intent === "string"
+      ? charge.payment_intent
+      : charge.payment_intent.id;
+  const sessions = await stripe.checkout.sessions.list({
+    payment_intent: paymentIntent,
+  });
+
+  await prisma.licenseKey.updateMany({
+    where: { stripeSessionId: { in: sessions.data.map((s) => s.id) } },
+    data: { status: "revoked" },
+  });
 };

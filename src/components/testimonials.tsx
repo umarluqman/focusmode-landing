@@ -1,7 +1,9 @@
+"use client";
+
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { ArrowBigRight, MoveRightIcon } from "lucide-react";
+import { MoveRight } from "lucide-react";
 
 const testimonials = [
   {
@@ -30,37 +32,42 @@ const testimonials = [
   },
 ];
 
-export let Testimonials = () => {
+export function Testimonials() {
   return (
-    <div className="h-[40rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
-      <div className="flex flex-col items-center justify-center space-y-4 text-center">
-        <div className="space-y-2 mb-8">
-          <h2
-            className="text-3xl font-bold tracking-wide sm:text-5xl"
-            style={{ fontFamily: "var(--font-cal-sans)" }}
-          >
-            Don&#39;t take it from us
+    <section className="w-full py-16 md:py-24">
+      <div className="container px-4 md:px-6">
+        <div className="text-center space-y-4 mb-12">
+          <p className="text-sm font-medium text-primary uppercase tracking-wider">
+            Testimonials
+          </p>
+          <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Loved by 15,000+ users
           </h2>
-          <p className="max-w-[900px] text-gray-500 dark:text-gray-400">
-            See what others have to say.
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            See what people are saying on the Chrome Web Store.
           </p>
         </div>
+
+        <InfiniteMovingCards
+          items={testimonials}
+          direction="right"
+          speed="slow"
+        />
+
+        <div className="flex justify-center mt-12">
+          <Button variant="outline" asChild>
+            <Link
+              href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              More reviews
+              <MoveRight className="w-4 h-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
-      <InfiniteMovingCards
-        items={testimonials}
-        direction="right"
-        speed="slow"
-      />
-      <Button variant={"outline"} className="mt-20">
-        <Link
-          href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex space-x-3 items-center"
-        >
-          <span>More reviews</span> <MoveRightIcon />
-        </Link>
-      </Button>
-    </div>
+    </section>
   );
-};
+}

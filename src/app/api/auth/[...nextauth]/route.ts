@@ -16,23 +16,43 @@ export const authOptions: NextAuthOptions = {
   ],
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  cookies: {
+    sessionToken: {
+      name:
+        process.env.NODE_ENV === "production"
+          ? `__Secure-next-auth.session-token`
+          : `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        domain:
+          process.env.NODE_ENV === "production" ? ".focusmode.app" : undefined,
+      },
+    },
   },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        // Fetch the latest user data from the database
+      }
+
+      // For lifetime subscription: only check DB if not yet subscribed
+      // Once true, it stays true forever - no need to re-check
+      if (token.id && !token.isSubscribed) {
         const dbUser = await prisma.user.findUnique({
-          where: { id: user.id },
+          where: { id: token.id as string },
           select: { stripeCustomerId: true, isSubscribed: true },
         });
         if (dbUser) {
           token.stripeCustomerId = dbUser.stripeCustomerId ?? undefined;
           token.isSubscribed = dbUser.isSubscribed;
-        } else {
-          token.isSubscribed = false;
         }
       }
+
       return token;
     },
     async session({ session, token }) {

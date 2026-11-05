@@ -4,7 +4,6 @@ import { Footer } from "@/components/footer";
 export default function PrivacyPolicy() {
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
-      <Header showCta={false} />
       <main className="flex-1 container max-w-screen-md px-4 py-8">
         <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
         <div className="space-y-6">
@@ -13,7 +12,7 @@ export default function PrivacyPolicy() {
               1. Information We Collect
             </h2>
             <p>
-              Our Chrome extension collects and uses the following information:
+              Our browser extension collects and uses the following information:
             </p>
             <ul className="list-disc list-inside ml-4">
               <li>
@@ -88,11 +87,13 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-semibold mb-3">7. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please
-              contact us at focusmode.app@gmail.com.
+              contact us at focusmode.app@gmail.com
             </p>
           </section>
         </div>
-        <p className="mt-8 text-sm text-gray-600">Last updated: 24 Jul 2024</p>
+        <p className="mt-8 text-sm text-gray-600">
+          Last updated: 16 April 2025
+        </p>
       </main>
       <Footer />
     </div>
