@@ -1,71 +1,70 @@
 import { prisma } from "@/lib/prisma";
-import { stripe } from "@/lib/stripe";
 import { emailKey, newKey } from "@/lib/license";
 
 const send = process.argv.includes("--send");
 const INTRO =
-  "Thank you for being an early FocusMode PRO supporter! FocusMode v3 is here and your PRO stays active automatically. As a thank-you, here's a license key you can use to unlock PRO on your other browsers and devices — no limit.";
-const ACTIVE = ["active", "trialing", "past_due"];
-
-async function activeSubscriptionId(customerId: string | null) {
-  if (!customerId) return { eligible: true, id: null };
-  const subs = await stripe.subscriptions.list({
-    customer: customerId,
-    status: "all",
-    limit: 100,
-  });
-  if (!subs.data.length) return { eligible: true, id: null }; // one-time purchase
-  const active = subs.data.find((s) => ACTIVE.includes(s.status));
-  return { eligible: !!active, id: active?.id ?? null };
-}
+  "Thank you for being an early FocusMode Pro supporter! FocusMode v3 is here, and you keep Pro for life. Here's your license key. It works on as many browsers as you like.";
+const GRANDFATHER = {
+  tier: "unlimited",
+  maxActivations: null,
+  grandfathered: true,
+  stripeSubscriptionId: null,
+};
 
 async function main() {
   const users = await prisma.user.findMany({
     where: { isSubscribed: true, email: { not: null } },
   });
-  console.log(`${users.length} subscribed users${send ? "" : " (dry run, pass --send to issue)"}`);
+  console.log(
+    `${users.length} grandfathered users${send ? "" : " (dry run, pass --send to issue and email)"}`
+  );
 
   for (const user of users) {
     const email = user.email!;
+    const stripeSessionId = `backfill_${user.id}`;
     try {
-      const existing = await prisma.licenseKey.findFirst({
+      // keys from the old backfill or legacy subscription checkouts stay revocable until upgraded
+      const legacy = await prisma.licenseKey.findMany({
         where: {
-          OR: [
-            { email },
-            ...(user.stripeCustomerId ? [{ stripeCustomerId: user.stripeCustomerId }] : []),
-          ],
-          status: "granted",
-          emailedAt: { not: null },
+          email: { equals: email, mode: "insensitive" },
+          grandfathered: false,
+          OR: [{ stripeSessionId }, { stripeSubscriptionId: { not: null } }],
         },
       });
-      if (existing) {
-        console.log(`skip ${email}: already has key`);
-        continue;
-      }
+      const existing =
+        (await prisma.licenseKey.findUnique({ where: { stripeSessionId } })) ??
+        legacy[0];
 
-      const sub = await activeSubscriptionId(user.stripeCustomerId);
-      if (!sub.eligible) {
-        console.log(`skip ${email}: subscription ended`);
-        continue;
-      }
       if (!send) {
-        console.log(`would issue ${email} (${sub.id ?? "no subscription"})`);
+        console.log(
+          `would ${legacy.length ? `upgrade ${legacy.length} key(s) and ` : ""}${existing?.emailedAt ? "skip email for" : existing ? "email" : "issue"} ${email}`
+        );
         continue;
       }
 
-      const stripeSessionId = `backfill_${user.id}`;
-      const license = await prisma.licenseKey.upsert({
-        where: { stripeSessionId },
-        update: {},
-        create: {
-          key: newKey(),
-          email,
-          stripeSessionId,
-          stripeCustomerId: user.stripeCustomerId,
-          stripeSubscriptionId: sub.id,
-        },
-      });
-      await emailKey(license, INTRO);
+      if (legacy.length) {
+        await prisma.licenseKey.updateMany({
+          where: { id: { in: legacy.map((l) => l.id) } },
+          data: GRANDFATHER,
+        });
+      }
+      if (existing?.emailedAt) {
+        console.log(`skip ${email}: already emailed`);
+        continue;
+      }
+
+      const license =
+        existing ??
+        (await prisma.licenseKey.create({
+          data: {
+            ...GRANDFATHER,
+            key: newKey(),
+            email,
+            stripeSessionId,
+            stripeCustomerId: user.stripeCustomerId,
+          },
+        }));
+      await emailKey({ ...license, ...GRANDFATHER }, INTRO);
       console.log(`issued ${email}`);
       await new Promise((r) => setTimeout(r, 600)); // Resend rate limit
     } catch (e) {

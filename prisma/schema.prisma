@@ -66,16 +66,33 @@ model VerificationToken {
 }
 
 model LicenseKey {
-  id                   String    @id @default(cuid())
-  key                  String    @unique
+  id                   String              @id @default(cuid())
+  key                  String              @unique
   email                String
   stripeCustomerId     String?
-  stripeSubscriptionId String?   @unique
-  stripeSessionId      String    @unique
-  status               String    @default("granted")
+  stripeSubscriptionId String?             @unique
+  stripeSessionId      String              @unique
+  status               String              @default("granted")
   expiresAt            DateTime?
   emailedAt            DateTime?
-  createdAt            DateTime  @default(now())
+  createdAt            DateTime            @default(now())
+  tier                 String?
+  maxActivations       Int?
+  grandfathered        Boolean             @default(false)
+  activations          LicenseActivation[]
 
   @@map("license_keys")
+}
+
+model LicenseActivation {
+  id           String     @id @default(cuid())
+  licenseKeyId String
+  instanceId   String
+  label        String?
+  createdAt    DateTime   @default(now())
+  lastSeenAt   DateTime   @default(now())
+  licenseKey   LicenseKey @relation(fields: [licenseKeyId], references: [id], onDelete: Cascade)
+
+  @@unique([licenseKeyId, instanceId])
+  @@map("license_activations")
 }

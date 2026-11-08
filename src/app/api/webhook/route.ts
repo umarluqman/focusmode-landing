@@ -36,13 +36,20 @@ export async function POST(req: NextRequest) {
       case "checkout.session.completed":
       case "checkout.session.async_payment_succeeded":
         await issueKey(event.data.object);
-        await handleSuccessfulCheckout(event.data.object);
+        if (event.data.object.mode === "subscription") {
+          await handleSuccessfulCheckout(event.data.object);
+        }
         break;
       case "customer.subscription.deleted":
         await handleSubscriptionDeleted(event.data.object);
         break;
       case "charge.refunded":
-        await handleRefund(event.data.object);
+        if (event.data.object.refunded) await revokeCharge(event.data.object);
+        break;
+      case "charge.dispute.created":
+        await revokeCharge(
+          await stripe.charges.retrieve(idOf(event.data.object.charge))
+        );
         break;
       default:
         console.log(`Unhandled event type ${event.type}`);
@@ -90,33 +97,35 @@ const handleSuccessfulCheckout = async (session: Stripe.Checkout.Session) => {
 
 const handleSubscriptionDeleted = async (subscription: Stripe.Subscription) => {
   await prisma.licenseKey.updateMany({
-    where: { stripeSubscriptionId: subscription.id },
+    where: { stripeSubscriptionId: subscription.id, grandfathered: false },
     data: { status: "revoked" },
   });
 
-  const customerId =
-    typeof subscription.customer === "string"
-      ? subscription.customer
-      : subscription.customer.id;
   await prisma.user.updateMany({
-    where: { stripeCustomerId: customerId },
+    where: { stripeCustomerId: idOf(subscription.customer) },
     data: { isSubscribed: false },
   });
 };
 
-const handleRefund = async (charge: Stripe.Charge) => {
-  if (!charge.refunded || !charge.payment_intent) return;
+const idOf = (value: string | { id: string }) =>
+  typeof value === "string" ? value : value.id;
 
-  const paymentIntent =
-    typeof charge.payment_intent === "string"
-      ? charge.payment_intent
-      : charge.payment_intent.id;
-  const sessions = await stripe.checkout.sessions.list({
-    payment_intent: paymentIntent,
-  });
+const revokeCharge = async (charge: Stripe.Charge) => {
+  const sessionIds = charge.payment_intent
+    ? (
+        await stripe.checkout.sessions.list({
+          payment_intent: idOf(charge.payment_intent),
+        })
+      ).data.map((s) => s.id)
+    : [];
 
-  await prisma.licenseKey.updateMany({
-    where: { stripeSessionId: { in: sessions.data.map((s) => s.id) } },
-    data: { status: "revoked" },
-  });
+  // subscription renewals have no checkout session, fall back to the customer
+  const where = sessionIds.length
+    ? { stripeSessionId: { in: sessionIds } }
+    : charge.customer
+      ? { stripeCustomerId: idOf(charge.customer), grandfathered: false }
+      : null;
+  if (!where) return;
+
+  await prisma.licenseKey.updateMany({ where, data: { status: "revoked" } });
 };
