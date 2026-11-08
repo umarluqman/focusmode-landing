@@ -1,24 +1,22 @@
-import { Metadata } from "next/types";
-import { FaqSection } from "@/components/v3/faq-section";
-import { JsonLdSchemas } from "@/components/v3/json-ld-schemas";
+import type { Metadata } from "next/types";
 import { Footer } from "@/components/footer";
+import { JsonLd } from "@/components/json-ld";
+import { Faq } from "@/components/home/faq";
 
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Frequently asked questions about FocusMode — the mindful website blocker Chrome extension. Learn about intervention types, pricing, privacy, and more.",
+    "Answers about FocusMode: what's free, lifetime Pro, browsers per license, v2 Pro upgrades, refunds and privacy.",
 };
 
 export default function FaqPage() {
   return (
     <>
-      <JsonLdSchemas />
-      <div className="flex min-h-screen flex-col">
-        <main className="flex-1">
-          <FaqSection />
-        </main>
-        <Footer />
-      </div>
+      <JsonLd />
+      <main id="main">
+        <Faq heading="h1" />
+      </main>
+      <Footer />
     </>
   );
 }

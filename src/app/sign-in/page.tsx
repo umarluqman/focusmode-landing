@@ -1,27 +1,27 @@
 import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
+import { Wordmark } from "@/components/logo";
+import Providers from "@/components/providers";
 import { SignInButton } from "@/components/sign-in-button";
-import Image from "next/image";
+
+export const metadata = {
+  title: "Sign in",
+  robots: { index: false, follow: false },
+};
 
 export default function SignInPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950">
-      {/* <Header showCta={false} /> */}
-      <div className="flex mt-24 flex-col items-center justify-start bg-gray-100">
-        <div className="p-8 bg-white rounded-lg shadow-md">
-          <div className="flex w-full items-center justify-center space-x-2 mb-8">
-            <Image
-              src="/focusmode-logo.png"
-              alt="focusmode"
-              width={40}
-              height={40}
-            />
-            <h1 className="text-2xl font-bold text-center">focusmode</h1>
-          </div>
-          <SignInButton />
+    <>
+      <main id="main" className="container grid min-h-[60vh] place-items-center py-16">
+        <div className="w-full max-w-sm rounded-[20px] border border-border bg-card p-8 text-center">
+          <h1 className="mb-6 flex justify-center">
+            <Wordmark />
+          </h1>
+          <Providers>
+            <SignInButton />
+          </Providers>
         </div>
-      </div>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

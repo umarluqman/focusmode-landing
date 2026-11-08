@@ -1,22 +1,24 @@
-import { Metadata } from "next/types";
-import { PricingSection } from "@/components/v3/pricing-section";
-import { FaqSection } from "@/components/v3/faq-section";
+import type { Metadata } from "next/types";
 import { Footer } from "@/components/footer";
+import { JsonLd } from "@/components/json-ld";
+import { Faq } from "@/components/home/faq";
+import { Pricing } from "@/components/home/pricing";
+import { browsersLabel, isSaleActive, TIERS } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description:
-    "FocusMode pricing — free forever with 1 group and all 4 intervention types. PRO is a one-time $20.99 for unlimited groups, analytics, and flexible break durations.",
+  description: `FocusMode is free for one focus group. Pro is a one-time payment: ${TIERS.map((t) => `${t.name} $${t.price} (${browsersLabel(t).toLowerCase()})`).join(", ")}.`,
 };
 
 export default function PricingPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="flex-1">
-        <PricingSection />
-        <FaqSection />
+    <>
+      <JsonLd />
+      <main id="main">
+        <Pricing initialSale={isSaleActive()} heading="h1" />
+        <Faq />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

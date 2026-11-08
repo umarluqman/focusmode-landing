@@ -1,0 +1,71 @@
+import { browsersLabel, CHROME_STORE_URL, isSaleActive, priceOf, SALE, TIERS } from "@/lib/pricing";
+import { FAQS } from "@/components/home/faq";
+import { getCwsStats } from "@/lib/cws";
+
+const ORG = "https://focusmode.app/#organization";
+
+export async function JsonLd() {
+  const sale = isSaleActive();
+  const stats = await getCwsStats();
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": ORG,
+      name: "FocusMode",
+      url: "https://focusmode.app",
+      logo: "https://focusmode.app/focusmode-logo.png",
+      email: "focusmode.app@gmail.com",
+      sameAs: [CHROME_STORE_URL],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "FocusMode",
+      description:
+        "A Chrome extension that replaces hard blocks with mindful pauses: live shader overlays, 8 interventions, per-group schedules, time limits and breaks.",
+      url: "https://focusmode.app",
+      applicationCategory: "BrowserApplication",
+      operatingSystem: "Chrome",
+      softwareVersion: "3.0",
+      installUrl: CHROME_STORE_URL,
+      author: { "@id": ORG },
+      ...(stats && {
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: String(stats.ratingValue),
+          bestRating: "5",
+          ratingCount: String(stats.ratingCount),
+        },
+      }),
+      offers: [
+        { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD" },
+        ...TIERS.map((t) => ({
+          "@type": "Offer",
+          name: `Pro ${t.name} (${browsersLabel(t)})`,
+          price: String(priceOf(t, sale)),
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          url: "https://focusmode.app/pricing/",
+          ...(sale && { priceValidUntil: SALE.end.toISOString().slice(0, 10) }),
+        })),
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQS.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    },
+  ];
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
+    />
+  );
+}

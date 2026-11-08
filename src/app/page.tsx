@@ -1,35 +1,34 @@
-import { HeroSection } from "@/components/v3/hero-section";
-import { HowItWorks } from "@/components/v3/how-it-works";
-import { InterventionTypes } from "@/components/v3/intervention-types";
-import { FeatureDeepDive } from "@/components/v3/feature-deep-dive";
-import { AnalyticsStreaks } from "@/components/v3/analytics-streaks";
-import { PricingSection } from "@/components/v3/pricing-section";
-import { Testimonials } from "@/components/testimonials";
-import { FaqSection } from "@/components/v3/faq-section";
-import { CompetitorsSection } from "@/components/v3/competitors-section";
-import { CtaSection } from "@/components/v3/cta-section";
-import { JsonLdSchemas } from "@/components/v3/json-ld-schemas";
 import { Footer } from "@/components/footer";
+import { JsonLd } from "@/components/json-ld";
+import { BlockedMoment } from "@/components/home/blocked-moment";
+import { ClosingCta } from "@/components/home/closing-cta";
+import { Faq } from "@/components/home/faq";
+import { Groups } from "@/components/home/groups";
+import { Hero } from "@/components/home/hero";
+import { Interventions } from "@/components/home/interventions";
+import { Pricing } from "@/components/home/pricing";
+import { ShaderGallery } from "@/components/home/shader-gallery";
+import { UpgradeStrip } from "@/components/home/upgrade-strip";
+import { UseCases } from "@/components/home/use-cases";
+import { isSaleActive } from "@/lib/pricing";
 
 export default function Home() {
   return (
     <>
-      <JsonLdSchemas />
-      <div className="flex min-h-screen flex-col">
-        <main className="flex-1">
-          <HeroSection />
-          <HowItWorks />
-          <InterventionTypes />
-          <FeatureDeepDive />
-          <AnalyticsStreaks />
-          <PricingSection />
-          <Testimonials />
-          <FaqSection />
-          <CompetitorsSection />
-          <CtaSection />
-        </main>
-        <Footer />
-      </div>
+      <JsonLd />
+      <main id="main">
+        <Hero />
+        <BlockedMoment />
+        <ShaderGallery />
+        <Groups />
+        <UseCases />
+        <Interventions />
+        <Pricing initialSale={isSaleActive()} />
+        <UpgradeStrip />
+        <Faq />
+        <ClosingCta />
+      </main>
+      <Footer />
     </>
   );
 }

@@ -1,42 +1,49 @@
-import type { Metadata } from "next/types";
-import { Nunito, Fraunces } from "next/font/google";
+import type { Metadata, Viewport } from "next/types";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Providers from "@/components/providers";
 import { Header } from "@/components/header";
+import { SaleBanner } from "@/components/sale";
+import { isSaleActive, lowestPrice } from "@/lib/pricing";
 
-const nunito = Nunito({
+export const revalidate = 300;
+
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-heading",
-});
+const description = `Block distracting websites with a calm pause instead of a wall. Live shader overlays, 8 interventions, per-group schedules and limits. Free Chrome extension, lifetime Pro from $${lowestPrice(false)}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://focusmode.app"),
   title: {
-    default: "FocusMode - Website Blocker & Focus Mode Chrome Extension",
+    default: "FocusMode: Mindful Website Blocker for Chrome",
     template: "%s | FocusMode",
   },
-  description:
-    "Block distracting websites mindfully with FocusMode. 4 intervention types, break management, streak tracking & analytics. Free Chrome extension used by 15k+ people.",
+  description,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
-    title: "FocusMode — Mindful Website Blocker for Chrome",
-    description:
-      "Gentle interventions that help you stay focused. Not a blunt blocker — a mindful browsing companion. Free with optional $20.99 PRO.",
+    title: "FocusMode: a pause before the scroll",
+    description,
     url: "https://focusmode.app",
     siteName: "FocusMode",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: "/focusmode-og-img.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "FocusMode: a pause before the scroll",
+    description,
+    card: "summary_large_image",
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -49,13 +56,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  twitter: {
-    title: "FocusMode — Mindful Website Blocker for Chrome",
-    description:
-      "Block distracting websites mindfully with FocusMode. 4 intervention types, break management, streak tracking & analytics. Free Chrome extension.",
-    card: "summary_large_image",
-    images: ["/focusmode-og-img.png"],
-  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f4f4f1",
 };
 
 export default function RootLayout({
@@ -64,31 +68,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4A9075" />
-        <meta name="msapplication-TileColor" content="#4A9075" />
-        <meta name="theme-color" content="#FAF9F6" />
-      </head>
-      <body className={`${nunito.variable} ${fraunces.variable} font-sans`}>
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-card focus:px-4 focus:py-2"
+        >
+          Skip to content
+        </a>
+        <SaleBanner initial={isSaleActive()} />
+        <Header />
+        {children}
       </body>
     </html>
   );
