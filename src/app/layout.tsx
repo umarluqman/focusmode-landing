@@ -13,7 +13,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const description = `Block distracting websites with a calm pause instead of a wall. Live shader overlays, 8 interventions, per-group schedules and limits. Free Chrome extension, lifetime Pro from $${lowestPrice(false)}.`;
+const description = `Block distracting websites with a calm pause instead of a wall. Live shader overlays, 7 interventions, per-group schedules and limits. Local-first, no server tracking. Free Chrome extension, lifetime Pro from $${lowestPrice(false)}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://focusmode.app"),
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description,
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: "/apple-touch-icon.png",

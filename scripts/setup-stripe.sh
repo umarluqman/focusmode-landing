@@ -295,9 +295,9 @@ pause
 vercel_push_stage preview
 
 stage "Smoke test: local test purchase"
-step "Tab 1: stripe listen --forward-to localhost:3000/api/webhook"
+step "Tab 1: stripe listen --forward-to localhost:3000/api/webhook/ --events ${WEBHOOK_EVENTS//, /,}  (match your dev port)"
 step "Tab 2: pnpm dev"
-step "Open http://localhost:3000/pro, buy each tier with 4242 4242 4242 4242."
+step "Open http://localhost:3000/pro (your dev port), buy each tier with 4242 4242 4242 4242."
 step "Check: license key email arrives, browser count matches the tier."
 confirm "Did all three tiers work?" || { warn "Fix before going live. Re-run this script anytime."; exit 1; }
 

@@ -11,8 +11,8 @@ export function UpgradeStrip() {
             On FocusMode 2? 3.0 arrives as a normal update.
           </h2>
           <p className="mt-3 opacity-80">
-            Chrome updates it for you. Nothing to reinstall. PIN lock and strict
-            mode aren&apos;t in 3.0 yet.
+            Chrome updates it for you. Nothing to reinstall. Strict mode is
+            still here. PIN lock isn&apos;t in 3.0 yet.
           </p>
         </div>
         <div>

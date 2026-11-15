@@ -56,20 +56,24 @@ export const browsersLabel = (tier: Tier) =>
     ? "Unlimited browsers"
     : `${tier.browsers} browser${tier.browsers > 1 ? "s" : ""}`;
 
-export const FREE_SHADER_FAMILIES = ["Gradient", "Marble"];
+export const FREE_SHADER_FAMILIES = ["Dither"];
 
 export const FREE_FEATURES = [
   "1 focus group",
-  "All 8 interventions",
+  "6 of 7 interventions",
   `${FREE_SHADER_FAMILIES.join(" and ")} shaders`,
   "Schedules and daily time limits",
-  "Breaks and streaks",
+  "Block lists and allow-only groups",
+  "Strict mode",
+  "5-minute breaks and streaks",
+  "Escalation when you overdo breaks",
 ];
 
 export const PRO_FEATURES = [
   "Unlimited focus groups",
-  "Full shader gallery, 34 scenes",
-  "Escalation when you overdo breaks",
+  "Breathing exercise intervention",
+  "Full shader gallery, 23 scenes",
+  "Longer, custom break lengths",
   "Usage analytics",
   "Every future update",
 ];

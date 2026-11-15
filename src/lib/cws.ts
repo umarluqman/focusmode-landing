@@ -14,8 +14,8 @@ function toCount(raw: string, suffix = "") {
 
 export function parseCwsStats(html: string): CwsStats | null {
   const rating =
-    html.match(/Average rating ([\d.]+) out of 5/) ??
-    html.match(/>([\d.]+) out of 5</);
+    html.match(/>([\d.]+) out of 5</) ??
+    html.match(/Average rating ([\d.]+) out of 5/);
   const count = html.match(/>([\d,.]+)([KkM]?) ratings?</);
   const users = html.match(/>([\d,]+)\+? users</);
   if (!rating || !count || !users) return null;

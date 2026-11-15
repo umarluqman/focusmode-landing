@@ -2,6 +2,10 @@ import { prisma } from "@/lib/prisma";
 import { emailKey, newKey } from "@/lib/license";
 
 const send = process.argv.includes("--send");
+const limitArg = process.argv.indexOf("--limit");
+// Resend free plan caps at 100 emails/day, keep headroom for buyers and resends
+const limit = limitArg === -1 ? 95 : Number(process.argv[limitArg + 1]);
+if (!Number.isInteger(limit) || limit < 1) throw new Error("--limit must be a positive integer");
 const INTRO =
   "Thank you for being an early FocusMode Pro supporter! FocusMode v3 is here, and you keep Pro for life. Here's your license key. It works on as many browsers as you like.";
 const GRANDFATHER = {
@@ -16,10 +20,15 @@ async function main() {
     where: { isSubscribed: true, email: { not: null } },
   });
   console.log(
-    `${users.length} grandfathered users${send ? "" : " (dry run, pass --send to issue and email)"}`
+    `${users.length} grandfathered users${send ? `, emailing at most ${limit}` : " (dry run, pass --send to issue and email)"}`
   );
 
+  let sent = 0;
   for (const user of users) {
+    if (send && sent >= limit) {
+      console.log(`limit ${limit} reached, re-run tomorrow for the rest`);
+      break;
+    }
     const email = user.email!;
     const stripeSessionId = `backfill_${user.id}`;
     try {
@@ -65,6 +74,7 @@ async function main() {
           },
         }));
       await emailKey({ ...license, ...GRANDFATHER }, INTRO);
+      sent++;
       console.log(`issued ${email}`);
       await new Promise((r) => setTimeout(r, 600)); // Resend rate limit
     } catch (e) {

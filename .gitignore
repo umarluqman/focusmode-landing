@@ -44,3 +44,4 @@ videos/*
 public/_next-video
 *.sql
 !prisma/migrations/**/*.sql
+.env*

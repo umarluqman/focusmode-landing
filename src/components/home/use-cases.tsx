@@ -1,7 +1,8 @@
 const CASES = [
-  ["News check-ins", "Kicks in after 15 min a day", "Slide, 5s"],
+  ["News check-ins", "After usage · 15 min a day", "Slide, 5s"],
   ["Shopping cool-off", "amazon.com, shopee.com", "15s wait · “Sleep on it”"],
-  ["Late night", "22:00–06:00", "Recharge micro-breaks"],
+  ["Late night", "22:00–06:00", "Breathing, 4‑7‑8 (Pro)"],
+  ["Deadline day", "Allow only docs and GitHub", "Strict mode, 15 min"],
   ["Inbox hours", "Gmail outside 11:00 and 16:00", "Instant pause"],
   ["Sports scores", "Weekdays only", "Pixel, 8s"],
 ];

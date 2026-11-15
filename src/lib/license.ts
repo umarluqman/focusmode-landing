@@ -130,7 +130,11 @@ const browsersOf = (license: LicenseKey) =>
     : `${license.maxActivations} browser${license.maxActivations === 1 ? "" : "s"}`;
 
 const tierNameOf = (license: LicenseKey) =>
-  isTier(license.tier) ? tierOf(license.tier).name : "Unlimited";
+  license.grandfathered
+    ? "Lifetime (v2 supporter)"
+    : isTier(license.tier)
+      ? tierOf(license.tier).name
+      : "Unlimited";
 
 const STEPS = [
   "Open the FocusMode extension.",
@@ -138,12 +142,20 @@ const STEPS = [
   "Paste your key and press Activate.",
 ];
 
+const V3_NOTE =
+  "Keys need FocusMode 3.0 or later. Chrome updates automatically; check your version at chrome://extensions.";
+const GRANDFATHER_NOTE =
+  "Already on 3.0? You're Pro already, nothing to do. Use this key on a new browser, Edge or Firefox.";
+
 function renderKeysEmail(intro: string, licenses: LicenseKey[]) {
   const resendUrl = `${SITE_URL}/license/`;
-  const subject =
-    licenses.length > 1
+  const grandfathered = licenses.every((l) => l.grandfathered);
+  const subject = grandfathered
+    ? "You're FocusMode Pro for life — here's your key"
+    : licenses.length > 1
       ? "Your FocusMode Pro license keys"
       : "Your FocusMode Pro license key";
+  const notes = grandfathered ? [GRANDFATHER_NOTE, V3_NOTE] : [V3_NOTE];
 
   const text = [
     intro,
@@ -152,6 +164,7 @@ function renderKeysEmail(intro: string, licenses: LicenseKey[]) {
     ),
     "\nTo activate:",
     ...STEPS.map((s, i) => `${i + 1}. ${s}`),
+    ...notes.map((n) => `\n${n}`),
     `\nLost this email? Get your keys again at ${resendUrl}`,
   ].join("\n");
 
@@ -179,6 +192,7 @@ function renderKeysEmail(intro: string, licenses: LicenseKey[]) {
         <ol style="margin:0;padding-left:20px;line-height:1.7">
           ${STEPS.map((s) => `<li>${s}</li>`).join("")}
         </ol>
+        ${notes.map((n) => `<p style="margin:16px 0 0;font-size:14px;color:#1c2b33">${n}</p>`).join("")}
         <p style="margin:24px 0 0;font-size:13px;color:#4a6572">
           Lost this email? <a href="${resendUrl}" style="color:#003f5c">Get your keys again</a>.
         </p>

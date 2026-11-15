@@ -1,5 +1,6 @@
 import { CHROME_STORE_URL } from "@/lib/pricing";
 import { getCwsStats } from "@/lib/cws";
+import { Stars } from "@/components/stars";
 import { HeroDemo } from "./hero-demo";
 
 export async function Hero() {
@@ -19,7 +20,7 @@ export async function Hero() {
           <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-muted-foreground">
             FocusMode doesn&apos;t slam the door on distracting sites. It slows
             the moment down: a living shader rises over the page, you take a
-            breath, and then you decide.
+            breath, and then you decide. Everything stays in your browser.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
@@ -37,19 +38,23 @@ export async function Hero() {
               Try the pause
             </a>
           </div>
-          <p className="mt-6 text-sm text-muted-foreground">
-            {stats ? (
-              <>
-                <span className="font-semibold text-foreground">
-                  {stats.ratingValue}
-                </span>{" "}
-                on the Chrome Web Store · {stats.users.toLocaleString("en-US")}+
-                people · no account needed
-              </>
-            ) : (
-              "Free on the Chrome Web Store · no account needed"
-            )}
-          </p>
+          {stats ? (
+            <a
+              href="#reviews"
+              className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground"
+            >
+              <Stars rating={stats.ratingValue} />
+              <span className="font-semibold text-foreground">{stats.ratingValue}</span>
+              <span>
+                from {stats.ratingCount.toLocaleString("en-US")} ratings ·{" "}
+                {stats.users.toLocaleString("en-US")}+ users · no account, no server tracking
+              </span>
+            </a>
+          ) : (
+            <p className="mt-6 text-sm text-muted-foreground">
+              Free on the Chrome Web Store · no account, no server tracking
+            </p>
+          )}
         </div>
 
         <HeroDemo />

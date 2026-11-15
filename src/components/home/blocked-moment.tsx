@@ -1,21 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LiveShader } from "@/components/shader/live-shader";
 import { FAMILIES } from "@/components/shader/scenes";
 import { BrowserFrame, FakeFeed } from "./browser-frame";
+import { OverlayMock, overlayButton } from "./overlay-mock";
 
 const SITES = [
-  { url: "x.com", group: "Doom-scroll", scene: FAMILIES[1].scenes[1] },
-  { url: "reddit.com", group: "Doom-scroll", scene: FAMILIES[0].scenes[0] },
-  { url: "youtube.com/shorts", group: "Research video", scene: FAMILIES[0].scenes[1] },
+  { url: "x.com", scene: FAMILIES[1].scenes[1] },
+  { url: "reddit.com", scene: FAMILIES[0].scenes[0] },
+  { url: "youtube.com/shorts", scene: FAMILIES[0].scenes[1] },
 ];
+
+const BREAK_MINUTES = [5, 10, 15, 30];
+const DAILY_BREAKS = 3;
 
 const STEPS = [
   ["Habit reaches for a site", "You open a tab on autopilot. FocusMode catches it before the page does."],
   ["The pause rises", "A shader fills the screen while a short timer runs. Nothing to read, nothing to scroll."],
-  ["You choose, on purpose", "Hold to take a counted break, or close the tab and keep your streak."],
+  ["You choose, on purpose", "Take a counted break, or close the tab and keep your streak."],
 ];
 
 type Phase = "idle" | "paused" | "break" | "closed";
@@ -23,24 +28,12 @@ type Phase = "idle" | "paused" | "break" | "closed";
 export function BlockedMoment() {
   const [site, setSite] = useState(SITES[0]);
   const [phase, setPhase] = useState<Phase>("idle");
-  const [holding, setHolding] = useState(false);
+  const [picking, setPicking] = useState(false);
 
   const visit = (s: (typeof SITES)[number]) => {
     setSite(s);
+    setPicking(false);
     setPhase("paused");
-  };
-
-  const hold = {
-    onPointerDown: () => setHolding(true),
-    onPointerUp: () => setHolding(false),
-    onPointerLeave: () => setHolding(false),
-    onKeyDown: (e: React.KeyboardEvent) => {
-      if (e.key === " " || e.key === "Enter") {
-        e.preventDefault();
-        setHolding(true);
-      }
-    },
-    onKeyUp: () => setHolding(false),
   };
 
   return (
@@ -87,7 +80,7 @@ export function BlockedMoment() {
             ))}
           </div>
 
-          <BrowserFrame url={phase === "idle" ? "new tab" : site.url}>
+          <BrowserFrame url={phase === "idle" || phase === "closed" ? "new tab" : site.url}>
             <div className="relative aspect-[4/3.4] sm:aspect-[16/11]" aria-live="polite">
               {phase === "idle" && (
                 <div className="absolute inset-0 grid place-items-center p-6 text-center text-muted-foreground">
@@ -103,62 +96,71 @@ export function BlockedMoment() {
                 )}
               >
                 {phase !== "idle" && <LiveShader scene={site.scene} reveal={phase === "paused" ? 1 : 0} />}
-                <div className="absolute inset-0 grid place-items-center p-5">
-                  {phase === "paused" && (
-                    <div className="w-full max-w-[20rem] rounded-3xl bg-[hsl(60_20%_99%/0.66)] p-6 text-center shadow-[0_8px_40px_rgba(0,0,0,0.14)] ring-1 ring-white/50 backdrop-blur-lg">
-                      <p className="text-xs font-medium text-foreground/60">{site.group} group</p>
-                      <p className="mt-1 text-lg font-semibold leading-snug tracking-tight">
-                        Are you sure you want to enter this site?
-                      </p>
-                      <div className="mt-5 grid gap-2">
+                {phase === "paused" && (
+                  <OverlayMock
+                    key={site.url}
+                    text="Are you sure you want to enter this site?"
+                    breaksLeft={DAILY_BREAKS}
+                  >
+                    {picking ? (
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <button
                           type="button"
-                          {...hold}
-                          className="relative h-11 select-none overflow-hidden rounded-full bg-foreground text-sm font-semibold text-background [touch-action:none]"
+                          aria-label="Back"
+                          onClick={() => setPicking(false)}
+                          className="grid size-9 shrink-0 place-items-center rounded-[8px] text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-950"
                         >
-                          <span
-                            onAnimationEnd={() => {
-                              setHolding(false);
-                              setPhase("break");
-                            }}
-                            className={cn(
-                              "absolute inset-0 origin-left scale-x-0 bg-orange",
-                              holding && "animate-[fill_3s_linear_forwards]"
-                            )}
-                          />
-                          <span className="relative">{holding ? "Keep holding…" : "Hold 3s to take a break"}</span>
+                          <ArrowLeft className="size-4" />
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => setPhase("closed")}
-                          className="h-11 rounded-full text-sm font-semibold transition-colors hover:bg-foreground/5"
-                        >
+                        <div className="grid grid-cols-2 gap-px xl:grid-cols-4 overflow-hidden rounded-[8px] border border-zinc-200 bg-zinc-200 shadow-sm">
+                          {BREAK_MINUTES.map((minutes) => (
+                            <button
+                              key={minutes}
+                              type="button"
+                              disabled={minutes !== 5}
+                              title={minutes !== 5 ? "Exclusive for PRO users" : undefined}
+                              onClick={() => setPhase("break")}
+                              className={overlayButton.segment}
+                            >
+                              For {minutes} minutes
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex gap-3">
+                        <button type="button" onClick={() => setPicking(true)} className={overlayButton.outline}>
+                          Let me continue
+                        </button>
+                        <button type="button" onClick={() => setPhase("closed")} className={overlayButton.dark}>
                           Close tab
                         </button>
                       </div>
-                    </div>
-                  )}
-                </div>
+                    )}
+                  </OverlayMock>
+                )}
               </div>
-
-              {(phase === "break" || phase === "closed") && (
-                <div className="absolute inset-x-4 bottom-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-foreground px-4 py-3 text-sm text-background">
-                  <span>
-                    {phase === "break"
-                      ? "5-minute break started. 2 of 3 breaks left today."
-                      : "Tab closed. Your streak lives on."}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setPhase("idle")}
-                    className="font-semibold text-orange underline-offset-4 hover:underline"
-                  >
-                    Try again
-                  </button>
-                </div>
-              )}
             </div>
           </BrowserFrame>
+
+          <p className="mt-4 flex min-h-5 flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground" aria-live="polite">
+            {(phase === "break" || phase === "closed") && (
+              <>
+                <span>
+                  {phase === "break"
+                    ? `5-minute break started. ${DAILY_BREAKS - 1} breaks left today.`
+                    : "Tab closed. Your streak lives on."}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setPhase("idle")}
+                  className="font-semibold text-orange-ink underline-offset-4 hover:underline"
+                >
+                  Try again
+                </button>
+              </>
+            )}
+          </p>
         </div>
       </div>
     </section>

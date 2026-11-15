@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><g fill="#000" transform="translate(128 128) scale(1) translate(-128 -128)"><path d="M180.1 19.9 L72 128 L122 178 L18.9 178 A120 120 0 0 1 180.1 19.9 Z"/><path d="M180.1 19.9 L72 128 L122 178 L18.9 178 A120 120 0 0 1 180.1 19.9 Z" transform="rotate(180 128 128)"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g fill="#000">
+    <g fill-opacity="0.35">
+      <circle cx="30" cy="30" r="8.5" />
+      <circle cx="70" cy="30" r="8.5" />
+      <circle cx="30" cy="70" r="8.5" />
+      <circle cx="70" cy="70" r="8.5" />
+    </g>
+    <circle cx="50" cy="30" r="8.5" />
+    <circle cx="30" cy="50" r="8.5" />
+    <circle cx="70" cy="50" r="8.5" />
+    <circle cx="50" cy="70" r="8.5" />
+  </g>
+</svg>

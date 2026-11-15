@@ -52,8 +52,11 @@ Every user with `isSubscribed = true` gets an unlimited key with `grandfathered 
 
 ```sh
 pnpm backfill:license-keys            # dry run, lists who would get a key
-pnpm backfill:license-keys -- --send  # creates keys and emails them
+pnpm backfill:license-keys -- --send  # creates keys and emails at most 95
+pnpm backfill:license-keys -- --send --limit 50  # custom cap
 ```
+
+Resend free plan caps at 100 emails/day, shared with buyer and resend emails. 279 users → run `--send` once a day for 3 days, all before the sale starts. Each run skips users already emailed.
 
 The backfill is idempotent (`stripeSessionId = backfill_<userId>`) and safe to re-run. It also upgrades that user's older keys (an earlier `backfill_<userId>` row, or keys issued by legacy subscription checkouts) to unlimited, grandfathered and no subscription id. If one of those keys was already emailed, no second key is created. New tier checkouts never set `isSubscribed`, so buyers after launch are not picked up. Emails can't be unsent, so read the dry-run list first.
 

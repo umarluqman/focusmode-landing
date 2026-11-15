@@ -24,8 +24,8 @@ export function ShaderGallery() {
           </div>
           <p className="max-w-sm text-muted-foreground">
             Each one renders live on your GPU, then settles as the timer ends.{" "}
-            {FREE_SHADER_FAMILIES.join(" and ")} come free. Pro opens the whole
-            gallery.
+            The {FREE_SHADER_FAMILIES.join(" and ")} family is free. Pro opens the
+            whole gallery.
           </p>
         </div>
 

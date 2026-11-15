@@ -4,8 +4,12 @@ const tierLine = TIERS.map((t) => `${t.name} (${browsersLabel(t).toLowerCase()},
 
 export const FAQS = [
   {
+    q: "Does FocusMode see my browsing?",
+    a: "No. FocusMode is local-first: your sites, groups, usage stats and streaks stay in your browser. Nothing about your browsing is sent to us, and there are no third-party trackers. The only thing that leaves it is your license key, with a random install ID and your browser's name, when Pro checks that the key is valid.",
+  },
+  {
     q: "Is FocusMode free?",
-    a: `Yes. The free version includes one focus group, all 8 interventions, schedules, time limits, breaks and streaks. Pro is a one-time payment from $${lowestPrice(false)}: ${tierLine}.`,
+    a: `Yes. The free version includes one focus group, 6 of the 7 interventions (Breathing is Pro), the Dither shaders, schedules, time limits, strict mode, 5-minute breaks, escalation and streaks. Pro is a one-time payment from $${lowestPrice(false)}: ${tierLine}.`,
   },
   {
     q: "Is Pro really lifetime?",
@@ -28,12 +32,12 @@ export const FAQS = [
     a: "Chrome, plus Chromium browsers that install from the Chrome Web Store, such as Edge, Brave and Arc.",
   },
   {
-    q: "Does FocusMode see my browsing?",
-    a: "No. Your sites, groups and stats stay in your browser. The only thing that leaves it is your license key, when Pro checks that the key is valid.",
+    q: "Can I block part of a site?",
+    a: "Yes. Block youtube.com/shorts and leave the rest of YouTube open, or block a site and let one path through with a ! rule. A group can also work the other way round: list the sites you need and everything else is blocked while it's on.",
   },
   {
-    q: "Can I block part of a site?",
-    a: "Yes. Block youtube.com/shorts and leave the rest of YouTube open, or block a site and let one path through with a ! rule.",
+    q: "Can I stop myself from switching it off?",
+    a: "Yes. Strict mode locks things for 1, 5, 10 or 15 minutes: every active group blocks instantly with no breaks, and groups can't be switched off or edited until the time is up. PIN lock from FocusMode 2 isn't in 3.0 yet.",
   },
   {
     q: "I lost my license key.",

@@ -23,7 +23,7 @@ export async function JsonLd() {
       "@type": "SoftwareApplication",
       name: "FocusMode",
       description:
-        "A Chrome extension that replaces hard blocks with mindful pauses: live shader overlays, 8 interventions, per-group schedules, time limits and breaks.",
+        "A Chrome extension that replaces hard blocks with mindful pauses: live shader overlays, 7 interventions, per-group schedules, time limits, breaks and strict mode.",
       url: "https://focusmode.app",
       applicationCategory: "BrowserApplication",
       operatingSystem: "Chrome",
