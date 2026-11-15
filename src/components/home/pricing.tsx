@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   browsersLabel,
   CHROME_STORE_URL,
+  formatPrice,
   FREE_FEATURES,
   PRO_FEATURES,
   priceOf,
@@ -44,7 +45,7 @@ export function Pricing({
           </div>
           {sale && (
             <div className="self-start rounded-2xl bg-primary px-4 py-3 text-sm text-primary-foreground lg:self-auto">
-              <p className="font-semibold">{SALE.name} prices</p>
+              <p className="font-semibold">{SALE.name}: {SALE.percentOff}% off</p>
               <p className="opacity-80">
                 Ends in <Countdown />
               </p>
@@ -100,14 +101,14 @@ export function Pricing({
                   {browsersLabel(t)}
                 </p>
                 <p className="mt-6 flex items-baseline gap-2">
-                  <span className="text-5xl font-semibold tracking-tight">${price}</span>
+                  <span className="text-5xl font-semibold tracking-tight">${formatPrice(price)}</span>
                   {sale && (
                     <>
                       <s className={cn("text-xl", featured ? "opacity-60" : "text-muted-foreground")}>
                         <span className="sr-only">was </span>${t.price}
                       </s>
                       <span className={cn("text-sm font-semibold", featured ? "text-orange" : "text-orange-ink")}>
-                        −{Math.round((1 - t.salePrice / t.price) * 100)}%
+                        −{SALE.percentOff}%
                       </span>
                     </>
                   )}

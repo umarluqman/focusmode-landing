@@ -5,7 +5,6 @@ export type Tier = {
   name: string;
   browsers: number | null;
   price: number;
-  salePrice: number;
   blurb: string;
 };
 
@@ -15,7 +14,6 @@ export const TIERS: Tier[] = [
     name: "Personal",
     browsers: 1,
     price: 20,
-    salePrice: 5,
     blurb: "One browser you live in.",
   },
   {
@@ -23,7 +21,6 @@ export const TIERS: Tier[] = [
     name: "Plus",
     browsers: 3,
     price: 30,
-    salePrice: 9,
     blurb: "Work laptop, home desktop, and one more.",
   },
   {
@@ -31,13 +28,13 @@ export const TIERS: Tier[] = [
     name: "Unlimited",
     browsers: null,
     price: 45,
-    salePrice: 15,
     blurb: "Every browser, every profile, the whole household.",
   },
 ];
 
 export const SALE = {
   name: "Black Friday",
+  percentOff: 50,
   start: new Date("2026-11-27T00:00:00-08:00"),
   end: new Date("2026-12-01T23:59:59-08:00"),
 };
@@ -46,10 +43,12 @@ export const isSaleActive = (now = new Date()) =>
   now >= SALE.start && now <= SALE.end;
 
 export const priceOf = (tier: Tier, sale: boolean) =>
-  sale ? tier.salePrice : tier.price;
+  sale ? (tier.price * (100 - SALE.percentOff)) / 100 : tier.price;
 
-export const lowestPrice = (sale: boolean) =>
-  Math.min(...TIERS.map((t) => priceOf(t, sale)));
+export const formatPrice = (n: number) =>
+  Number.isInteger(n) ? String(n) : n.toFixed(2);
+
+export const lowestPrice = () => Math.min(...TIERS.map((t) => t.price));
 
 export const browsersLabel = (tier: Tier) =>
   tier.browsers === null

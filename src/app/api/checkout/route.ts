@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
-import { isTier, tierPriceId, tierSaleCoupon } from "@/lib/license";
+import { isTier, saleCoupon, tierPriceId } from "@/lib/license";
 import { isSaleActive } from "@/lib/pricing";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid tier" }, { status: 422 });
   }
 
-  const coupon = isSaleActive() ? tierSaleCoupon(tier) : undefined;
+  const coupon = isSaleActive() ? saleCoupon() : undefined;
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     line_items: [{ price, quantity: 1 }],

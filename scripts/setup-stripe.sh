@@ -201,7 +201,7 @@ finish() {
 LIVE_ENV_FILE=".env.stripe-live.local"
 STRIPE_VARS=(STRIPE_SECRET_KEY STRIPE_WEBHOOK_SECRET
   STRIPE_PRICE_PERSONAL STRIPE_PRICE_PLUS STRIPE_PRICE_UNLIMITED
-  STRIPE_SALE_COUPON_PERSONAL STRIPE_SALE_COUPON_PLUS STRIPE_SALE_COUPON_UNLIMITED)
+  STRIPE_SALE_COUPON)
 WEBHOOK_EVENTS="checkout.session.completed, checkout.session.async_payment_succeeded, customer.subscription.deleted, charge.refunded, charge.dispute.created"
 
 vc() { npx -y vercel@latest "$@"; }
@@ -242,7 +242,7 @@ products_apply_stage() {
   if grep -q '<price id>' <<<"$out"; then warn "A price id is missing, aborting."; exit 1; fi
   while IFS='=' read -r key value; do
     write_env "$key" "$value"
-  done < <(grep -E '^STRIPE_(PRICE|SALE_COUPON)_[A-Z]+=' <<<"$out")
+  done < <(grep -E '^STRIPE_(PRICE_[A-Z]+|SALE_COUPON)=' <<<"$out")
   pause
 }
 

@@ -14,8 +14,7 @@ const tierOf = (id: TierId) => TIERS.find((t) => t.id === id)!;
 export const tierPriceId = (tier: TierId) =>
   process.env[`STRIPE_PRICE_${tier.toUpperCase()}`];
 
-export const tierSaleCoupon = (tier: TierId) =>
-  process.env[`STRIPE_SALE_COUPON_${tier.toUpperCase()}`];
+export const saleCoupon = () => process.env.STRIPE_SALE_COUPON;
 
 const SITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL ?? "https://focusmode.app";
 

@@ -9,7 +9,7 @@ export const FAQS = [
   },
   {
     q: "Is FocusMode free?",
-    a: `Yes. The free version includes one focus group, 6 of the 7 interventions (Breathing is Pro), the Dither shaders, schedules, time limits, strict mode, 5-minute breaks, escalation and streaks. Pro is a one-time payment from $${lowestPrice(false)}: ${tierLine}.`,
+    a: `Yes. The free version includes one focus group, 6 of the 7 interventions (Breathing is Pro), the Dither shaders, schedules, time limits, strict mode, 5-minute breaks, escalation and streaks. Pro is a one-time payment from $${lowestPrice()}: ${tierLine}.`,
   },
   {
     q: "Is Pro really lifetime?",

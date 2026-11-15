@@ -10,13 +10,13 @@ Sale window: 2026-11-27 00:00 PT to 2026-12-01 23:59 PT (`SALE` in `src/lib/pric
 | `NEXT_PUBLIC_WEBSITE_URL` | `https://focusmode.app` |
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | live keys (already set) |
 | `STRIPE_PRICE_PERSONAL` / `STRIPE_PRICE_PLUS` / `STRIPE_PRICE_UNLIMITED` | price ids printed by step 3 |
-| `STRIPE_SALE_COUPON_PERSONAL` / `_PLUS` / `_UNLIMITED` | `bf2026_personal` / `bf2026_plus` / `bf2026_unlimited` |
+| `STRIPE_SALE_COUPON` | `bf2026_50off` |
 | `RESEND_API_KEY` | Resend API key (focusmode.app domain verified in Resend) |
 | `RESEND_FROM_EMAIL` | `FocusMode <hey@focusmode.app>` |
 
 Email goes through Resend only. Local `.env` still has `PLUNK_API_KEY` / `EMAIL_FROM`, which nothing reads.
 
-One coupon per tier, because $20→$5, $30→$9 and $45→$15 are different amounts off. The coupon is applied only inside the sale window. Outside it, Checkout shows a promo-code field instead.
+One 50%-off coupon for all tiers: $20→$10, $30→$15, $45→$22.50. The coupon is applied only inside the sale window. Outside it, Checkout shows a promo-code field instead.
 
 ## 2. Database migration
 
@@ -112,6 +112,6 @@ Do a full test-mode purchase on a Preview deploy with card `4242 4242 4242 4242`
   ALTER TABLE license_keys DROP COLUMN tier, DROP COLUMN "maxActivations", DROP COLUMN grandfathered;
   DELETE FROM _prisma_migrations WHERE migration_name = '20261108000000_add_license_tiers_and_activations';
   ```
-- **Sale:** unset the `STRIPE_SALE_COUPON_*` vars, or delete the coupons in Stripe. Coupons also expire on their own at the sale end (`redeem_by`).
+- **Sale:** unset `STRIPE_SALE_COUPON`, or delete the coupon in Stripe. It also expires on their own at the sale end (`redeem_by`).
 - **Bad key:** `UPDATE license_keys SET status = 'revoked' WHERE key = '...';` and to reinstate it, `status = 'granted'`.
 - **Free a seat for a customer:** `DELETE FROM license_activations WHERE "licenseKeyId" = (SELECT id FROM license_keys WHERE key = '...');`
