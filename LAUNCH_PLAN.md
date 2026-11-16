@@ -15,7 +15,7 @@ After CWS approval:
 - [ ] Firefox: once the AMO listing is live, set `FIREFOX_STORE_URL` in `src/lib/pricing.ts`. Until then Firefox visitors get the Chrome button, while the copy already says Firefox is supported.
 
 Decided / done (2026-11-16):
-- [x] Sale display: full price + "50% off with code BRIGHTFRIDAY", not pre-discounted prices.
+- [x] Sale display: keep halved price cards + "50% off with code BRIGHTFRIDAY" banner. Sale starts at launch.
 - [x] Grandfather backfill: low priority, v2 Pro users get Pro automatically in the extension.
 - [x] `prisma migrate status` on Neon: up to date (4 migrations), nothing pending.
 - [x] 0.6 CWS listing: done in `focusmode-wxt`.
