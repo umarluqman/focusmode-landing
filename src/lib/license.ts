@@ -4,7 +4,7 @@ import type Stripe from "stripe";
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
-import { TIERS, type TierId } from "@/lib/pricing";
+import { FIREFOX_LIVE, TIERS, type TierId } from "@/lib/pricing";
 
 export const isTier = (value: unknown): value is TierId =>
   TIERS.some((t) => t.id === value);
@@ -142,7 +142,7 @@ const STEPS = [
 const V3_NOTE =
   "Keys need FocusMode 3.0 or later. Chrome updates automatically; check your version at chrome://extensions.";
 const GRANDFATHER_NOTE =
-  "Already on 3.0? You're Pro already, nothing to do. Use this key on a new browser, Edge or Firefox.";
+  `Already on 3.0? You're Pro already, nothing to do. Use this key on a new browser, Edge${FIREFOX_LIVE ? " or Firefox" : ""}.`;
 
 function renderKeysEmail(intro: string, licenses: LicenseKey[]) {
   const resendUrl = `${SITE_URL}/license/`;

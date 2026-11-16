@@ -1,3 +1,5 @@
+import { FIREFOX_LIVE } from "@/lib/pricing";
+
 export type BlockPage = {
   slug: string;
   name: string;
@@ -51,8 +53,8 @@ export const BLOCK_PAGES: BlockPage[] = [
         a: "No. The rule youtube.com/shorts/* only matches addresses that start with /shorts/. Regular videos live at /watch, so they open as usual.",
       },
       {
-        q: "Does it work in Firefox, Edge, Brave or Arc?",
-        a: "Yes. FocusMode installs from the Chrome Web Store, so it works in Chrome and in Chromium browsers that use the store, including Edge, Brave and Arc. Firefox has its own version on Firefox Add-ons.",
+        q: FIREFOX_LIVE ? "Does it work in Firefox, Edge, Brave or Arc?" : "Does it work in Edge, Brave or Arc?",
+        a: `Yes. FocusMode installs from the Chrome Web Store, so it works in Chrome and in Chromium browsers that use the store, including Edge, Brave and Arc.${FIREFOX_LIVE ? " Firefox has its own version on Firefox Add-ons." : ""}`,
       },
       {
         q: "Can I allow Shorts for an hour a day?",

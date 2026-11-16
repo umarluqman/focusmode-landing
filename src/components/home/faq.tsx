@@ -1,4 +1,4 @@
-import { browsersLabel, lowestPrice, TIERS } from "@/lib/pricing";
+import { browsersLabel, FIREFOX_LIVE, lowestPrice, TIERS } from "@/lib/pricing";
 
 const tierLine = TIERS.map((t) => `${t.name} (${browsersLabel(t).toLowerCase()}, $${t.price})`).join(", ");
 
@@ -29,7 +29,7 @@ export const FAQS = [
   },
   {
     q: "Which browsers does it work in?",
-    a: "Chrome and Firefox, plus Chromium browsers that install from the Chrome Web Store, such as Edge, Brave and Arc.",
+    a: `Chrome${FIREFOX_LIVE ? " and Firefox" : ""}, plus Chromium browsers that install from the Chrome Web Store, such as Edge, Brave and Arc.`,
   },
   {
     q: "Can I block part of a site?",

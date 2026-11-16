@@ -1,5 +1,6 @@
 import { StoreLink } from "@/components/store-link";
 import { getCwsStats } from "@/lib/cws";
+import { FIREFOX_LIVE } from "@/lib/pricing";
 import { Stars } from "@/components/stars";
 import { HeroDemo } from "./hero-demo";
 
@@ -37,7 +38,7 @@ export async function Hero() {
             </a>
           </div>
           <p className="mt-3 text-sm text-muted-foreground">
-            Works in Chrome, Firefox, Edge, Brave and Arc.{" "}
+            Works in Chrome, {FIREFOX_LIVE && "Firefox, "}Edge, Brave and Arc.{" "}
             <span className="hidden [@media(pointer:coarse)]:inline">
               Desktop only, open this page on your computer.
             </span>
@@ -56,7 +57,7 @@ export async function Hero() {
             </a>
           ) : (
             <p className="mt-6 text-sm text-muted-foreground">
-              Free for Chrome and Firefox · no account, no server tracking
+              Free for Chrome{FIREFOX_LIVE && " and Firefox"} · no account, no server tracking
             </p>
           )}
         </div>

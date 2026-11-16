@@ -81,8 +81,9 @@ export const PRO_FEATURES = [
 export const CHROME_STORE_URL =
   "https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc";
 
-// TODO: set once the Firefox Add-ons (AMO) listing is live
+// Set once the Firefox Add-ons (AMO) listing is live; turns on Firefox copy site-wide.
 export const FIREFOX_STORE_URL: string | null = null;
+export const FIREFOX_LIVE = FIREFOX_STORE_URL !== null;
 
 export const storeUrl = (placement: string, base = CHROME_STORE_URL) =>
   `${base}?utm_source=focusmode.app&utm_medium=${placement}&utm_campaign=v3`;

@@ -12,7 +12,7 @@ After CWS approval:
 - [ ] Redeploy on Amplify.
 - [ ] Test checkout in live: promo field accepts `BRIGHTFRIDAY`, 50% off, refund after.
 - [ ] Turn on Cloudflare Web Analytics (automatic setup) with the deploy; privacy policy already mentions it.
-- [ ] Firefox: once the AMO listing is live, set `FIREFOX_STORE_URL` in `src/lib/pricing.ts`. Until then Firefox visitors get the Chrome button, while the copy already says Firefox is supported.
+- [ ] Firefox: once the AMO listing is live, set `FIREFOX_STORE_URL` in `src/lib/pricing.ts`. That flips `FIREFOX_LIVE`, which turns on all Firefox copy (hero, FAQ, block pages, key email) and the Firefox button. Until then the site only mentions Chrome, Edge, Brave and Arc.
 
 Decided / done (2026-11-16):
 - [x] Sale display: keep halved price cards + "50% off with code BRIGHTFRIDAY" banner. Sale starts at launch.
