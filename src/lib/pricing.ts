@@ -85,5 +85,8 @@ export const CHROME_STORE_URL =
 export const FIREFOX_STORE_URL: string | null = null;
 export const FIREFOX_LIVE = FIREFOX_STORE_URL !== null;
 
+// Set once the Edge Add-ons listing is live. Edge copy stays on regardless (Edge installs from the Chrome Web Store); this only sends Edge visitors to Edge Add-ons.
+export const EDGE_STORE_URL: string | null = null;
+
 export const storeUrl = (placement: string, base = CHROME_STORE_URL) =>
   `${base}?utm_source=focusmode.app&utm_medium=${placement}&utm_campaign=v3`;

@@ -1,7 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CHROME_STORE_URL, FIREFOX_STORE_URL, storeUrl } from "@/lib/pricing";
+import { CHROME_STORE_URL, EDGE_STORE_URL, FIREFOX_STORE_URL, storeUrl } from "@/lib/pricing";
+
+type Store = { name: string; url: string };
+
+const CHROME: Store = { name: "Chrome", url: CHROME_STORE_URL };
+
+function detectStore(ua: string): Store {
+  if (FIREFOX_STORE_URL && /firefox/i.test(ua)) return { name: "Firefox", url: FIREFOX_STORE_URL };
+  if (EDGE_STORE_URL && /edg\//i.test(ua)) return { name: "Edge", url: EDGE_STORE_URL };
+  return CHROME;
+}
 
 export function StoreLink({
   placement,
@@ -12,22 +22,20 @@ export function StoreLink({
   suffix?: string;
   className?: string;
 }) {
-  const [firefoxUrl, setFirefoxUrl] = useState<string | null>(null);
+  const [store, setStore] = useState(CHROME);
 
   useEffect(() => {
-    if (FIREFOX_STORE_URL && /firefox/i.test(navigator.userAgent)) {
-      setFirefoxUrl(FIREFOX_STORE_URL);
-    }
+    setStore(detectStore(navigator.userAgent));
   }, []);
 
   return (
     <a
-      href={storeUrl(placement, firefoxUrl ?? CHROME_STORE_URL)}
+      href={storeUrl(placement, store.url)}
       target="_blank"
       rel="noopener noreferrer"
       className={className}
     >
-      Add to {firefoxUrl ? "Firefox" : "Chrome"}
+      Add to {store.name}
       {suffix}
     </a>
   );

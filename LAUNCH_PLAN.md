@@ -11,6 +11,8 @@ After CWS approval:
 - [ ] Run `scripts/setup-stripe.sh` for live mode (needs `sk_live_` key from dashboard.stripe.com/apikeys): creates products, prices, `BRIGHTFRIDAY` coupon + promo code.
 - [ ] Redeploy on Amplify.
 - [ ] Test checkout in live: promo field accepts `BRIGHTFRIDAY`, 50% off, refund after.
+- [ ] Edge: once the Edge Add-ons listing is live, set `EDGE_STORE_URL` in `src/lib/pricing.ts`. Edge visitors then get an "Add to Edge" button; Edge copy is already on (it installs from CWS today).
+- [ ] Before publishing the new pages, click through and confirm these site settings exist as described (fix copy in `src/lib/block-pages.ts` if not): Netflix Account → Profiles → Playback settings (autoplay) + Profile Lock; Amazon turn off 1-Click + `/your-orders/` path; TikTok web screen time setting location; Facebook Feeds tab and "Watch" vs "Video" tab name.
 - [ ] Turn on Cloudflare Web Analytics (automatic setup) with the deploy; privacy policy already mentions it.
 - [ ] Firefox: once the AMO listing is live, set `FIREFOX_STORE_URL` in `src/lib/pricing.ts`. That flips `FIREFOX_LIVE`, which turns on all Firefox copy (hero, FAQ, block pages, key email) and the Firefox button. Until then the site only mentions Chrome, Edge, Brave and Arc.
 
