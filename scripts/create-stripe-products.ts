@@ -23,7 +23,7 @@ async function main() {
       console.log(`price ${lookupKey} exists: ${price.id}`);
     } else if (apply) {
       const product = await stripe.products.create({
-        name: `FocusMode Pro ${t.name} (${browsersLabel(t)})`,
+        name: `focusmode Pro ${t.name} (${browsersLabel(t)})`,
         metadata,
       });
       price = await stripe.prices.create({

@@ -1,24 +1,23 @@
 import type { Metadata } from "next/types";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
-import { Countdown } from "@/components/sale";
 import { BLOCK_PAGES } from "@/lib/block-pages";
 import { formatPrice, isSaleActive, priceOf, PRO_FEATURES, SALE, TIERS } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: { absolute: "Welcome to FocusMode" },
-  description: "FocusMode is installed. Pin it, set up your first group and choose how the pause works. Three steps, about two minutes.",
+  title: { absolute: "Welcome to focusmode" },
+  description: "focusmode is installed. Pin it, set up your first group and choose how the pause works. Three steps, about two minutes.",
   robots: { index: false, follow: false },
 };
 
 const STEPS = [
   {
     title: "Pin it to your toolbar",
-    body: "Click the puzzle piece icon next to the address bar, then the pin next to FocusMode. Now it's one click away.",
+    body: "Click the puzzle piece icon next to the address bar, then the pin next to focusmode. Now it's one click away.",
   },
   {
     title: "Set up your first group",
-    body: "Click the FocusMode icon. Pick a goal, the sites that steal your time and how many breaks you want a day. That becomes your first group. Later, right-click any page and choose Add to FocusMode Group, then the group.",
+    body: "Click the focusmode icon. Pick a goal, the sites that steal your time and how many breaks you want a day. That becomes your first group. Later, right-click any page and choose Add to focusmode Group, then the group.",
   },
   {
     title: "Choose the pause and when it runs",
@@ -35,13 +34,13 @@ export default function Welcome() {
       <main id="main" className="container max-w-3xl py-12 lg:py-20">
         <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
           <span className="size-1.5 rounded-full bg-orange" />
-          FocusMode is installed
+          focusmode is installed
         </p>
         <h1 className="mt-5 text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.02] tracking-[-0.02em]">
           Thanks for installing. Here&apos;s how to start.
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-          FocusMode puts a short pause in front of the sites that pull you in, so you decide
+          focusmode puts a short pause in front of the sites that pull you in, so you decide
           before you scroll. Setup takes about two minutes.
         </p>
 
@@ -78,7 +77,7 @@ export default function Welcome() {
           <p className="text-sm font-semibold text-orange-ink">
             {sale ? (
               <>
-                {SALE.name} · {SALE.percentOff}% off with code {SALE.code} · ends in <Countdown />
+                {SALE.name} · {SALE.percentOff}% off with code {SALE.code} · ends {SALE.endLabel}
               </>
             ) : (
               "When you want more"

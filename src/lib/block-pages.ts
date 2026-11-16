@@ -31,7 +31,7 @@ export const BLOCK_PAGES: BlockPage[] = [
       ["youtube.com/feed/*", "Optional: the Subscriptions and History feeds, if those pull you in too"],
     ],
     setup:
-      "Open a Short, right-click the page and choose Add to FocusMode Group, then change the rule to youtube.com/shorts/* so it covers every Short, not only this one.",
+      "Open a Short, right-click the page and choose Add to focusmode Group, then change the rule to youtube.com/shorts/* so it covers every Short, not only this one.",
     native: [
       {
         title: "Hide the Shorts shelf",
@@ -54,7 +54,7 @@ export const BLOCK_PAGES: BlockPage[] = [
       },
       {
         q: FIREFOX_LIVE ? "Does it work in Firefox, Edge, Brave or Arc?" : "Does it work in Edge, Brave or Arc?",
-        a: `Yes. FocusMode installs from the Chrome Web Store, so it works in Chrome and in Chromium browsers that use the store, including Edge, Brave and Arc.${FIREFOX_LIVE ? " Firefox has its own version on Firefox Add-ons." : ""}`,
+        a: `Yes. focusmode installs from the Chrome Web Store, so it works in Chrome and in Chromium browsers that use the store, including Edge, Brave and Arc.${FIREFOX_LIVE ? " Firefox has its own version on Firefox Add-ons." : ""}`,
       },
       {
         q: "Can I allow Shorts for an hour a day?",
@@ -79,7 +79,7 @@ export const BLOCK_PAGES: BlockPage[] = [
       ["!youtube.com/playlist*", "Lets your playlists through while the rest is paused"],
     ],
     setup:
-      "Open the FocusMode popup, create a group called YouTube and add youtube.com. Or right-click any YouTube page and choose Add to FocusMode Group.",
+      "Open the focusmode popup, create a group called YouTube and add youtube.com. Or right-click any YouTube page and choose Add to focusmode Group.",
     native: [
       {
         title: "Edit your hosts file",
@@ -94,7 +94,7 @@ export const BLOCK_PAGES: BlockPage[] = [
         body: "YouTube's own Remind me to take a break setting nudges you after a set time. It's a notification you can dismiss, not a block.",
       },
     ],
-    why: "Most people don't need YouTube gone; they need it to stop being the default tab. Put it on a schedule (say, blocked Monday to Friday from 9:00 to 17:30), or give it a daily time limit, and let FocusMode pause the page instead of hiding it. When you need a video for work, take a counted break and the pause steps aside.",
+    why: "Most people don't need YouTube gone; they need it to stop being the default tab. Put it on a schedule (say, blocked Monday to Friday from 9:00 to 17:30), or give it a daily time limit, and let focusmode pause the page instead of hiding it. When you need a video for work, take a counted break and the pause steps aside.",
     faqs: [
       {
         q: "Can I block YouTube only during work hours?",
@@ -106,7 +106,7 @@ export const BLOCK_PAGES: BlockPage[] = [
       },
       {
         q: "Does it block the YouTube app on my phone?",
-        a: "No. FocusMode is a desktop browser extension for Chrome, Edge, Brave and Arc.",
+        a: "No. focusmode is a desktop browser extension for Chrome, Edge, Brave and Arc.",
       },
     ],
     related: ["youtube-shorts", "netflix", "reddit"],
@@ -150,7 +150,7 @@ export const BLOCK_PAGES: BlockPage[] = [
       },
       {
         q: "Does this need a Reddit account?",
-        a: "No. FocusMode works on the address of the page, in your browser. It doesn't touch your Reddit account.",
+        a: "No. focusmode works on the address of the page, in your browser. It doesn't touch your Reddit account.",
       },
     ],
     related: ["x-twitter", "youtube", "instagram"],
@@ -191,11 +191,11 @@ export const BLOCK_PAGES: BlockPage[] = [
       },
       {
         q: "Does this block Instagram on my phone?",
-        a: "No. FocusMode is a desktop browser extension. On your phone, use Instagram's own time reminders or your phone's screen time settings.",
+        a: "No. focusmode is a desktop browser extension. On your phone, use Instagram's own time reminders or your phone's screen time settings.",
       },
       {
         q: "What happens when I open a blocked page?",
-        a: "FocusMode puts a pause over the page: a short animation, a hold-to-continue button or a breathing exercise, depending on what you choose. Then you decide to go on or close the tab.",
+        a: "focusmode puts a pause over the page: a short animation, a hold-to-continue button or a breathing exercise, depending on what you choose. Then you decide to go on or close the tab.",
       },
     ],
     related: ["tiktok", "facebook", "youtube-shorts"],
@@ -292,7 +292,7 @@ export const BLOCK_PAGES: BlockPage[] = [
       },
       {
         q: "Will this block X in the mobile app?",
-        a: "No. FocusMode is a desktop browser extension for Chrome, Edge, Brave and Arc. It works on x.com in your browser.",
+        a: "No. focusmode is a desktop browser extension for Chrome, Edge, Brave and Arc. It works on x.com in your browser.",
       },
     ],
     related: ["reddit", "linkedin", "facebook"],
@@ -335,7 +335,7 @@ export const BLOCK_PAGES: BlockPage[] = [
       },
       {
         q: "Does this block Netflix on my TV or phone?",
-        a: "No. FocusMode works in your desktop browser: Chrome, Edge, Brave and Arc. For the TV, use Netflix's Profile Lock or autoplay settings.",
+        a: "No. focusmode works in your desktop browser: Chrome, Edge, Brave and Arc. For the TV, use Netflix's Profile Lock or autoplay settings.",
       },
       {
         q: "Will I still be able to change my Netflix settings?",
@@ -475,7 +475,7 @@ export const BLOCK_PAGES: BlockPage[] = [
     faqs: [
       {
         q: "Will this block TikTok on my phone?",
-        a: "No. FocusMode is a desktop browser extension for Chrome, Edge, Brave and Arc. On your phone, use TikTok's screen time settings or your phone's own screen time limits.",
+        a: "No. focusmode is a desktop browser extension for Chrome, Edge, Brave and Arc. On your phone, use TikTok's screen time settings or your phone's own screen time limits.",
       },
       {
         q: "Does it block TikTok Ads Manager or Seller Center?",

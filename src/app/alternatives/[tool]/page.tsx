@@ -47,7 +47,7 @@ export default function AlternativePage({ params }: { params: { tool: string } }
           <p className="text-sm font-semibold text-orange-ink">The short answer</p>
           <p className="mt-2">
             If you browse on a computer and want fewer reflex visits rather than a locked door,
-            try FocusMode. Copy your {page.name} list into a group and pick a pause. It&apos;s
+            try focusmode. Copy your {page.name} list into a group and pick a pause. It&apos;s
             free for one group, and your data stays in your browser.
           </p>
           <StoreLink
@@ -67,14 +67,14 @@ export default function AlternativePage({ params }: { params: { tool: string } }
           ))}
         </div>
 
-        <h2 className={h2}>{page.name} vs FocusMode</h2>
+        <h2 className={h2}>{page.name} vs focusmode</h2>
         <div className="mt-6 overflow-x-auto rounded-[20px] border border-border">
           <table className="w-full text-left text-sm">
             <thead className="bg-card text-muted-foreground">
               <tr>
                 <th className="px-4 py-3 font-semibold" />
                 <th className="px-4 py-3 font-semibold">{page.name}</th>
-                <th className="px-4 py-3 font-semibold">FocusMode</th>
+                <th className="px-4 py-3 font-semibold">focusmode</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -93,7 +93,7 @@ export default function AlternativePage({ params }: { params: { tool: string } }
           2026. Features change, so check theirs before you decide.
         </p>
 
-        <h2 className={h2}>Where FocusMode is different</h2>
+        <h2 className={h2}>Where focusmode is different</h2>
         <div className="mt-6 space-y-6">
           {page.differs.map((d) => (
             <div key={d.title}>
@@ -126,7 +126,7 @@ export default function AlternativePage({ params }: { params: { tool: string } }
         </div>
 
         <div className="mt-14 rounded-[20px] bg-primary p-8 text-center text-primary-foreground">
-          <p className="text-2xl font-semibold">Try FocusMode next to {page.name}.</p>
+          <p className="text-2xl font-semibold">Try focusmode next to {page.name}.</p>
           <p className="mt-2 opacity-80">Free forever for one group. Lifetime Pro if you want more.</p>
           <StoreLink
             placement={cta}

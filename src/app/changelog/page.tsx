@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Changelog",
-  description: "What's new in FocusMode, release by release.",
+  description: "What's new in focusmode, release by release.",
 };
 
 type Period = {
@@ -23,7 +23,7 @@ const changes: Period[] = [
     updates: [
       {
         version: "3.0.0",
-        title: "FocusMode 3: groups, shaders and lifetime Pro",
+        title: "focusmode 3: groups, shaders and lifetime Pro",
         imageSrc: [],
         description: [
           "Groups: give each set of sites its own trigger (always on, on schedule or after a daily usage limit), break budget, interventions and message. A group can block its sites or allow only them.",
@@ -69,7 +69,7 @@ const changes: Period[] = [
         title: "Bug Fixed and Improvements",
         imageSrc: [],
         description: [
-          "Confirmation prompt before toggle FocusMode OFF is now working fine",
+          "Confirmation prompt before toggle focusmode OFF is now working fine",
           "Other minor improvements",
         ],
       },
@@ -90,10 +90,10 @@ const changes: Period[] = [
         ],
         description: [
           "Dark mode theme is now available exclusively for PRO users",
-          "Added option to toggle confirmation dialog when disabling FocusMode",
+          "Added option to toggle confirmation dialog when disabling focusmode",
           "Theme colors for charts. More charts are coming to PRO users.",
           "Resolved an issue with Advanced List website blocking functionality",
-          "Fixed a bug preventing websites from being unblocked when FocusMode is disabled",
+          "Fixed a bug preventing websites from being unblocked when focusmode is disabled",
           "Restored missing website usage statistics",
           "Save the charts setting",
         ],
@@ -111,7 +111,7 @@ const changes: Period[] = [
         description: [
           "PRO interventions are now FREE for all users! Enjoy advanced interventions like Slide In Out, Hold to Complete and Pixelated.",
           "PIN Protection is now available for all users. Try it in the Settings.",
-          "Confirmation dialog added when turning off FocusMode. When confirmed, FocusMode will stay off eventhough the scheduled is ON.",
+          "Confirmation dialog added when turning off focusmode. When confirmed, focusmode will stay off eventhough the scheduled is ON.",
           "Schedule feature is now limited to 3 days (Sun, Mon, Tue) per week for free users. Upgrade to PRO for unlimited scheduling.",
           // "More features are coming! Promo code 'BF2025' for 30% OFF will expired soon",
         ],

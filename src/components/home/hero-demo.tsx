@@ -24,7 +24,7 @@ export function HeroDemo() {
 
   return (
     <div className="animate-fade-up [animation-delay:120ms]">
-      <BrowserFrame url={paused ? "x.com · paused by FocusMode" : "x.com/home"}>
+      <BrowserFrame url={paused ? "x.com · paused by focusmode" : "x.com/home"}>
         <div className="relative aspect-[4/3.4] sm:aspect-[4/3]">
           <FakeFeed />
           {paused && (

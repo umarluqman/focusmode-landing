@@ -4,7 +4,6 @@ import { Footer } from "@/components/footer";
 import { Faq } from "@/components/home/faq";
 import { Reviews } from "@/components/home/reviews";
 import { ResendForm } from "@/components/resend-form";
-import { Countdown } from "@/components/sale";
 import { LiveShader } from "@/components/shader/live-shader";
 import { FAMILIES, HERO_SCENE } from "@/components/shader/scenes";
 import { Stars } from "@/components/stars";
@@ -21,8 +20,8 @@ import {
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "What's new in FocusMode 3",
-  description: "FocusMode 3 is installed. Here's what changed and what Pro adds.",
+  title: "What's new in focusmode 3",
+  description: "focusmode 3 is installed. Here's what changed and what Pro adds.",
   robots: { index: false, follow: false },
 };
 
@@ -105,7 +104,7 @@ function Hero({
       <div className="max-w-xl animate-fade-up">
         <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
           <span className="size-1.5 rounded-full bg-orange" />
-          You&apos;re on FocusMode 3
+          You&apos;re on focusmode 3
         </p>
         <h1 className="text-[clamp(2.4rem,6vw,4.2rem)] leading-[0.98] tracking-[-0.03em]">
           You updated. Now take your hours back.
@@ -136,7 +135,7 @@ function Hero({
           {sale && (
             <>
               {" "}
-              Sale ends in <Countdown className="font-semibold text-foreground" />
+              Sale ends <span className="font-semibold text-foreground">{SALE.endLabel}</span>.
             </>
           )}
         </p>
@@ -160,13 +159,13 @@ function LifetimeHero() {
       <div className="max-w-xl animate-fade-up">
         <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
           <span className="size-1.5 rounded-full bg-orange" />
-          You&apos;re on FocusMode 3
+          You&apos;re on focusmode 3
         </p>
         <h1 className="text-[clamp(2.4rem,6vw,4.2rem)] leading-[0.98] tracking-[-0.03em]">
           You&apos;re Pro for life. Thank you.
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-          You backed FocusMode early, so every v2 Pro account gets an Unlimited
+          You backed focusmode early, so every v2 Pro account gets an Unlimited
           key for free, even if your subscription lapsed. Enter the email you
           paid with and we&apos;ll send it. Then paste it in Settings in the
           extension.
@@ -230,7 +229,7 @@ function TheMath({ sale }: { sale: boolean }) {
         <div className="space-y-3 text-lg opacity-90">
           <p>
             That&apos;s what a few &ldquo;quick checks&rdquo; add up to. If
-            FocusMode stops just that much, Pro costs about {cents}¢ for every
+            focusmode stops just that much, Pro costs about {cents}¢ for every
             hour you get back.
           </p>
           <p>
@@ -282,7 +281,7 @@ function Offer({ sale }: { sale: boolean }) {
         <div className="max-w-2xl">
           {sale && (
             <p className="text-sm font-semibold text-orange-ink">
-              {SALE.name} · code {SALE.code} · ends in <Countdown />
+              {SALE.name} · code {SALE.code} · ends {SALE.endLabel}
             </p>
           )}
           <h2 className="mt-3 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.02]">
@@ -366,7 +365,7 @@ function ReviewAsk() {
         <LiveShader scene={HERO_SCENE} className="-z-10" />
         <div className="absolute inset-0 -z-10 bg-[hsl(199_60%_8%/0.3)]" />
         <h2 className="mx-auto max-w-xl text-[clamp(2rem,5vw,3.4rem)] leading-[1.02] text-[hsl(60_20%_99%)]">
-          Like FocusMode 3?
+          Like focusmode 3?
         </h2>
         <p className="mx-auto mt-4 max-w-md text-[hsl(60_20%_99%/0.85)]">
           A two-line review on the Chrome Web Store helps other people find it.

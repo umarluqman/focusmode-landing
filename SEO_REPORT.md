@@ -93,7 +93,7 @@ Block distracting websites mindfully with FocusMode. 4 intervention types, break
     "height": 32
   },
   "image": "https://focusmode.app/public/focusmode-og-img.png",
-  "email": "focusmode.app@gmail.com",
+  "email": "hey@focusmode.app",
   "sameAs": [
     "https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
   ]

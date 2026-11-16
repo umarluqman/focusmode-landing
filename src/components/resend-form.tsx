@@ -21,7 +21,7 @@ export function ResendForm({ className }: { className?: string }) {
   if (state === "sent") {
     return (
       <p role="status" className={cn("text-sm", className)}>
-        If that email has a FocusMode key, it&apos;s on its way. Check spam if it
+        If that email has a focusmode key, it&apos;s on its way. Check spam if it
         doesn&apos;t show up in a few minutes.
       </p>
     );

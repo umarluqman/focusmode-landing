@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     url: "./",
     type: "article",
-    siteName: "FocusMode",
+    siteName: "focusmode",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
@@ -38,10 +38,10 @@ const ARTICLE = {
   dateModified: PUBLISHED,
   mainEntityOfPage: PAGE_URL,
   image: "https://focusmode.app/og-image.jpg",
-  author: { "@type": "Organization", name: "FocusMode", url: "https://focusmode.app" },
+  author: { "@type": "Organization", name: "focusmode", url: "https://focusmode.app" },
   publisher: {
     "@type": "Organization",
-    name: "FocusMode",
+    name: "focusmode",
     logo: { "@type": "ImageObject", url: "https://focusmode.app/focusmode-logo.png" },
   },
 };
@@ -217,9 +217,9 @@ export default function DoomscrollingPost() {
           ))}
         </div>
 
-        <h2 className={h2}>Where FocusMode fits</h2>
+        <h2 className={h2}>Where focusmode fits</h2>
         <p className={p}>
-          FocusMode is a browser extension we make for Chrome, Edge, Brave and Arc. It puts a short
+          focusmode is a browser extension we make for Chrome, Edge, Brave and Arc. It puts a short
           pause in front of the sites you choose instead of a hard block. When you open a feed, the
           page is covered for a few seconds and you choose: take a counted break, or close the tab.
           You can pause only the feed part of a site, have the pause on during work hours, or let a

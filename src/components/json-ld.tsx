@@ -10,10 +10,10 @@ export function JsonLd({ faq = false }: { faq?: boolean }) {
       "@context": "https://schema.org",
       "@type": "Organization",
       "@id": ORG,
-      name: "FocusMode",
+      name: "focusmode",
       url: "https://focusmode.app",
       logo: "https://focusmode.app/focusmode-logo.png",
-      email: "focusmode.app@gmail.com",
+      email: "hey@focusmode.app",
       sameAs: [
         CHROME_STORE_URL,
         "https://alternativeto.net/software/focusmode/about/",
@@ -23,7 +23,7 @@ export function JsonLd({ faq = false }: { faq?: boolean }) {
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      name: "FocusMode",
+      name: "focusmode",
       description:
         "A Chrome extension that replaces hard blocks with mindful pauses: live shader overlays, 7 interventions, per-group schedules, time limits, breaks and strict mode.",
       url: "https://focusmode.app",

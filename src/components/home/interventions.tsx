@@ -31,7 +31,7 @@ export function Interventions() {
           </h2>
           <p className="mt-5 max-w-md text-lg text-muted-foreground">
             The same wall every time becomes wallpaper. Mix several in a group
-            and FocusMode rotates them, so the pause never turns into a reflex.
+            and focusmode rotates them, so the pause never turns into a reflex.
           </p>
           <p className="mt-4 max-w-md text-muted-foreground">
             Need a hard stop instead? Strict mode blocks every active group

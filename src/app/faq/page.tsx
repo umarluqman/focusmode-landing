@@ -6,7 +6,7 @@ import { Faq } from "@/components/home/faq";
 export const metadata: Metadata = {
   title: "FAQ: Website Blocker for Chrome",
   description:
-    "Answers about FocusMode: what's free, lifetime Pro, browsers per license, v2 Pro upgrades, refunds and privacy.",
+    "Answers about focusmode: what's free, lifetime Pro, browsers per license, v2 Pro upgrades, refunds and privacy.",
 };
 
 export default function FaqPage() {

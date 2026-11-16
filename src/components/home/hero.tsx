@@ -19,7 +19,7 @@ export async function Hero() {
             A pause before the scroll.
           </h1>
           <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-muted-foreground">
-            FocusMode is a website blocker that doesn&apos;t slam the door on
+            focusmode is a website blocker that doesn&apos;t slam the door on
             YouTube, Reddit or Instagram. It slows the moment down: a living
             shader rises over the page, you take a breath, and then you decide.
             Everything stays in your browser.

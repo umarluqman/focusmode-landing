@@ -14,7 +14,7 @@ const SITES = [
 const DAILY_BREAKS = 3;
 
 const STEPS = [
-  ["Habit reaches for a site", "You open a tab on autopilot. FocusMode catches it before the page does."],
+  ["Habit reaches for a site", "You open a tab on autopilot. focusmode catches it before the page does."],
   ["The pause rises", "A shader fills the screen while a short timer runs. Nothing to read, nothing to scroll."],
   ["You choose, on purpose", "Take a counted break, or close the tab and keep your streak."],
 ];
@@ -78,7 +78,7 @@ export function BlockedMoment() {
             <div className="relative aspect-[4/3.4] sm:aspect-[16/11]" aria-live="polite">
               {phase === "idle" && (
                 <div className="absolute inset-0 grid place-items-center p-6 text-center text-muted-foreground">
-                  <p>Pick a site above and see what FocusMode does.</p>
+                  <p>Pick a site above and see what focusmode does.</p>
                 </div>
               )}
               {phase === "break" && <FakeFeed />}

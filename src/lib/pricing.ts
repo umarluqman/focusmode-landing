@@ -38,6 +38,7 @@ export const SALE = {
   percentOff: 50,
   start: new Date("2026-11-16T00:00:00-08:00"),
   end: new Date("2026-12-15T23:59:59-08:00"),
+  endLabel: "Dec 15",
 };
 
 export const isSaleActive = (now = new Date()) =>

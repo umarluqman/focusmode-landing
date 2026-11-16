@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "What FocusMode keeps in your browser, what the license server stores, and who processes payments and email.",
+    "What focusmode keeps in your browser, what the license server stores, and who processes payments and email.",
 };
 
 export default function PrivacyPolicy() {
@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
           <section>
             <h2 className="text-2xl font-semibold mb-3">1. The Short Version</h2>
             <p>
-              FocusMode is a browser extension that blocks or delays the
+              focusmode is a browser extension that blocks or delays the
               websites you choose. It works without an account. Your groups,
               settings and browsing statistics stay in your browser and are
               never sent to us. The only thing the extension sends to
@@ -189,7 +189,7 @@ export default function PrivacyPolicy() {
               </li>
               <li>
                 You can ask us to access, correct or delete the data we hold
-                about you by emailing focusmode.app@gmail.com. Deleting your
+                about you by emailing hey@focusmode.app. Deleting your
                 license record ends Pro access for that key
               </li>
             </ul>
@@ -211,7 +211,7 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-semibold mb-3">8. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please
-              contact us at focusmode.app@gmail.com
+              contact us at hey@focusmode.app
             </p>
           </section>
         </div>

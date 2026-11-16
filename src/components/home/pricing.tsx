@@ -13,7 +13,7 @@ import {
 import { BuyButton } from "@/components/buy-button";
 import { StoreLink } from "@/components/store-link";
 import { ResendForm } from "@/components/resend-form";
-import { Countdown, useSaleActive } from "@/components/sale";
+import { useSaleActive } from "@/components/sale";
 
 const Check = () => (
   <svg viewBox="0 0 16 16" className="mt-1 size-3.5 shrink-0" aria-hidden="true">
@@ -47,7 +47,7 @@ export function Pricing({
             <div className="self-start rounded-2xl bg-primary px-4 py-3 text-sm text-primary-foreground lg:self-auto">
               <p className="font-semibold">{SALE.name}: {SALE.percentOff}% off with code {SALE.code}</p>
               <p className="opacity-80">
-                Ends in <Countdown />
+                Ends {SALE.endLabel}
               </p>
             </div>
           )}
@@ -134,7 +134,7 @@ export function Pricing({
           <b>Still local-first</b>, your browsing never leaves the browser
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
-          Pro keys work with FocusMode 3.0 and later. On an older version?
+          Pro keys work with focusmode 3.0 and later. On an older version?
           Update it from chrome://extensions before you activate.
         </p>
 

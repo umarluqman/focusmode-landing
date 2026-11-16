@@ -34,7 +34,7 @@ const columns = [
       { href: "/faq/", label: "FAQ" },
       { href: "/license/", label: "Find my license key" },
       { href: "/sign-in/", label: "v2 sign in" },
-      { href: "mailto:focusmode.app@gmail.com", label: "Email support" },
+      { href: "mailto:hey@focusmode.app", label: "Email support" },
       { href: "/privacy-policy/", label: "Privacy" },
     ],
   },
@@ -66,7 +66,7 @@ export function Footer() {
         ))}
       </div>
       <div className="container border-t border-border py-6 text-xs text-muted-foreground">
-        &copy; {new Date().getFullYear()} FocusMode
+        &copy; {new Date().getFullYear()} focusmode
       </div>
     </footer>
   );

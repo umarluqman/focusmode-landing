@@ -28,7 +28,7 @@ export function LocalFirst() {
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
             A focus tool sees every site you open. That&apos;s exactly why
-            FocusMode keeps all of it on your device and never sends it
+            focusmode keeps all of it on your device and never sends it
             to us.
           </p>
         </div>

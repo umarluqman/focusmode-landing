@@ -52,7 +52,7 @@ export default function BlockSitePage({ params }: { params: { site: string } }) 
         <div className="mt-8 rounded-[20px] border border-border bg-card p-6">
           <p className="text-sm font-semibold text-orange-ink">The short answer</p>
           <p className="mt-2">
-            Install FocusMode, create a group and add{" "}
+            Install focusmode, create a group and add{" "}
             <code className="rounded bg-secondary px-1.5 py-0.5 text-[15px]">{page.rules[0][0]}</code>.
             Next time you open {page.name}, a calm pause covers the page and you decide whether to
             go on.
@@ -65,12 +65,12 @@ export default function BlockSitePage({ params }: { params: { site: string } }) 
         </div>
 
         <h2 className="mt-14 text-[clamp(1.6rem,3.5vw,2.2rem)] leading-tight">
-          Block {page.name} with FocusMode
+          Block {page.name} with focusmode
         </h2>
         <ol className="mt-6 list-decimal space-y-4 pl-5 marker:font-semibold marker:text-muted-foreground">
           <li>
             <a href={storeUrl(cta)} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
-              Add FocusMode to Chrome
+              Add focusmode to Chrome
             </a>{" "}
             (free, works in Edge, Brave and Arc too).
           </li>
@@ -87,7 +87,7 @@ export default function BlockSitePage({ params }: { params: { site: string } }) 
           </li>
           <li>
             Choose the pause: a living shader, hold to continue, slide, pixels, an instant stop or a
-            breathing exercise (Pro). Mix several and FocusMode rotates them.
+            breathing exercise (Pro). Mix several and focusmode rotates them.
           </li>
           <li>
             Want no way around it for a while? Turn on strict mode for 1 to 15 minutes: no breaks,

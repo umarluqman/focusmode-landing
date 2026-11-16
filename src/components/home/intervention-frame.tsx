@@ -65,7 +65,7 @@ export function InterventionFrame({
           ref={frame}
           key={src}
           src={src}
-          title="FocusMode intervention preview"
+          title="focusmode intervention preview"
           tabIndex={interactive ? undefined : -1}
           aria-hidden={interactive ? undefined : true}
           className={cn("absolute left-0 top-0 origin-top-left border-0", !interactive && "pointer-events-none")}

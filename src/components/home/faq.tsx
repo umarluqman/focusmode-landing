@@ -4,11 +4,11 @@ const tierLine = TIERS.map((t) => `${t.name} (${browsersLabel(t).toLowerCase()},
 
 export const FAQS = [
   {
-    q: "Does FocusMode see my browsing?",
-    a: "No. FocusMode is local-first: your sites, groups, usage stats and streaks stay in your browser. Nothing about your browsing is sent to us, and there are no third-party trackers. The only thing that leaves it is your license key, with a random install ID and your browser's name, when Pro checks that the key is valid.",
+    q: "Does focusmode see my browsing?",
+    a: "No. focusmode is local-first: your sites, groups, usage stats and streaks stay in your browser. Nothing about your browsing is sent to us, and there are no third-party trackers. The only thing that leaves it is your license key, with a random install ID and your browser's name, when Pro checks that the key is valid.",
   },
   {
-    q: "Is FocusMode free?",
+    q: "Is focusmode free?",
     a: `Yes. The free version includes one focus group, 6 of the 7 interventions (Breathing is Pro), the Dither shaders, schedules, time limits, strict mode, 5-minute breaks, escalation and streaks. Pro is a one-time payment from $${lowestPrice()}: ${tierLine}.`,
   },
   {
@@ -17,15 +17,15 @@ export const FAQS = [
   },
   {
     q: "What counts as a browser?",
-    a: "One browser profile with FocusMode installed. Work Chrome and personal Chrome are two browsers, even on the same computer. You can free a seat from Settings in the extension and use it somewhere else.",
+    a: "One browser profile with focusmode installed. Work Chrome and personal Chrome are two browsers, even on the same computer. You can free a seat from Settings in the extension and use it somewhere else.",
   },
   {
-    q: "I paid for Pro in FocusMode 2. What happens now?",
+    q: "I paid for Pro in focusmode 2. What happens now?",
     a: "You're Pro for life on unlimited browsers, even if your old subscription lapsed. We're emailing every v2 Pro customer a key. If yours hasn't arrived, use the Find my license key page with the email you paid with.",
   },
   {
     q: "Can I get a refund?",
-    a: "Yes. If FocusMode Pro isn't right for you, email focusmode.app@gmail.com within 14 days of purchase for a full refund.",
+    a: "Yes. If focusmode Pro isn't right for you, email hey@focusmode.app within 14 days of purchase for a full refund.",
   },
   {
     q: "Which browsers does it work in?",
@@ -37,7 +37,7 @@ export const FAQS = [
   },
   {
     q: "Can I stop myself from switching it off?",
-    a: "Yes. Strict mode locks things for 1, 5, 10 or 15 minutes: every active group blocks instantly with no breaks, and groups can't be switched off or edited until the time is up. PIN lock from FocusMode 2 isn't in 3.0 yet.",
+    a: "Yes. Strict mode locks things for 1, 5, 10 or 15 minutes: every active group blocks instantly with no breaks, and groups can't be switched off or edited until the time is up. PIN lock from focusmode 2 isn't in 3.0 yet.",
   },
   {
     q: "I lost my license key.",
@@ -67,7 +67,7 @@ export function Faq({ heading: Heading = "h2" }: { heading?: "h1" | "h2" }) {
           ))}
           {Heading === "h2" && (
             <a href="/faq/" className="block py-5 text-sm font-semibold underline underline-offset-4">
-              All questions about FocusMode
+              All questions about focusmode
             </a>
           )}
         </div>

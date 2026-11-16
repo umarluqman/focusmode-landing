@@ -17,7 +17,7 @@ export default function BlockHub() {
           Block a website on Chrome
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-          Guides for the sites people block most, with FocusMode rules you can copy and the
+          Guides for the sites people block most, with focusmode rules you can copy and the
           options you have without an extension. Block the whole site, or only the feed that
           pulls you in.
         </p>

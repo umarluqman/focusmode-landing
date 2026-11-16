@@ -52,7 +52,7 @@ export function BuyButton({
         {busy ? "Opening checkout…" : children}
       </button>
       <p role="status" className="mt-2 min-h-5 text-center text-xs text-destructive">
-        {error && "Checkout didn't open. Try again, or email focusmode.app@gmail.com."}
+        {error && "Checkout didn't open. Try again, or email hey@focusmode.app."}
       </p>
     </div>
   );

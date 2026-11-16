@@ -161,7 +161,7 @@ Source of truth: `FREE_FEATURES`, `PRO_FEATURES` and `TIERS` in `src/lib/pricing
 - A "browser" is one browser profile with FocusMode installed. Work Chrome and personal Chrome count as two.
 - A seat can be freed from Settings in the extension and reused elsewhere.
 - Keys only work on FocusMode 3.0 and later.
-- Refund: full refund within 14 days, by email to focusmode.app@gmail.com.
+- Refund: full refund within 14 days, by email to hey@focusmode.app.
 - v2 Pro customers (including lapsed subscriptions) are grandfathered: Pro for life on unlimited browsers, sent a key by email.
 
 ### Black Friday 2026

@@ -19,8 +19,8 @@ const description =
 export const metadata: Metadata = {
   metadataBase: new URL("https://focusmode.app"),
   title: {
-    default: "FocusMode: Mindful Website Blocker for Chrome",
-    template: "%s | FocusMode",
+    default: "focusmode: Mindful Website Blocker for Chrome",
+    template: "%s | focusmode",
   },
   description,
   alternates: { canonical: "./" },
@@ -33,16 +33,16 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "FocusMode: a pause before the scroll",
+    title: "focusmode: a pause before the scroll",
     description,
     url: "./",
-    siteName: "FocusMode",
+    siteName: "focusmode",
     locale: "en_US",
     type: "website",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
-    title: "FocusMode: a pause before the scroll",
+    title: "focusmode: a pause before the scroll",
     description,
     card: "summary_large_image",
     images: ["/og-image.jpg"],

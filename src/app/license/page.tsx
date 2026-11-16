@@ -5,7 +5,7 @@ import { ResendForm } from "@/components/resend-form";
 export const metadata: Metadata = {
   title: "Find my license key",
   description:
-    "Get your FocusMode Pro license key emailed to you again, including free lifetime keys for v2 Pro customers.",
+    "Get your focusmode Pro license key emailed to you again, including free lifetime keys for v2 Pro customers.",
 };
 
 export default function LicensePage() {
@@ -16,15 +16,15 @@ export default function LicensePage() {
           Find my license key
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Enter the email you paid with and we&apos;ll send every FocusMode key
-          on it. Paid for Pro in FocusMode 2? Your free Unlimited key is there
+          Enter the email you paid with and we&apos;ll send every focusmode key
+          on it. Paid for Pro in focusmode 2? Your free Unlimited key is there
           too.
         </p>
         <ResendForm className="mt-8" />
         <p className="mt-6 text-sm text-muted-foreground">
           Paid with a different email, or still stuck? Write to{" "}
-          <a href="mailto:focusmode.app@gmail.com" className="font-semibold text-foreground underline underline-offset-4">
-            focusmode.app@gmail.com
+          <a href="mailto:hey@focusmode.app" className="font-semibold text-foreground underline underline-offset-4">
+            hey@focusmode.app
           </a>
           .
         </p>

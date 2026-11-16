@@ -26,7 +26,7 @@ export function Wordmark() {
     <span className="flex items-center gap-2">
       <Logo size={28} className="rounded-[7px] bg-primary text-primary-foreground" />
       <span className="font-display text-[17px] font-semibold tracking-tight">
-        FocusMode
+        focusmode
       </span>
     </span>
   );

@@ -56,7 +56,7 @@ export function CheckoutResult() {
           <Link href="/license/" className="font-semibold text-foreground underline underline-offset-4">
             Resend it
           </Link>{" "}
-          or email focusmode.app@gmail.com.
+          or email hey@focusmode.app.
         </p>
       </div>
     );
@@ -86,7 +86,7 @@ export function CheckoutResult() {
     <div className="space-y-10">
       <div className="space-y-4">
         <p className="text-sm font-semibold text-orange-ink">
-          FocusMode Pro{tier && ` ${tier.name}`} · {seats}
+          focusmode Pro{tier && ` ${tier.name}`} · {seats}
         </p>
         <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.05]">
           You&apos;re Pro for life.
@@ -101,9 +101,9 @@ export function CheckoutResult() {
       <ol className="space-y-5">
         {[
           [
-            "Open FocusMode",
+            "Open focusmode",
             <>
-              Click the puzzle piece in Chrome&apos;s toolbar, then FocusMode.
+              Click the puzzle piece in Chrome&apos;s toolbar, then focusmode.
               Pin it so it&apos;s one click away. Not installed yet?{" "}
               <a href={CHROME_STORE_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground underline underline-offset-4">
                 Add it to Chrome

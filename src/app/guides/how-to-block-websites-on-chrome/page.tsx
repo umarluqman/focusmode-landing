@@ -37,8 +37,8 @@ const RULES: [pattern: string, effect: string][] = [
 ];
 
 const STEPS = [
-  "Add FocusMode to Chrome. It's free and also installs in Edge, Brave and Arc.",
-  "Open the popup and create a group, for example Social. Add one rule per line. You can also right-click any page and choose Add to FocusMode Group.",
+  "Add focusmode to Chrome. It's free and also installs in Edge, Brave and Arc.",
+  "Open the popup and create a group, for example Social. Add one rule per line. You can also right-click any page and choose Add to focusmode Group.",
   "Pick when the group is on: always, on a schedule such as weekdays 9:00 to 17:30, or after a daily time limit.",
   "Pick the pause: a living shader, a texture field, hold to continue, slide, pixels, an instant stop, or a breathing exercise (Pro). Mix several and they rotate.",
   "Set how many breaks you get per day. When you need a site, take a break; it counts toward the limit.",
@@ -53,8 +53,8 @@ const jsonLd = {
   datePublished: PUBLISHED,
   dateModified: PUBLISHED,
   mainEntityOfPage: "https://focusmode.app/guides/how-to-block-websites-on-chrome/",
-  author: { "@type": "Organization", name: "FocusMode", url: "https://focusmode.app/" },
-  publisher: { "@type": "Organization", name: "FocusMode", url: "https://focusmode.app/" },
+  author: { "@type": "Organization", name: "focusmode", url: "https://focusmode.app/" },
+  publisher: { "@type": "Organization", name: "focusmode", url: "https://focusmode.app/" },
 };
 
 export default function BlockWebsitesOnChromeGuide() {
@@ -176,9 +176,9 @@ export default function BlockWebsitesOnChromeGuide() {
           extension&apos;s details page, so do that if you want no gap.
         </p>
 
-        <h2 className={h2}>6. The FocusMode way: a pause instead of a wall</h2>
+        <h2 className={h2}>6. The focusmode way: a pause instead of a wall</h2>
         <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-          FocusMode is a website blocker extension that doesn&apos;t slam the door. When you open a
+          focusmode is a website blocker extension that doesn&apos;t slam the door. When you open a
           blocked site, a calm pause covers the page for a few seconds and you choose: take a counted
           break or close the tab. Hard blocks tend to get switched off by Thursday. A pause catches the
           habit and leaves the decision with you.

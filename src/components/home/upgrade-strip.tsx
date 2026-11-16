@@ -8,7 +8,7 @@ export function UpgradeStrip() {
       <div className="container grid gap-8 py-14 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:py-16">
         <div>
           <h2 id="upgrade" className="text-[clamp(1.6rem,3.5vw,2.25rem)] leading-tight">
-            On FocusMode 2? 3.0 arrives as a normal update.
+            On focusmode 2? 3.0 arrives as a normal update.
           </h2>
           <p className="mt-3 opacity-80">
             Chrome updates it for you. Nothing to reinstall. Strict mode is

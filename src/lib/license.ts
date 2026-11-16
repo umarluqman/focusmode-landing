@@ -48,7 +48,7 @@ export async function issueKey(session: Stripe.Checkout.Session) {
   }
 
   const where = { stripeSessionId: session.id };
-  const intro = "Thanks for buying FocusMode Pro!";
+  const intro = "Thanks for buying focusmode Pro!";
   const existing = await prisma.licenseKey.findUnique({ where });
   if (existing) return emailKey(existing, intro);
 
@@ -104,7 +104,7 @@ export async function resendKeys(email: string) {
 
   await sendEmail(
     licenses[0].email,
-    renderKeysEmail("Here are your FocusMode Pro license keys.", licenses)
+    renderKeysEmail("Here are your focusmode Pro license keys.", licenses)
   );
 }
 
@@ -115,7 +115,7 @@ async function sendEmail(
 ) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const { error } = await resend.emails.send(
-    { from: process.env.RESEND_FROM_EMAIL!, to, subject, text, html },
+    { from: process.env.RESEND_FROM_EMAIL!, replyTo: "hey@focusmode.app", to, subject, text, html },
     options
   );
   if (error) throw new Error(`Failed to send email: ${error.message}`);
@@ -134,13 +134,13 @@ const tierNameOf = (license: LicenseKey) =>
       : "Unlimited";
 
 const STEPS = [
-  "Open the FocusMode extension.",
+  "Open the focusmode extension.",
   "Go to Settings → License.",
   "Paste your key and press Activate.",
 ];
 
 const V3_NOTE =
-  "Keys need FocusMode 3.0 or later. Chrome updates automatically; check your version at chrome://extensions.";
+  "Keys need focusmode 3.0 or later. Chrome updates automatically; check your version at chrome://extensions.";
 const GRANDFATHER_NOTE =
   `Already on 3.0? You're Pro already, nothing to do. Use this key on a new browser, Edge${FIREFOX_LIVE ? " or Firefox" : ""}.`;
 
@@ -148,10 +148,10 @@ function renderKeysEmail(intro: string, licenses: LicenseKey[]) {
   const resendUrl = `${SITE_URL}/license/`;
   const grandfathered = licenses.every((l) => l.grandfathered);
   const subject = grandfathered
-    ? "You're FocusMode Pro for life — here's your key"
+    ? "You're focusmode Pro for life — here's your key"
     : licenses.length > 1
-      ? "Your FocusMode Pro license keys"
-      : "Your FocusMode Pro license key";
+      ? "Your focusmode Pro license keys"
+      : "Your focusmode Pro license key";
   const notes = grandfathered ? [GRANDFATHER_NOTE, V3_NOTE] : [V3_NOTE];
 
   const text = [
@@ -180,7 +180,7 @@ function renderKeysEmail(intro: string, licenses: LicenseKey[]) {
   <body style="margin:0;padding:24px;background:#eef2f4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1c2b33">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden">
       <div style="padding:20px 24px;background:#003f5c;color:#ffffff;font-size:20px;font-weight:700">
-        FocusMode <span style="color:#ff7c43">Pro</span>
+        focusmode <span style="color:#ff7c43">Pro</span>
       </div>
       <div style="padding:24px">
         <p style="margin:0 0 8px;font-size:16px">${intro}</p>

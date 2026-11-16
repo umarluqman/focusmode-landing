@@ -11,7 +11,7 @@ export type Blocker = {
 
 export const BLOCKERS: Blocker[] = [
   {
-    name: "FocusMode",
+    name: "focusmode",
     url: "https://focusmode.app/",
     runsOn: "Chrome, Edge, Brave, Arc (desktop)",
     blocks: "Websites and paths",
@@ -80,7 +80,7 @@ export const BLOCKERS: Blocker[] = [
     style: "A breath or small task before an app opens",
     pricing: "Free essentials; paid Premium",
     bestFor:
-      "The same idea as FocusMode, a pause instead of a wall, but built phone first. If your scrolling happens mostly on your phone, start here.",
+      "The same idea as focusmode, a pause instead of a wall, but built phone first. If your scrolling happens mostly on your phone, start here.",
   },
   {
     name: "Opal",
@@ -125,22 +125,22 @@ export const ALTERNATIVE_PAGES: AlternativePage[] = [
     name: "BlockSite",
     title: "BlockSite Alternative for Chrome: Pause Sites, Pay Once",
     description:
-      "A BlockSite alternative for Chrome: FocusMode pauses distracting sites instead of walling them off. No account, data stays local, Pro is paid once.",
+      "A BlockSite alternative for Chrome: focusmode pauses distracting sites instead of walling them off. No account, data stays local, Pro is paid once.",
     h1: "A BlockSite alternative that pauses instead of walls",
     intro:
-      "BlockSite is one of the best known blockers on the Chrome Web Store, and it does a lot: phone apps, sync, redirects, keyword and adult-content blocking. FocusMode is narrower. It lives in your desktop browser, keeps everything on your device, and puts a short pause in front of a site instead of a block page. Here's how they compare, including where BlockSite is the better pick.",
+      "BlockSite is one of the best known blockers on the Chrome Web Store, and it does a lot: phone apps, sync, redirects, keyword and adult-content blocking. focusmode is narrower. It lives in your desktop browser, keeps everything on your device, and puts a short pause in front of a site instead of a block page. Here's how they compare, including where BlockSite is the better pick.",
     theyDoWell: [
       {
         title: "Your phone too",
-        body: "BlockSite has iOS and Android apps and can sync blocked sites, keywords and password protection between them and the extension. FocusMode only runs in desktop browsers.",
+        body: "BlockSite has iOS and Android apps and can sync blocked sites, keywords and password protection between them and the extension. focusmode only runs in desktop browsers.",
       },
       {
         title: "Keyword and adult-content blocking",
-        body: "BlockSite can block pages by keyword and has a built-in adult-content filter. FocusMode has no content filter; it works on the addresses you list.",
+        body: "BlockSite can block pages by keyword and has a built-in adult-content filter. focusmode has no content filter; it works on the addresses you list.",
       },
       {
         title: "Password and uninstall prevention",
-        body: "BlockSite can protect its settings with a password and try to stop the extension being removed. FocusMode 3 has strict mode but no password lock yet.",
+        body: "BlockSite can protect its settings with a password and try to stop the extension being removed. focusmode 3 has strict mode but no password lock yet.",
       },
       {
         title: "Redirects and Pomodoro",
@@ -160,7 +160,7 @@ export const ALTERNATIVE_PAGES: AlternativePage[] = [
     differs: [
       {
         title: "A pause, not a punishment",
-        body: "A block page tells you no. A pause asks if you meant it. FocusMode covers the site with a live animation, a hold-to-continue button or a breathing exercise, then lets you go on or close the tab. Most visits to a time-sink are a reflex, and a few seconds is enough to catch it.",
+        body: "A block page tells you no. A pause asks if you meant it. focusmode covers the site with a live animation, a hold-to-continue button or a breathing exercise, then lets you go on or close the tab. Most visits to a time-sink are a reflex, and a few seconds is enough to catch it.",
       },
       {
         title: "Groups with their own rules",
@@ -176,30 +176,30 @@ export const ALTERNATIVE_PAGES: AlternativePage[] = [
       },
     ],
     stayIf:
-      "you want the same blocks on your phone, keyword or adult-content filtering, or a password on your settings. FocusMode is a desktop browser extension and has none of those.",
+      "you want the same blocks on your phone, keyword or adult-content filtering, or a password on your settings. focusmode is a desktop browser extension and has none of those.",
     move: [
       "Open BlockSite's settings and copy the sites in your block list.",
-      "Install FocusMode, open its popup and create a group.",
+      "Install focusmode, open its popup and create a group.",
       "Paste the sites into the group, one per line, without https://. Add *. in front of a domain to cover its subdomains, or a path such as youtube.com/shorts/* to block only part of a site.",
       "Pick when the group is on: always, on a schedule, or after a daily limit. Then pick the pause.",
-      "Once FocusMode is set up, turn BlockSite off or remove it, so the two don't both react to the same page.",
+      "Once focusmode is set up, turn BlockSite off or remove it, so the two don't both react to the same page.",
     ],
     faqs: [
       {
-        q: "Is FocusMode free like BlockSite?",
+        q: "Is focusmode free like BlockSite?",
         a: "Yes, the free version has one focus group with schedules, daily limits, strict mode and 6 of the 7 pauses. Pro adds unlimited groups and is a one-time payment, not a subscription.",
       },
       {
-        q: "Can FocusMode block apps on my phone?",
-        a: "No. FocusMode is a desktop browser extension. If you need the same blocks on your phone, BlockSite, Freedom or one sec cover that.",
+        q: "Can focusmode block apps on my phone?",
+        a: "No. focusmode is a desktop browser extension. If you need the same blocks on your phone, BlockSite, Freedom or one sec cover that.",
       },
       {
         q: "Can I redirect a blocked site to another page?",
-        a: "Not in FocusMode. When you open a paused site you see the pause, then choose to go on or close the tab.",
+        a: "Not in focusmode. When you open a paused site you see the pause, then choose to go on or close the tab.",
       },
       {
         q: "Can I import my BlockSite list?",
-        a: "There's no direct import. Copy the sites from BlockSite and paste them into a FocusMode group, one per line. It takes a minute for most lists.",
+        a: "There's no direct import. Copy the sites from BlockSite and paste them into a focusmode group, one per line. It takes a minute for most lists.",
       },
     ],
   },
@@ -211,11 +211,11 @@ export const ALTERNATIVE_PAGES: AlternativePage[] = [
       "A StayFocusd alternative for Chrome: groups with their own schedule or daily limit, a short pause instead of a block page, data kept on your device.",
     h1: "A StayFocusd alternative with groups and a gentler stop",
     intro:
-      "StayFocusd made the daily time allowance famous: a budget for time-wasting sites, then they're gone until tomorrow. FocusMode has daily limits too, but splits your sites into groups that each get their own rule, and when a limit runs out it shows a short pause instead of a block page. If what you want is a budget and a block you can't cancel, StayFocusd still does that well.",
+      "StayFocusd made the daily time allowance famous: a budget for time-wasting sites, then they're gone until tomorrow. focusmode has daily limits too, but splits your sites into groups that each get their own rule, and when a limit runs out it shows a short pause instead of a block page. If what you want is a budget and a block you can't cancel, StayFocusd still does that well.",
     theyDoWell: [
       {
         title: "The Nuclear Option",
-        body: "StayFocusd can block sites for a number of hours you choose, and once it's on it can't be cancelled. FocusMode's strict mode goes up to 15 minutes at a time.",
+        body: "StayFocusd can block sites for a number of hours you choose, and once it's on it can't be cancelled. focusmode's strict mode goes up to 15 minutes at a time.",
       },
       {
         title: "Require Challenge",
@@ -223,7 +223,7 @@ export const ALTERNATIVE_PAGES: AlternativePage[] = [
       },
       {
         title: "Hiding parts of a page",
-        body: "StayFocusd can block in-page content and hide things like Shorts, comments and recommended videos on YouTube. FocusMode works on addresses: it can pause youtube.com/shorts/*, but it doesn't hide elements on a page you've let through.",
+        body: "StayFocusd can block in-page content and hide things like Shorts, comments and recommended videos on YouTube. focusmode works on addresses: it can pause youtube.com/shorts/*, but it doesn't hide elements on a page you've let through.",
       },
       {
         title: "Android and AI chat usage",
@@ -244,11 +244,11 @@ export const ALTERNATIVE_PAGES: AlternativePage[] = [
     differs: [
       {
         title: "A limit per group",
-        body: "Give news 15 minutes a day, keep YouTube closed during work hours, and let Reddit through only in the evening. Each group in FocusMode has its own trigger: always on, a schedule, or a daily limit. More than one group needs Pro.",
+        body: "Give news 15 minutes a day, keep YouTube closed during work hours, and let Reddit through only in the evening. Each group in focusmode has its own trigger: always on, a schedule, or a daily limit. More than one group needs Pro.",
       },
       {
         title: "A pause at the limit",
-        body: "When a limit runs out, FocusMode covers the page with a short pause: a live shader, an animated texture, hold to continue, slide, pixels, an instant stop or a breathing exercise (Pro). If you really need the page, take a break. Breaks are counted per day, and the pause can get longer once you go over.",
+        body: "When a limit runs out, focusmode covers the page with a short pause: a live shader, an animated texture, hold to continue, slide, pixels, an instant stop or a breathing exercise (Pro). If you really need the page, take a break. Breaks are counted per day, and the pause can get longer once you go over.",
       },
       {
         title: "Strict mode when you need a wall",
@@ -256,21 +256,21 @@ export const ALTERNATIVE_PAGES: AlternativePage[] = [
       },
       {
         title: "Your browsing stays in your browser",
-        body: "Time per site is counted on your device and stays there. FocusMode has no analytics SDK and no trackers, and you don't need an account.",
+        body: "Time per site is counted on your device and stays there. focusmode has no analytics SDK and no trackers, and you don't need an account.",
       },
     ],
     stayIf:
-      "you want a lock that lasts hours, or you want to hide Shorts and comments on pages you still use. FocusMode's strict mode tops out at 15 minutes, and its rules work on whole addresses.",
+      "you want a lock that lasts hours, or you want to hide Shorts and comments on pages you still use. focusmode's strict mode tops out at 15 minutes, and its rules work on whole addresses.",
     move: [
       "Open StayFocusd's settings and copy your blocked sites.",
-      "Install FocusMode and create a group. With Pro you can make one for each kind of site you treat differently, for example Social and News.",
+      "Install focusmode and create a group. With Pro you can make one for each kind of site you treat differently, for example Social and News.",
       "Paste the sites into a group, one per line, without https://. Put ! in front of an address you want let through, such as one subreddit or a docs page.",
       "Set the group's trigger to a daily limit and pick the number of minutes. Add a schedule to another group if some sites should only close during work hours.",
-      "Turn StayFocusd off once FocusMode is running, so only one extension reacts to each page.",
+      "Turn StayFocusd off once focusmode is running, so only one extension reacts to each page.",
     ],
     faqs: [
       {
-        q: "Does FocusMode have something like the Nuclear Option?",
+        q: "Does focusmode have something like the Nuclear Option?",
         a: "Strict mode is the closest: up to 15 minutes where every active group blocks, breaks are off and nothing can be edited. There's no multi-hour lock.",
       },
       {
@@ -282,7 +282,7 @@ export const ALTERNATIVE_PAGES: AlternativePage[] = [
         a: "Yes. Add youtube.com/shorts/* to a group. Regular videos at /watch stay open.",
       },
       {
-        q: "Is FocusMode free?",
+        q: "Is focusmode free?",
         a: "The free version has one group with schedules, daily limits and strict mode. Pro, for unlimited groups, the breathing pause and every shader, is a one-time payment.",
       },
     ],

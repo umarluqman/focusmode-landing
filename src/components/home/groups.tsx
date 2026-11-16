@@ -64,7 +64,7 @@ export function Groups() {
               <figure>
                 <Image
                   src={`/screens/popup-${name}.webp`}
-                  alt={`FocusMode popup. ${caption}.`}
+                  alt={`focusmode popup. ${caption}.`}
                   width={400}
                   height={580}
                   loading="lazy"

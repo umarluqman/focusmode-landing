@@ -6,7 +6,7 @@ import { ALTERNATIVE_PAGES, BLOCKERS } from "@/lib/alternatives";
 
 const title = "Best Website Blockers for Chrome in 2026, Compared";
 const description =
-  "BlockSite, StayFocusd, LeechBlock NG, Cold Turkey, Freedom, one sec, Opal and FocusMode compared: platforms, apps vs sites, pricing model and privacy.";
+  "BlockSite, StayFocusd, LeechBlock NG, Cold Turkey, Freedom, one sec, Opal and focusmode compared: platforms, apps vs sites, pricing model and privacy.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -21,7 +21,7 @@ const PICKS = [
   ["You want a daily budget and a block you can't cancel", "StayFocusd."],
   [
     "You want a pause in Chrome, not a wall, and your data kept on your device",
-    "FocusMode, or Mindful Browsing for something lighter.",
+    "focusmode, or Mindful Browsing for something lighter.",
   ],
 ];
 
@@ -35,8 +35,8 @@ export default function AlternativesHub() {
           The best website blockers for Chrome, compared
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-          We make FocusMode, so read this with that in mind. We&apos;ve tried to be fair: every
-          tool below is good at something, and several do things FocusMode doesn&apos;t, like
+          We make focusmode, so read this with that in mind. We&apos;ve tried to be fair: every
+          tool below is good at something, and several do things focusmode doesn&apos;t, like
           blocking apps on your phone or desktop. Facts come from each tool&apos;s own site or
           Chrome Web Store listing, checked in November 2026.
         </p>
@@ -109,7 +109,7 @@ export default function AlternativesHub() {
                 </p>
                 <p className="mt-3">{b.bestFor}</p>
                 <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-                  {b.name !== "FocusMode" && (
+                  {b.name !== "focusmode" && (
                     <a
                       href={b.url}
                       target="_blank"
@@ -121,7 +121,7 @@ export default function AlternativesHub() {
                   )}
                   {page && (
                     <Link href={`/alternatives/${page.slug}/`} className="underline underline-offset-4">
-                      FocusMode vs {page.name}
+                      focusmode vs {page.name}
                     </Link>
                   )}
                 </p>
@@ -139,9 +139,9 @@ export default function AlternativesHub() {
           ))}
         </ul>
 
-        <h2 className={h2}>Where FocusMode fits</h2>
+        <h2 className={h2}>Where focusmode fits</h2>
         <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-          FocusMode is for the browser on your computer. Instead of a block page it shows a short
+          focusmode is for the browser on your computer. Instead of a block page it shows a short
           pause, one of 7 kinds, and you decide whether to go on. Sites live in groups, each with
           its own trigger: always, a schedule, or a daily limit. Rules can target a path, like
           youtube.com/shorts/*, and exceptions start with !. Strict mode gives you a hard stop for

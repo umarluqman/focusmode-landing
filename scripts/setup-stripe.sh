@@ -258,7 +258,7 @@ run_wizard() {
 
 TOTAL_STAGES=10
 
-banner "FocusMode v3 Stripe setup (test → live)"
+banner "focusmode v3 Stripe setup (test → live)"
 
 # ── Test mode → local .env ──
 stripe_key_stage test

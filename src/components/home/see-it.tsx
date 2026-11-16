@@ -5,7 +5,7 @@ export function SeeIt() {
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-orange-ink">See it in action</p>
           <h2 className="mt-3 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.02]">
-            FocusMode 3 in 25 seconds.
+            focusmode 3 in 25 seconds.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
             The pause, the popup and the extension&apos;s own shaders, rendered live.
@@ -20,7 +20,7 @@ export function SeeIt() {
           playsInline
           controls
           preload="none"
-          aria-label="FocusMode 3 promo video"
+          aria-label="focusmode 3 promo video"
         />
       </div>
     </section>
