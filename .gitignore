@@ -29,8 +29,6 @@ yarn-error.log*
 .env*.local
 .env
 
-# vercel
-.vercel
 
 # typescript
 *.tsbuildinfo
@@ -43,3 +41,5 @@ videos/*
 !videos/*.ts
 public/_next-video
 *.sql
+!prisma/migrations/**/*.sql
+.env*

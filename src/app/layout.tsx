@@ -1,42 +1,51 @@
-import type { Metadata } from "next/types";
+import type { Metadata, Viewport } from "next/types";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import localFont from "next/font/local";
-import Providers from "@/components/providers";
-import { Navbar } from "@/components/navbar";
 import { Header } from "@/components/header";
-// import { eudoxusSans } from "@/lib/font";
+import { SaleBanner } from "@/components/sale";
+import { isSaleActive } from "@/lib/pricing";
 
-const CalSans = localFont({
-  src: "../../public/fonts/CalSans-SemiBold.otf",
-  variable: "--font-cal-sans",
+export const revalidate = 300;
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const inter = Inter({ subsets: ["latin"] });
+const description =
+  "Free Chrome website blocker that pauses distracting sites instead of walling them off. Schedules, limits, 7 interventions. Pay once for Pro.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://focusmode.app"),
   title: {
-    default: "FocusMode - Stay focused, be present",
-    template: "%s | FocusMode",
+    default: "focusmode: Mindful Website Blocker for Chrome",
+    template: "%s | focusmode",
   },
-  description:
-    "Reclaim 2-3 hours daily with FocusMode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
+  description,
+  alternates: { canonical: "./" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
-    title: "focusmode",
-    description:
-      "Reclaim 2-3 hours daily with FocusMode. Our app helps you reduce mindless browsing and make informed decisions about distracting websites. Try it now!",
-    url: "https://focusmode.app",
+    title: "focusmode: a pause before the scroll",
+    description,
+    url: "./",
     siteName: "focusmode",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: "/public/focusmode-og-img.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "focusmode: a pause before the scroll",
+    description,
+    card: "summary_large_image",
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -49,10 +58,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  twitter: {
-    title: "focusmode",
-    card: "summary_large_image",
-  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f4f4f1",
 };
 
 export default function RootLayout({
@@ -61,34 +70,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <link rel="canonical" href="https://focusmode.app" />
-      <link rel="icon" href="/favicon.ico" />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png"
-      />
-      <link rel="manifest" href="/site.webmanifest" />
-      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-      <meta name="msapplication-TileColor" content="#da532c" />
-      <meta name="theme-color" content="#ffffff"></meta>
-      <body className={`${inter.className} ${CalSans.variable}`}>
-        {/* <Navbar /> */}
-
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-card focus:px-4 focus:py-2"
+        >
+          Skip to content
+        </a>
+        <SaleBanner initial={isSaleActive()} />
+        <Header />
+        {children}
       </body>
-      <script async src="https://cdn.splitbee.io/sb.js"></script>
     </html>
   );
 }

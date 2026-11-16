@@ -1,91 +1,37 @@
-"use client";
-
-import { signIn, signOut, useSession } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
-import { usePathname } from "next/navigation";
+import { StoreLink } from "@/components/store-link";
+import { Wordmark } from "./logo";
 
-export let Header = ({ showCta = true }: { showCta?: boolean }) => {
-  const { data: session } = useSession();
+const links = [
+  { href: "/#shaders", label: "Shaders", wide: true },
+  { href: "/#groups", label: "Groups", wide: true },
+  { href: "/pricing/", label: "Pricing", wide: false },
+  { href: "/changelog/", label: "Changelog", wide: true },
+];
 
-  const handleSignIn = () => {
-    signIn("google");
-  };
-  const pathname = usePathname();
-  const isProPage = pathname === "/pro";
-  const isHomePage = pathname === "/";
-  const isSignInPage = pathname === "/sign-in";
-
-  const isLoggedIn = !!session;
-
+export function Header() {
   return (
-    <header className="grid grid-cols-[auto,1fr,auto] items-center gap-4 px-4 py-3 md:px-12 bg-white dark:bg-zinc-900">
-      <Link className="flex items-center" href="/">
-        <div className="flex space-x-3 items-center">
-          <Image
-            src="/focusmode-logo.png"
-            alt="focusmode logo"
-            width={32}
-            height={32}
-          />
-          <span className="sr-only">FocusMode</span>
-          <div
-            className="tracking-wide"
-            style={{ fontFamily: "var(--font-cal-sans)" }}
-          >
-            FocusMode
-          </div>
-        </div>
-      </Link>
-      <nav className="hidden justify-center gap-4 sm:flex md:gap-6">
-        {" "}
-        <Link className="flex items-center" href="/pro">
-          <div className="flex space-x-3 items-center">
-            <div className="tracking-wide">PRO Version</div>
-          </div>
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
+      <nav className="container flex h-16 items-center justify-between gap-4">
+        <Link href="/" aria-label="focusmode home">
+          <Wordmark />
         </Link>
-      </nav>
-      <div className="ml-auto">
-        {isLoggedIn ? (
-          <div className="flex items-center gap-2">
-            <Button variant={"outline"} onClick={() => signOut()}>
-              Sign Out
-            </Button>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              {session?.user?.email}
-            </div>
-            <Avatar>
-              <AvatarImage src={session?.user?.image ?? ""} />
-              <AvatarFallback>
-                {session?.user?.name?.slice(0, 2).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-          </div>
-        ) : isProPage || isSignInPage ? (
-          <Button variant={"outline"} onClick={handleSignIn}>
-            Sign In
-          </Button>
-        ) : (
-          <Button>
+        <div className="flex items-center gap-1 sm:gap-2">
+          {links.map((l) => (
             <Link
-              href="https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
+              key={l.href}
+              href={l.href}
+              className={`${l.wide ? "hidden md:inline-flex" : "inline-flex"} h-9 items-center rounded-full px-3 text-sm text-muted-foreground transition-colors hover:text-foreground`}
             >
-              <Image
-                src="/chrome.png"
-                alt="chrome logo"
-                width={24}
-                height={24}
-              />
-              Install Now
+              {l.label}
             </Link>
-          </Button>
-        )}
-      </div>
+          ))}
+          <StoreLink
+            placement="header"
+            className="ml-1 inline-flex h-9 items-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          />
+        </div>
+      </nav>
     </header>
   );
-};
+}
