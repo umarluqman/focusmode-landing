@@ -33,7 +33,7 @@ export const FAQS = [
   },
   {
     q: "Can I block part of a site?",
-    a: "Yes. Block youtube.com/shorts and leave the rest of YouTube open, or block a site and let one path through with a ! rule. A group can also work the other way round: list the sites you need and everything else is blocked while it's on.",
+    a: "Yes. Block youtube.com/shorts/* and leave the rest of YouTube open, or block a site and let one path through with a ! rule. A group can also work the other way round: list the sites you need and everything else is blocked while it's on.",
   },
   {
     q: "Can I stop myself from switching it off?",

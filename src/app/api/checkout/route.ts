@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     customer_creation: "always",
     metadata: { tier, source },
     allow_promotion_codes: true,
-    success_url: `${SITE_URL}/pro/success?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `${SITE_URL}/pro/success/?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${SITE_URL}/pricing/`,
   });
 

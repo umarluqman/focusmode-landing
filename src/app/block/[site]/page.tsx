@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { BLOCK_PAGES, getBlockPage } from "@/lib/block-pages";
 import { StoreLink } from "@/components/store-link";
+import { storeUrl } from "@/lib/pricing";
 
 export const dynamicParams = false;
 
@@ -15,7 +16,8 @@ export function generateMetadata({ params }: { params: { site: string } }): Meta
   return {
     title: { absolute: page.title },
     description: page.description,
-    openGraph: { title: page.title, description: page.description, url: "./" },
+    openGraph: { title: page.title, description: page.description, url: "./", images: ["/og-image.jpg"] },
+    twitter: { title: page.title, description: page.description },
   };
 }
 
@@ -67,7 +69,7 @@ export default function BlockSitePage({ params }: { params: { site: string } }) 
         </h2>
         <ol className="mt-6 list-decimal space-y-4 pl-5 marker:font-semibold marker:text-muted-foreground">
           <li>
-            <a href={cta} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
+            <a href={storeUrl(cta)} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
               Add FocusMode to Chrome
             </a>{" "}
             (free, works in Edge, Brave and Arc too).

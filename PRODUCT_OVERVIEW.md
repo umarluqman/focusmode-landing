@@ -1,385 +1,277 @@
-# FocusMode v3.0 — Comprehensive Product Overview
+# FocusMode 3.0: Product Overview
 
-> This document is a complete reference for generating an SEO-optimized landing page update for focusmode.app.
+> Reference for writing copy, SEO pages and schema for focusmode.app. Every claim here is checked against the landing code (`src/lib/pricing.ts`, `src/components/home/*`, `src/lib/license.ts`) or the extension source (`focusmode-revamp/focusmode-wxt`). If you add a claim, verify it the same way.
 
 ---
 
 ## 1. Product Identity
 
 - **Name**: FocusMode
-- **Tagline**: "Stay focused, be present"
-- **Version**: 3.0 (complete rewrite from v2.x)
-- **Category**: Browser Extension / Digital Wellness / Productivity
-- **Platform**: Chrome (Manifest V3), built with WXT Framework + React + TypeScript
-- **Pricing**: Free tier + PRO at **$20.99 one-time lifetime purchase** (via Polar.sh)
-- **Website**: https://focusmode.app (Next.js)
-- **Chrome Web Store**: 15,000+ users, 4.7/5 star rating
-- **Purchase link**: https://polar.sh/focusmode
+- **Tagline**: "A pause before the scroll"
+- **Version**: 3.0 (rewrite of v2.x, WXT + React + TypeScript; Manifest V3 on Chrome)
+- **Category**: Browser extension / website blocker / digital wellness
+- **Browsers**: Chrome. Edge, Brave and Arc install it from the Chrome Web Store. Firefox build exists (`wxt build -b firefox`, MV2) but the AMO listing is not live yet (`FIREFOX_STORE_URL` is `null`), so don't link AMO or promise Firefox in copy.
+- **Pricing**: Free, plus Pro as a one-time payment from $20 (see section 5)
+- **Website**: https://focusmode.app (Next.js App Router, hosted on AWS Amplify)
+- **Chrome Web Store**: `CHROME_STORE_URL` in `src/lib/pricing.ts`. Always link through `storeUrl(placement)` for UTM.
+- **Store stats**: never hardcode. Use `getCwsStats()` (`src/lib/cws.ts`, refreshed daily). Baseline on 2026-11-16: about 10k users, 4.6 stars from 323 ratings.
+- **Account**: none. No sign-up, no email needed to use it. (`/sign-in/` is a legacy page for v2 subscribers only.)
 
 ---
 
 ## 2. Core Value Proposition
 
-FocusMode is a **mindfulness-first website blocker** that reduces mindless browsing through intelligent, friction-based interventions — not brute-force blocking.
+FocusMode is a **mindful website blocker**. When you open a distracting site it pauses you with a short intervention instead of a hard wall. You can still go through, but you have to choose to.
 
 **Key differentiators:**
-- 4 unique intervention types that use psychological friction (hold, watch, wait) instead of hard blocks
-- Calm, zen-inspired aesthetic that feels like self-care, not punishment
-- Break management with flexible durations (5/10/15/30 min) that respects user autonomy
-- Progressive escalation that adapts to behavior without being punitive
-- Built-in analytics and mindfulness streak tracking for accountability
-- Group-based organization for nuanced control over different site categories
+- 7 interventions, rotated within a group so the pause doesn't turn into a reflex
+- Groups of sites, each with its own schedule, time limit, pause, break budget and message
+- Counted breaks per day, with optional escalation when you overdo them
+- Strict mode when you want a real hard stop
+- Local-first: usage data stays on the device; nothing about your browsing is sent to FocusMode
 
-**One-liner**: "A mindful website intervention tool that helps you browse with intention — not a blocker that locks you out."
-
-**Claim**: "Reduce mindless browsing by 10x" (existing hero headline)
+**One-liner**: "Free Chrome website blocker that pauses distracting sites instead of walling them off."
 
 ---
 
 ## 3. Target Audience & Pain Points
 
-### Primary Audiences
-1. **Knowledge workers & remote workers** — Losing 2-3 hours/day to distracting websites during work
-2. **Students** — Struggling to focus during study sessions, reflexively opening social media
-3. **Digital wellness seekers** — Anyone wanting to be more intentional with screen time
-4. **People who tried other blockers** — Found them too harsh, too easy to bypass, or too ugly
+### Primary audiences
+1. **Knowledge and remote workers** losing work hours to feeds and news
+2. **Students** who open social media on reflex while studying
+3. **People who want less screen time** without a tool that feels like punishment
+4. **People who tried other blockers** and found them too harsh, too easy to switch off, or too ugly
 
-### Pain Points Addressed
-- Guilt after mindless scrolling sessions
-- Broken flow states from "just checking" social media
-- Missed deadlines due to YouTube/Reddit rabbit holes
-- Feeling controlled or punished by traditional blockers
-- Blocker fatigue (habituation to the same block screen)
-- All-or-nothing blocking that doesn't allow for legitimate use
-
-### Emotional Outcome
-Users feel **in control, calm, and self-aware** — not restricted. The extension is a "personal focus coach" in the browser.
+### Pain points addressed
+- "Just checking" a site and losing 40 minutes
+- Short-video rabbit holes (YouTube Shorts, Reels, TikTok)
+- All-or-nothing blockers that also block legitimate use
+- The same block screen every time, which you stop seeing
+- Blockers you can switch off in two clicks
 
 ---
 
-## 4. Complete Feature Set (v3.0)
+## 4. Feature Set (v3.0)
 
-### A. Group-Based Website Blocking
-- Organize blocked sites into logical groups: "Social Media", "News", "Video", "Shopping", etc.
-- Each group has its own intervention settings, break limits, and trigger rules
-- Advanced URL pattern matching:
-  - Wildcards: `*.example.com`, `example.com/reels/*`
-  - Exclusions: `!allowed.example.com`
-  - Path-based: `example.com/feed` (block feed but not homepage)
-  - Comments: Lines starting with `#` are ignored
-  - Auto-includes www: `example.com` also blocks `www.example.com`
-- **Free**: 1 group | **PRO**: Unlimited groups
+### A. Groups and URL rules
+- Sites are organized into groups ("Deep work", "Doom-scroll", "Study only").
+- Each group has its own trigger, interventions, durations, break limit, escalation and custom messages.
+- Two modes: **Block these sites**, or **Allow only these sites** (everything else is paused while the group is on).
+- URL rules (`lib/blocking.ts`):
+  - `example.com` matches `example.com` and `www.example.com` (not other subdomains)
+  - `*.example.com` matches the domain and all subdomains
+  - `example.com/path` is an **exact** path (also `/path/`); `example.com/` is the main page only
+  - `example.com/path/*` matches everything under that path. Use `youtube.com/shorts/*` to pause every Short and leave the rest of YouTube open (`youtube.com/shorts` alone only matches the bare `/shorts` page)
+  - `?` matches one character in a path; `*keyword*` matches the keyword anywhere in host, path or query
+  - `!` exception rules let one path or subdomain through (e.g. `!music.youtube.com`)
+  - Lines starting with `#` are comments
+- Right-click menu: "Add to FocusMode Group", with every group plus "Create New Group".
+- **Free**: 1 group. **Pro**: unlimited groups.
 
-### B. 4 Intervention Types (Core Differentiator)
+### B. 7 interventions
 
-Each intervention is designed around a different psychological approach to prevent habituation:
+Names as shown in the extension and on the landing page:
 
-1. **Instant Block** — "A moment of stillness"
-   - Calm, immediate pause with a leaf icon and pulsing animation
-   - Zero-friction reflection point before choosing to continue
-   - Encouraging copy: "Continue mindfully" or "Return to focus"
+1. **Shader Light** (new in 3.0): a live GPU scene rises and settles while the timer runs. 23 scenes across Dither, Paper, Liquid, Marble and Fluid families. Free gets the Dither family; Pro gets the full gallery.
+2. **Texture Field** (new in 3.0): a quiet animated pattern settles before you continue. 9 patterns, 4 palettes.
+3. **Breathing Exercise** (Pro): a guided breath before you decide. Patterns: 4-7-8, 5-0-5, 7-1-1, box.
+4. **Hold to Continue**: press and hold a button to go through.
+5. **Slide to Continue**: a panel slides over the page and back. Wait it out.
+6. **Pixel Animation**: pixel blocks fill the screen one by one.
+7. **Instant Block**: a calm stop with one question. No timer.
 
-2. **Hold to Complete** — "Cultivate patience"
-   - Press and hold a circular button for 3-15 seconds (configurable)
-   - SVG circular progress indicator with green-to-teal gradient
-   - Real-time countdown: "X seconds remaining"
-   - Tactile feedback: button scales when pressed
+All timed interventions:
+- Duration 3 to 15 seconds per group (default 5)
+- Several can be enabled per group; FocusMode rotates between them
+- Custom message per intervention type per group
+- Shown as an overlay on the page (overlay mode can be switched off in Settings)
 
-3. **Slide to Continue** — "Flow with intention"
-   - Full-screen gradient animation slides across the screen
-   - Duration: 3-15 seconds (configurable)
-   - Mix-blend-difference effect creates dynamic visual
-   - Meditative, passive observation experience
+Free gets 6 of the 7. Breathing is Pro.
 
-4. **Pixel Garden** — "Watch the garden grow"
-   - 400 pixels bloom across the screen in randomized order (Fisher-Yates shuffle)
-   - 20x20 grid with gradient colors from primary to accent
-   - Duration: 3-15 seconds (configurable)
-   - Creates organic "garden growth" visual effect
+### C. Triggers (per group)
+1. **Always on**: pause whenever a listed site is opened
+2. **On schedule**: only during chosen schedules (days + start/end time; several groups can share a schedule)
+3. **After usage**: pause after a daily time limit on the group's sites (e.g. 45 minutes a day)
 
-**All interventions feature:**
-- Customizable duration per group (3-15 seconds, doubling under escalation up to 30s)
-- Custom messages per intervention type per group
-- Visual editor for full appearance customization (opens in dedicated tab)
-- Shadow DOM isolation — works on ANY website without style conflicts (even YouTube)
-- Dark/light mode detection
+Schedules and time limits are free.
 
-### C. Smart Triggering (3 Modes)
+### D. Breaks
+- Daily break limit per group (default 3)
+- **Free**: 5-minute breaks. **Pro**: 5, 10, 15, 30 minutes or custom lengths
+- Site pauses again when the break ends
 
-1. **Always On** — Block whenever a listed site is visited
-2. **On Schedule** — Block only during configured time windows (e.g., 9 AM–5 PM weekdays)
-   - Multiple schedules per group
-   - Schedule manager UI with day/time picker
-3. **After Usage** — Block only after daily time limit is exceeded
-   - Configurable daily limit in minutes (e.g., 30 min of Reddit before blocking starts)
-   - Tracks seconds spent on group sites in real-time
+### E. Escalation (per group, on by default)
+When you go past your break limit:
+- **Double intervention duration** (max 30 seconds)
+- **Remove Instant Block**, so only timed interventions show
 
-### D. Break Management System
+Escalation and each option are separate toggles, all on for new groups. Free.
 
-- **Daily break limits** per group (configurable, e.g., 3 breaks/day for Social Media)
-- **Flexible break durations**: 5, 10, 15, or 30 minutes (Free: 5 min only, PRO: all durations)
-- **Badge countdown** showing remaining break time in the extension icon
-- **Break selector UI** with visual card interface and checkmark animation
-- **Automatic break end** when duration expires — sites block again immediately
-- **Smart tracking**: If daily time limit is exceeded during a break, the break ends automatically
+### F. Strict mode
+- Locks for 1, 5, 10 or 15 minutes
+- Every active group pauses instantly, no breaks
+- Groups can't be switched off or edited until the timer ends; import is disabled
+- Free
+- PIN lock from v2 is **not** in 3.0 yet
 
-### E. Progressive Escalation System
+### G. Streaks and analytics
+- **Streaks** (free): current and longest streak of days kept within limits
+- **Usage analytics** (Pro): time per site on your device, with 7 / 30 / 90-day ranges. Free users see it blurred with an upgrade prompt.
 
-When users exceed their daily break limit or usage limits, the extension can optionally:
-- **Double intervention duration** (5s → 10s, max 30s) — make users wait longer
-- **Remove Instant Block** — force harder intervention types only (hold/slide/pixel)
-- **Show streak warning banner** — orange motivational warning about breaking their streak
+### H. Other
+- Theme: light, dark or system
+- Export and import all data as a JSON backup (free)
+- Works offline; if the license server can't be reached, Pro stays on for up to 14 days since the last successful check
 
-Escalation is:
-- Opt-in per group (users choose "Keep breaks easy" vs "Increase friction")
-- Each escalation behavior is individually toggleable
-- Designed to be firm but encouraging, not punitive
-
-### F. Mindfulness Streak Tracking
-
-- **Current streak**: Consecutive days staying within break/usage limits
-- **Longest streak**: Personal best record
-- **Growth Calendar**: Visual 7/30/90-day calendar showing mindful vs missed days
-  - Green leaf icons for maintained days
-  - Dashed circles for missed days
-  - Ring highlight for today
-- **Total blocks prevented**: Running counter of how many times the extension intervened
-- Gamification that encourages consistency through visible progress
-
-### G. Analytics Dashboard (PRO)
-
-- **Website Usage Chart**: Top 10 domains by time spent, with horizontal bar chart
-  - Gradient bars from primary to accent color
-  - Shows hours/minutes per domain
-  - Percentage breakdown
-- **Key Metrics**: Current streak, longest streak, total blocks prevented
-- **Date Range Filters**: 7D, 30D, 90D views
-- **"Time in Garden"** — zen-inspired section title for usage data
-
-### H. Additional Features
-
-- **Right-click context menu**: "Add to FocusMode Group" → shows all groups + "Create New Group"
-- **Theme**: Light / Dark / System (auto-detects OS preference)
-- **Data export/import**: JSON backup of all settings, groups, and analytics
-- **Overlay mode**: Show interventions as overlays vs full-page
-- **Show stats on interventions**: Optionally display usage chart during intervention
-- **Offline-first**: Works without internet, PRO license cached for 24 hours
-- **Privacy-respecting**: No external tracking, all data stored locally
+### I. Privacy
+- Usage stats, breaks and streaks live in local extension storage on the device
+- Groups (with their site lists), schedules, settings and the license key live in the browser's extension sync storage; if browser sync is on, the browser vendor (e.g. Google) copies them between the user's browsers. FocusMode never receives them (matches `/privacy-policy/`)
+- No analytics SDK, no trackers, no telemetry, no account
+- One exception: Pro sends the license key, a random install ID and the browser's name to `/api/license/validate`. No browsing data.
 
 ---
 
-## 5. Free vs PRO Comparison
+## 5. Free vs Pro
 
-| Feature | Free | PRO ($20.99 lifetime) |
+Source of truth: `FREE_FEATURES`, `PRO_FEATURES` and `TIERS` in `src/lib/pricing.ts`.
+
+| Feature | Free | Pro |
 |---|---|---|
 | Focus groups | 1 | Unlimited |
-| Intervention types | All 4 | All 4 |
-| Break durations | 5 min only | 5 / 10 / 15 / 30 min |
-| Schedule-based triggering | Yes | Yes |
-| Usage-based triggering | Yes | Yes |
-| Escalation system | Yes | Yes |
-| Streak tracking | Yes | Yes |
-| Analytics dashboard | Basic | Full (usage charts, date ranges) |
-| Website usage charts | — | Top 10 domains breakdown |
-| Data export/import | — | Full backup & restore |
-| Context menu | Yes | Yes |
-| Dark mode | Yes | Yes |
-| Custom intervention messages | Yes | Yes |
-| Intervention editor | Yes | Yes |
+| Interventions | 6 of 7 | All 7 (adds Breathing) |
+| Shader scenes | Dither family | Full gallery, 23 scenes |
+| Schedules and daily time limits | Yes | Yes |
+| Block lists and allow-only groups | Yes | Yes |
+| Strict mode | Yes | Yes |
+| Break length | 5 minutes | Longer and custom |
+| Streaks | Yes | Yes |
+| Escalation | Yes | Yes |
+| Usage analytics | No | Yes |
+| Export / import | Yes | Yes |
+| Future updates | Yes | Every future update |
 
-**PRO purchase**: One-time $20.99 via Polar.sh — no subscription, no recurring fees.
+### Pro tiers (one-time payment, no subscription)
 
----
+| Tier | Price | Browsers (max activations) |
+|---|---|---|
+| Personal | $20 | 1 |
+| Plus | $30 | 3 |
+| Unlimited | $45 | Unlimited |
 
-## 6. Competitive Positioning
+- A "browser" is one browser profile with FocusMode installed. Work Chrome and personal Chrome count as two.
+- A seat can be freed from Settings in the extension and reused elsewhere.
+- Keys only work on FocusMode 3.0 and later.
+- Refund: full refund within 14 days, by email to focusmode.app@gmail.com.
+- v2 Pro customers (including lapsed subscriptions) are grandfathered: Pro for life on unlimited browsers, sent a key by email.
 
-### vs Freedom ($8.99/mo or $39.99/yr)
-- FocusMode is **free to start** with a one-time PRO upgrade
-- FocusMode uses **mindful interventions** instead of hard blocks
-- FocusMode has **built-in analytics and streak tracking**
-- Freedom requires a subscription; FocusMode is pay-once
-
-### vs Cold Turkey (free basic, $39 lifetime)
-- FocusMode offers **4 unique intervention types** vs simple blocking
-- FocusMode has a **calm, zen aesthetic** vs Cold Turkey's utilitarian UI
-- FocusMode includes **break management** with flexible durations
-- FocusMode is **$20.99** vs Cold Turkey's **$39**
-
-### vs LeechBlock (free)
-- FocusMode has a **modern, beautiful UI** vs LeechBlock's dated interface
-- FocusMode offers **escalation and streak tracking** beyond basic scheduling
-- FocusMode has **4 intervention types** vs LeechBlock's simple block page
-- FocusMode provides **analytics** for tracking progress
-
-### vs Forest ($3.99)
-- FocusMode is **group-based** (not just a single focus timer)
-- FocusMode offers **granular per-site and per-path controls**
-- FocusMode has **4 intervention types** vs Forest's tree-growing mechanic
-- FocusMode costs **$20.99 one-time** vs Forest's per-device pricing
-
-### vs StayFocusd (free)
-- FocusMode has **modern UI** vs StayFocusd's basic interface
-- FocusMode offers **4 intervention types** vs simple time-based blocking
-- FocusMode has **break management, escalation, and streaks**
-- FocusMode includes **analytics dashboard**
-
-### vs BlockSite ($10.99/mo)
-- FocusMode is **$20.99 one-time** vs BlockSite's **$131.88/yr subscription**
-- FocusMode uses **mindful interventions** vs hard blocks
-- FocusMode has **no ads or upselling** in the free tier
-- FocusMode is **privacy-respecting** (no data collection)
+### Black Friday 2026
+- Code **BRIGHTFRIDAY**, **50% off** any tier: $10 / $15 / $22.50
+- Runs **Nov 27 – Dec 15, 2026** (Pacific time), `SALE` in `src/lib/pricing.ts`
+- Stripe coupon `BRIGHTFRIDAY` (duration once, expires at sale end) + promotion code of the same name, created by `scripts/create-stripe-products.ts`
+- Customer types the code in Stripe Checkout (`allow_promotion_codes: true`); it isn't applied automatically
 
 ---
 
-## 7. SEO Keyword Strategy
+## 6. Purchase and License Flow
 
-### Primary Keywords
-- focus mode extension
+1. **Checkout** (`POST /api/checkout`): body `{ tier, source }`. Creates a Stripe Checkout Session in `payment` mode (one-time) with the tier's price (`STRIPE_PRICE_PERSONAL|PLUS|UNLIMITED`), `metadata: { tier, source }`. Success → `/pro/success?session_id=…` (308 to `/pro/success/` via `trailingSlash`), cancel → `/pricing/`.
+2. **Stripe products**: `scripts/create-stripe-products.ts` (wrapped by `scripts/setup-stripe.sh`) creates one product + price per tier, lookup key `focusmode_pro_{tier}`, metadata `tier` and `max_activations`.
+3. **Key issue**: the webhook (`/api/webhook`, `checkout.session.completed` / `async_payment_succeeded`) and the success page (`GET /api/checkout/session`) both call `issueKey()`; whichever runs first creates the key, the other reads it. Key format `FM-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX`.
+4. **Email**: key sent through **Resend** (`RESEND_API_KEY`, `RESEND_FROM_EMAIL`) with an idempotency key, so it's sent once.
+5. **Lost key**: `/license/` page → `POST /api/license/resend` emails every active key on that address (rate limited).
+6. **Activation**: extension Settings → License → paste key. `POST /api/license/validate` checks status and counts seats by `instance_id`; over the tier limit returns `seat_limit`. `POST /api/license/deactivate` frees a seat.
+7. **Revocation**: `charge.refunded` (full) and `charge.dispute.created` revoke the key.
+
+Legacy v2 subscription handlers (`customer.subscription.deleted`, NextAuth sign-in) remain only for v2 customers. Don't mention subscriptions or sign-in in copy.
+
+---
+
+## 7. Competitive Positioning
+
+Angles that hold for FocusMode (check competitor prices on their own sites before publishing anything with numbers):
+
+- **Block-page blockers** (BlockSite, StayFocusd, Cold Turkey): FocusMode pauses instead of walling off, rotates 7 interventions, and still offers strict mode for a hard stop. LeechBlock NG has a countdown "delaying page", so don't call it hard-wall only; the angle there is 7 rotating interventions and per-group breaks.
+- **Subscription pricing**: BlockSite Premium and Freedom are sold mainly as subscriptions (Freedom also sells a separate lifetime plan, so don't claim it has none). FocusMode Pro is a one-time payment.
+- Keep comparisons factual and neutral; no claims about competitors' quality, privacy or ratings unless sourced from their own pages.
+- **Timer apps** (Forest): FocusMode works on specific sites and paths, with per-group schedules and time limits, not a single focus timer.
+- **Privacy**: no account, no browsing data leaves the browser.
+
+---
+
+## 8. SEO Keyword Strategy
+
+### Primary
 - website blocker chrome
 - website blocker extension
-- digital wellness chrome extension
+- focus mode extension
 - mindful browsing extension
 
-### Secondary Keywords
+### Secondary
 - block distracting websites chrome
+- block youtube shorts
 - reduce screen time chrome extension
-- productivity extension chrome
-- focus app for chrome
-- website intervention tool
-- mindless browsing blocker
-
-### Long-tail Keywords
-- how to stop mindless scrolling on chrome
-- chrome extension to block social media during work hours
-- website blocker with breaks and timer
-- best website blocker that doesn't fully block sites
-- chrome extension for digital wellness and focus
-- how to reduce time on distracting websites
-- website blocker with analytics and tracking
-- gentle website blocker with interventions
-
-### Comparison Keywords
-- focusmode vs freedom app
-- focusmode vs cold turkey
-- focusmode vs leechblock
-- focusmode vs forest app
-- best website blocker chrome 2026
-- website blocker alternatives
-- freedom app alternative free
-
-### Feature-Specific Keywords
-- website blocker with break timer
-- website blocker with streak tracking
-- website blocker with analytics
 - website blocker with schedule
-- mindful browsing chrome extension
-- zen website blocker
+- website blocker with time limit
 
----
+### Long-tail
+- how to block youtube shorts on chrome
+- chrome extension to block social media during work hours
+- website blocker with breaks
+- website blocker that doesn't fully block sites
+- private website blocker no account
 
-## 8. Social Proof
-
-### Chrome Web Store Stats
-- 15,000+ active users
-- 4.7 out of 5 stars rating
-
-### Testimonial Themes (from existing landing page)
-- Easy to use and set up
-- Beautiful, aesthetic design (zen/calming)
-- Actually effective at preventing procrastination
-- Love the gamification features
-- Scheduled blocking is a game-changer
-- Feels encouraging, not restrictive
+Content pages (`/block/{site}/`, from `src/lib/block-pages.ts`) follow: native how-to first, then the FocusMode way, then CTA.
 
 ---
 
 ## 9. Design & Brand Language
 
-### Visual Identity
-- **Primary color**: Sage green (#4A9075) — calm, natural
-- **Accent**: Teal (#6AABB0) — fresh, balanced
-- **Background**: Warm off-white (#FAF9F6) — paper-like, zen
-- **Typography**: Nunito (body, clean) + Fraunces (headings, elegant serif)
-- **Iconography**: Leaf motif throughout (growth, nature, mindfulness)
+### Visual identity (`src/app/globals.css`)
+- **Primary**: deep navy-teal (`hsl(199 100% 18%)`, about `#003f5c`)
+- **Accent**: orange (`hsl(18 100% 63%)`, about `#ff7c43`), darker `orange-ink` for text
+- **Background**: warm off-white (`hsl(60 9% 95%)`)
+- **Type**: system stack, SF Pro Display for headings, SF Pro Text for body
 
-### Brand Voice
-- Calm, encouraging, never punitive
-- Uses nature metaphors: "zen garden", "growth calendar", "watch the garden grow"
-- Active language: "cultivate patience", "flow with intention", "find your calm"
-- Empowering: "continue mindfully", "resume focus", "take control"
-- Avoids: urgency language, fear-based copy, aggressive blocking terminology
-
-### UX Philosophy
-- Self-care over self-control
-- Friction over blocking
-- Encouragement over punishment
-- Awareness over restriction
-- Flexibility over rigidity
+### Voice
+- Plain, concrete, short sentences. No hype, no fear-based copy.
+- Say what happens: "pauses the site", "a calm stop with one question".
+- Calm and on the user's side: friction, not force.
+- Never invent numbers, ratings or features.
 
 ---
 
-## 10. Current Landing Page Audit (focusmode.app)
+## 10. Site Map (current)
 
-### What Exists
-- Hero: "Reduce Mindless Browsing By 10x" with 15k+ users / 4.7 rating badge
-- Value prop section: "We know what you're thinking"
-- 3 feature cards: Structured Breaks, Personalized Prompts, Automatic Scheduling
-- 5 testimonials carousel
-- Meta tags: title, description, OG tags, Twitter cards
-- CTA: "Install Now" → Chrome Web Store
+- `/` home
+- `/pricing/` (`/pro` 308s here)
+- `/pro/success/` post-checkout key page
+- `/license/` find my license key
+- `/faq/` (only page with FAQPage schema)
+- `/whats-new/` 3.0 release notes
+- `/block/` hub + `/block/{youtube-shorts,youtube,reddit,instagram}/` (slugs from `BLOCK_PAGES`)
+- `/guides/how-to-block-websites-on-chrome/`
+- `/blog/how-to-stop-doomscrolling/`
+- `/alternatives/`, `/alternatives/blocksite/`, `/alternatives/stayfocusd/`
+- `/welcome/` post-install page
+- `/changelog/`, `/privacy-policy/`
+- `/sign-in/` v2 legacy only
 
-### What's Missing / Outdated
-1. **No v3.0 features**: Groups, 4 intervention types, escalation, streak calendar, analytics
-2. **No schema markup**: Missing SoftwareApplication, FAQPage, Organization schemas
-3. **No FAQ section**: Huge opportunity for featured snippets
-4. **No pricing section**: Free vs PRO breakdown not shown
-5. **No comparison content**: Missing "vs" pages for competitors
-6. **Feature descriptions are thin**: Only 3 features listed, briefly described
-7. **No demo video**: Video placeholder exists but is empty
-8. **No internal linking**: No blog, resources, or sub-pages
-9. **No how-it-works section**: Flow diagram of intervention → break → resume
-10. **No stats/numbers section**: Could showcase "X blocks prevented across all users"
-
-### Technical SEO Gaps
-- Missing JSON-LD structured data
-- No sitemap reference found
-- No FAQ schema for rich snippets
-- OG image exists but page content doesn't reflect v3.0
-- Meta description doesn't mention key v3.0 features
+All URLs use a trailing slash. Each page self-canonicals (`alternates: { canonical: "./" }` in the layout).
 
 ---
 
-## 11. Recommended Landing Page Structure
+## 11. Schema Markup
 
-1. **Hero** — Updated headline + v3.0 value prop + social proof badge + CTA
-2. **How It Works** — 3-step visual flow: Visit → Intervention → Break → Resume
-3. **4 Intervention Types** — Individual showcase cards with animations/screenshots
-4. **Feature Deep Dive** — Groups, scheduling, break management, escalation
-5. **Analytics & Streaks** — Dashboard preview screenshots
-6. **Pricing** — Free vs PRO comparison table
-7. **Testimonials** — Existing + request new ones highlighting v3.0 features
-8. **FAQ** — Common questions with schema markup
-9. **Competitors Comparison** — Brief "Why FocusMode" section
-10. **Final CTA** — Install button + PRO purchase link
+Source: `src/components/json-ld.tsx` (`<JsonLd />` on `/` and `/pricing/`, `<JsonLd faq />` on `/faq/`). Organization + SoftwareApplication on each.
 
----
-
-## 12. Content for Schema Markup
-
-### SoftwareApplication Schema
+### SoftwareApplication
 - Name: FocusMode
-- Application Category: BrowserApplication
-- Operating System: Chrome
-- Offers: Free / $20.99 (one-time)
-- Aggregate Rating: 4.7/5 (15,000+ users)
-- Description: "A mindful website intervention tool for Chrome that reduces mindless browsing through intelligent, friction-based interventions."
+- applicationCategory: BrowserApplication
+- operatingSystem: Chrome
+- Offers: Free ($0); Pro $20 / $30 / $45 one-time, built from `TIERS`. During the sale the offers switch to the discounted price with `priceValidUntil` = sale end.
+- No `aggregateRating` (removed on purpose). If added back, take values from `getCwsStats()` at render time.
+- softwareVersion: 3.0
+- Description (current): "A Chrome extension that replaces hard blocks with mindful pauses: live shader overlays, 7 interventions, per-group schedules, time limits, breaks and strict mode."
 
-### FAQ Items for Schema
-1. "What is FocusMode?" — A Chrome extension that reduces mindless browsing through calming interventions instead of hard blocks.
-2. "Is FocusMode free?" — Yes, FocusMode has a free tier with 1 group and all 4 intervention types. PRO is a one-time $20.99 for unlimited groups and analytics.
-3. "How is FocusMode different from other website blockers?" — FocusMode uses 4 unique mindfulness-based interventions (hold, slide, pixel, instant) instead of simply blocking sites. It respects user autonomy with flexible breaks and progressive escalation.
-4. "Does FocusMode work on all websites?" — Yes, FocusMode uses Shadow DOM isolation to work on any website without style conflicts.
-5. "Can I use FocusMode during work hours only?" — Yes, schedule-based triggering lets you activate blocking during specific time windows.
-6. "What happens when I exceed my break limit?" — Optional escalation increases intervention duration, removes easy interventions, and shows streak warnings.
-7. "Does FocusMode collect my data?" — No, all data is stored locally in your browser. FocusMode is privacy-respecting with no external tracking.
-8. "Can I block specific pages instead of entire websites?" — Yes, FocusMode supports path-based blocking (e.g., block youtube.com/shorts but allow youtube.com).
+### FAQ
+Use `FAQS` in `src/components/home/faq.tsx` as the single source. Don't duplicate answers here.

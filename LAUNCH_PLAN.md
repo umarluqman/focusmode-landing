@@ -4,15 +4,25 @@ Status: planned 2026-11-16. Waiting for extension 3.0 approval on the Chrome Web
 Research: OpenSEO project `focusmode.app`, research log 2026-11-16 (~604 credits).
 Hosting: AWS Amplify.
 
-## TODO now (Black Friday, before Nov 27)
+## TODO now (Black Friday starts at launch)
 
+After CWS approval:
 - [ ] Amplify console → Environment variables: set `STRIPE_PRICE_PERSONAL`, `STRIPE_PRICE_PLUS`, `STRIPE_PRICE_UNLIMITED` (live price ids), `RESEND_API_KEY`, `RESEND_FROM_EMAIL`. `amplify.yml` already echoes them into `.env`.
 - [ ] Run `scripts/setup-stripe.sh` for live mode (needs `sk_live_` key from dashboard.stripe.com/apikeys): creates products, prices, `BRIGHTFRIDAY` coupon + promo code.
 - [ ] Redeploy on Amplify.
 - [ ] Test checkout in live: promo field accepts `BRIGHTFRIDAY`, 50% off, refund after.
-- [ ] Decide: show full price + "50% off with code" instead of pre-discounted prices (site shows −50% but checkout charges full until code typed).
+- [ ] Turn on Cloudflare Web Analytics (automatic setup) with the deploy; privacy policy already mentions it.
 - [ ] Firefox: once the AMO listing is live, set `FIREFOX_STORE_URL` in `src/lib/pricing.ts`. Until then Firefox visitors get the Chrome button, while the copy already says Firefox is supported.
-- [ ] Delete unused `PLUNK_API_KEY`, `EMAIL_FROM`, `STRIPE_SALE_COUPON_*` from local `.env`.
+
+Decided / done (2026-11-16):
+- [x] Sale display: full price + "50% off with code BRIGHTFRIDAY", not pre-discounted prices.
+- [x] Grandfather backfill: low priority, v2 Pro users get Pro automatically in the extension.
+- [x] `prisma migrate status` on Neon: up to date (4 migrations), nothing pending.
+- [x] 0.6 CWS listing: done in `focusmode-wxt`.
+- [x] GSC domain verified.
+- [x] Local `.env`: unused `PLUNK_API_KEY`, `EMAIL_FROM`, `STRIPE_SALE_COUPON_*` removed.
+- [x] Cloudflare proxies focusmode.app (Web Analytics needs no code; no custom events).
+- 0.8 outreach: after launch.
 
 ---
 
@@ -150,7 +160,7 @@ Everywhere: "FocusMode – Mindful Website Blocker for Chrome" (8+ CWS extension
 - Ship `/block/youtube-shorts`, `/block/youtube`, `/block/reddit`, `/block/instagram` + homepage section. Add to sitemap, request indexing.
 - `/welcome/` onboarding + extension review prompt (3.0.x).
 - First 6 listicle pitches.
-- BF sale Nov 27 – Dec 15: watch refunds and "key won't activate" tickets daily.
+- BF sale launch – Dec 15: watch refunds and "key won't activate" tickets daily.
 
 ## Phase 3: days 31–60
 - How-to-block-websites guide, remaining 6 `/block/*` pages.
@@ -183,7 +193,7 @@ Everywhere: "FocusMode – Mindful Website Blocker for Chrome" (8+ CWS extension
 
 ## Launch runbook (Stripe, DB, email)
 
-Sale window: 2026-11-27 00:00 PT to 2026-12-15 23:59 PT (`SALE` in `src/lib/pricing.ts`).
+Sale window: starts at launch (`SALE.start` is 2026-11-16, so it is live from the first deploy) to 2026-12-15 23:59 PT (`SALE` in `src/lib/pricing.ts`).
 
 ### 1. Env vars on Amplify (Hosting → Environment variables)
 

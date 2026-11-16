@@ -12,6 +12,14 @@ const columns = [
     ],
   },
   {
+    title: "Guides",
+    links: [
+      { href: "/guides/how-to-block-websites-on-chrome/", label: "Block websites on Chrome" },
+      { href: "/blog/how-to-stop-doomscrolling/", label: "Stop doomscrolling" },
+      { href: "/alternatives/", label: "Website blocker alternatives" },
+    ],
+  },
+  {
     title: "Product",
     links: [
       { href: "/#shaders", label: "Shaders" },
@@ -35,7 +43,7 @@ const columns = [
 export function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="container grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+      <div className="container grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
         <div className="space-y-3">
           <Wordmark />
           <p className="max-w-xs text-sm text-muted-foreground">

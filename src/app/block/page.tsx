@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer";
 import { BLOCK_PAGES } from "@/lib/block-pages";
 
 export const metadata: Metadata = {
-  title: "Block a Website on Chrome: YouTube, Shorts, Reddit, Instagram",
+  title: "Block a Website on Chrome: YouTube, Reddit, Instagram, X and More",
   description:
     "Step-by-step guides to block the sites that eat your day on Chrome, with rules you can copy. Block a whole site or just the feed.",
 };

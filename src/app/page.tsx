@@ -1,6 +1,7 @@
 import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
 import { BlockedMoment } from "@/components/home/blocked-moment";
+import { BlockSites } from "@/components/home/block-sites";
 import { ClosingCta } from "@/components/home/closing-cta";
 import { Faq } from "@/components/home/faq";
 import { Groups } from "@/components/home/groups";
@@ -27,6 +28,7 @@ export default function Home() {
         <ShaderGallery />
         <Groups />
         <UseCases />
+        <BlockSites />
         <Interventions />
         <Reviews />
         <Pricing initialSale={isSaleActive()} />
