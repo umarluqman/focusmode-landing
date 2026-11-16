@@ -2,7 +2,6 @@ import { stripe } from "@/lib/stripe";
 import { SALE, TIERS, browsersLabel } from "@/lib/pricing";
 
 const apply = process.argv.includes("--apply");
-const COUPON_ID = "bf2026_50off";
 
 async function main() {
   const env: string[] = [];
@@ -44,25 +43,38 @@ async function main() {
     env.push(`STRIPE_PRICE_${tier.toUpperCase()}=${price?.id ?? "<price id>"}`);
   }
 
-  const coupon = await stripe.coupons.retrieve(COUPON_ID).catch(() => null);
+  const coupon = await stripe.coupons.retrieve(SALE.code).catch(() => null);
   if (coupon) {
-    console.log(`coupon ${COUPON_ID} exists`);
+    console.log(`coupon ${SALE.code} exists`);
   } else if (apply && productIds.length === TIERS.length) {
     await stripe.coupons.create({
-      id: COUPON_ID,
+      id: SALE.code,
       name: `${SALE.name} ${SALE.percentOff}% off`,
       percent_off: SALE.percentOff,
       duration: "once",
       redeem_by: Math.floor(SALE.end.getTime() / 1000),
       applies_to: { products: productIds },
     });
-    console.log(`created coupon ${COUPON_ID}`);
+    console.log(`created coupon ${SALE.code}`);
   } else {
-    console.log(`would create coupon ${COUPON_ID}: ${SALE.percentOff}% off until ${SALE.end.toISOString()}`);
+    console.log(`would create coupon ${SALE.code}: ${SALE.percentOff}% off until ${SALE.end.toISOString()}`);
   }
-  env.push(`STRIPE_SALE_COUPON=${COUPON_ID}`);
 
-  console.log(`\nSet on Vercel:\n${env.join("\n")}`);
+  const { data: codes } = await stripe.promotionCodes.list({ code: SALE.code });
+  if (codes.length) {
+    console.log(`promo code ${SALE.code} exists`);
+  } else if (apply) {
+    await stripe.promotionCodes.create({
+      coupon: SALE.code,
+      code: SALE.code,
+      expires_at: Math.floor(SALE.end.getTime() / 1000),
+    });
+    console.log(`created promo code ${SALE.code}`);
+  } else {
+    console.log(`would create promo code ${SALE.code}`);
+  }
+
+  console.log(`\nSet on Amplify:\n${env.join("\n")}`);
 }
 
 main();

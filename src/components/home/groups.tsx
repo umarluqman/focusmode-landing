@@ -50,10 +50,10 @@ export function Groups() {
         <div className="max-w-2xl">
           <p className="text-sm font-semibold text-orange-ink">Per-group rules</p>
           <h2 className="mt-3 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.02]">
-            Slack at 10am isn&apos;t TikTok at midnight.
+            Schedules and time limits for each group of sites.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
-            Put sites in groups and give each group its own schedule, pause,
+            Slack at 10am isn&apos;t TikTok at midnight. Put sites in groups and give each group its own schedule, pause,
             break budget and message. Three to start from:
           </p>
         </div>

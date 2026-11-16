@@ -1,44 +1,24 @@
 import { MetadataRoute } from "next";
+import { BLOCK_PAGES } from "@/lib/block-pages";
+
+const BASE = "https://focusmode.app";
+
+const PAGES: [path: string, lastModified: string, priority: number][] = [
+  ["/", "2026-11-16", 1],
+  ["/pricing/", "2026-11-16", 0.8],
+  ["/faq/", "2026-11-16", 0.7],
+  ["/whats-new/", "2026-11-16", 0.6],
+  ["/changelog/", "2026-11-16", 0.5],
+  ["/license/", "2026-11-16", 0.4],
+  ["/privacy-policy/", "2026-11-16", 0.3],
+  ["/block/", "2026-11-16", 0.7],
+  ...BLOCK_PAGES.map((p): [string, string, number] => [`/block/${p.slug}/`, "2026-11-16", 0.7]),
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://focusmode.app";
-
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/pricing`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/faq`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/changelog`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/license`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.4,
-    },
-    {
-      url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-  ];
+  return PAGES.map(([path, lastModified, priority]) => ({
+    url: `${BASE}${path}`,
+    lastModified,
+    priority,
+  }));
 }

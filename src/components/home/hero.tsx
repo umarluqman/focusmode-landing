@@ -1,4 +1,4 @@
-import { CHROME_STORE_URL } from "@/lib/pricing";
+import { StoreLink } from "@/components/store-link";
 import { getCwsStats } from "@/lib/cws";
 import { Stars } from "@/components/stars";
 import { HeroDemo } from "./hero-demo";
@@ -12,25 +12,23 @@ export async function Hero() {
         <div className="max-w-xl animate-fade-up">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
             <span className="size-1.5 rounded-full bg-orange" />
-            FocusMode 3.0 is here
+            Mindful website blocker for Chrome
           </p>
           <h1 className="text-[clamp(2.6rem,6.5vw,4.6rem)] leading-[0.98] tracking-[-0.03em]">
             A pause before the scroll.
           </h1>
           <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-muted-foreground">
-            FocusMode doesn&apos;t slam the door on distracting sites. It slows
-            the moment down: a living shader rises over the page, you take a
-            breath, and then you decide. Everything stays in your browser.
+            FocusMode is a website blocker that doesn&apos;t slam the door on
+            YouTube, Reddit or Instagram. It slows the moment down: a living
+            shader rises over the page, you take a breath, and then you decide.
+            Everything stays in your browser.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href={CHROME_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <StoreLink
+              placement="hero"
+              suffix=", it's free"
               className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-[15px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              Add to Chrome, it&apos;s free
-            </a>
+            />
             <a
               href="#demo"
               className="inline-flex h-12 items-center justify-center rounded-full px-5 text-[15px] font-semibold text-foreground transition-colors hover:bg-secondary"
@@ -38,6 +36,12 @@ export async function Hero() {
               Try the pause
             </a>
           </div>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Works in Chrome, Firefox, Edge, Brave and Arc.{" "}
+            <span className="hidden [@media(pointer:coarse)]:inline">
+              Desktop only, open this page on your computer.
+            </span>
+          </p>
           {stats ? (
             <a
               href="#reviews"
@@ -52,7 +56,7 @@ export async function Hero() {
             </a>
           ) : (
             <p className="mt-6 text-sm text-muted-foreground">
-              Free on the Chrome Web Store · no account, no server tracking
+              Free for Chrome and Firefox · no account, no server tracking
             </p>
           )}
         </div>

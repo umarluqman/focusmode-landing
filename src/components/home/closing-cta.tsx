@@ -1,4 +1,4 @@
-import { CHROME_STORE_URL } from "@/lib/pricing";
+import { StoreLink } from "@/components/store-link";
 import { LiveShader } from "@/components/shader/live-shader";
 import { HERO_SCENE } from "@/components/shader/scenes";
 
@@ -14,14 +14,10 @@ export function ClosingCta() {
         <p className="mx-auto mt-4 max-w-md text-[hsl(60_20%_99%/0.85)]">
           Free forever for one group. Two minutes to set up.
         </p>
-        <a
-          href={CHROME_STORE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <StoreLink
+          placement="closing_cta"
           className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-[hsl(60_20%_99%)] px-7 text-[15px] font-semibold text-foreground transition-transform duration-200 ease-out hover:scale-[1.02]"
-        >
-          Add to Chrome
-        </a>
+        />
       </div>
     </section>
   );

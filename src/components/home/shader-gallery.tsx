@@ -3,13 +3,31 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { FREE_SHADER_FAMILIES } from "@/lib/pricing";
-import { LiveShader } from "@/components/shader/live-shader";
-import { FAMILIES, poster } from "@/components/shader/scenes";
+import { InterventionFrame } from "./intervention-frame";
 
-const total = FAMILIES.reduce((n, f) => n + f.count, 0);
+// Mirrors SHADER_VARIANTS in focusmode-wxt/types/storage.ts.
+const family = (label: string, prefix: string, names: string[]) => ({
+  label,
+  free: FREE_SHADER_FAMILIES.includes(label),
+  scenes: names.map((name) => ({
+    id: `${prefix}-${name}`,
+    label: name.split("-").map((w) => w[0].toUpperCase() + w.slice(1)).join(" "),
+  })),
+});
+
+const FAMILIES = [
+  family("Dither", "dither", ["sphere", "warp", "simplex", "swirl", "ripple", "wave"]),
+  family("Gallery", "paper", ["mesh", "grain", "warp", "metaballs", "smoke-ring", "god-rays", "swirl", "neuro", "spiral"]),
+  family("Liquid", "liquid", ["molten", "aurora", "silk", "bayer"]),
+  family("Marble", "marble", ["marble", "ink", "aurora"]),
+  family("Fluid", "fluid", ["burst"]),
+];
+
+const total = FAMILIES.reduce((n, f) => n + f.scenes.length, 0);
 
 export function ShaderGallery() {
   const [scene, setScene] = useState(FAMILIES[0].scenes[0]);
+  const [run, setRun] = useState(0);
   const family = FAMILIES.find((f) => f.scenes.includes(scene))!;
 
   return (
@@ -36,7 +54,7 @@ export function ShaderGallery() {
                 <legend className="mb-2 flex w-full items-center justify-between text-sm">
                   <span className="font-semibold">
                     {f.label}
-                    <span className="ml-1.5 font-normal text-muted-foreground">{f.count}</span>
+                    <span className="ml-1.5 font-normal text-muted-foreground">{f.scenes.length}</span>
                   </span>
                   <span
                     className={cn(
@@ -57,8 +75,7 @@ export function ShaderGallery() {
                         checked={s === scene}
                         onChange={() => setScene(s)}
                       />
-                      <span className="flex h-9 items-center gap-2 rounded-full border border-border bg-card pl-1.5 pr-3.5 text-sm transition-colors peer-checked:border-foreground peer-focus-visible:ring-2 peer-focus-visible:ring-ring">
-                        <span className="size-6 rounded-full" style={{ background: poster(s.colors) }} />
+                      <span className="flex h-9 items-center rounded-full border border-border bg-card px-3.5 text-sm transition-colors peer-checked:border-foreground peer-focus-visible:ring-2 peer-focus-visible:ring-ring">
                         {s.label}
                       </span>
                     </label>
@@ -69,16 +86,16 @@ export function ShaderGallery() {
           </div>
 
           <div className="relative order-1 aspect-[4/3] overflow-hidden rounded-[24px] bg-muted lg:order-2 lg:aspect-auto lg:min-h-[30rem]">
-            <LiveShader scene={scene} />
+            <InterventionFrame
+              params={{ type: "shader", variant: scene.id, duration: 4, run }}
+              onAction={() => setRun((n) => n + 1)}
+            />
             <div className="absolute bottom-4 left-4 rounded-full bg-[hsl(60_20%_99%/0.8)] px-3.5 py-1.5 text-sm font-semibold backdrop-blur">
               {family.label} · {scene.label}
               {!family.free && <span className="ml-2 text-primary">Pro</span>}
             </div>
           </div>
         </div>
-        <p className="mt-4 text-xs text-muted-foreground">
-          Previews are simplified web versions of the in-extension shaders.
-        </p>
       </div>
     </section>
   );

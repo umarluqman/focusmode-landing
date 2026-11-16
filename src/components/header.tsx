@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CHROME_STORE_URL } from "@/lib/pricing";
+import { StoreLink } from "@/components/store-link";
 import { Wordmark } from "./logo";
 
 const links = [
@@ -26,14 +26,10 @@ export function Header() {
               {l.label}
             </Link>
           ))}
-          <a
-            href={CHROME_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <StoreLink
+            placement="header"
             className="ml-1 inline-flex h-9 items-center rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Add to Chrome
-          </a>
+          />
         </div>
       </nav>
     </header>

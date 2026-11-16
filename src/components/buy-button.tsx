@@ -23,7 +23,10 @@ export function BuyButton({
       const res = await fetch("/api/checkout/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tier }),
+        body: JSON.stringify({
+          tier,
+          source: window.location.pathname + window.location.search,
+        }),
       });
       const { url } = await res.json();
       if (!res.ok || !url) throw new Error();

@@ -4,7 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Faq } from "@/components/home/faq";
 
 export const metadata: Metadata = {
-  title: "FAQ",
+  title: "FAQ: Website Blocker for Chrome",
   description:
     "Answers about FocusMode: what's free, lifetime Pro, browsers per license, v2 Pro upgrades, refunds and privacy.",
 };
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function FaqPage() {
   return (
     <>
-      <JsonLd />
+      <JsonLd faq />
       <main id="main">
         <Faq heading="h1" />
       </main>

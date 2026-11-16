@@ -63,9 +63,8 @@ export const authOptions: NextAuthOptions = {
       session.user.isSubscribed = token.isSubscribed as boolean | undefined;
       return session;
     },
-    async redirect({ url, baseUrl }) {
-      // Always redirect to /pro after sign in
-      return baseUrl + "/pro";
+    async redirect({ baseUrl }) {
+      return baseUrl + "/sign-in/";
     },
   },
 

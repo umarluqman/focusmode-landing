@@ -12,7 +12,7 @@ export const corsOptions = () =>
 export const corsJson = (body: unknown, status = 200) =>
   NextResponse.json(body, { status, headers: corsHeaders });
 
-// Per-instance memory: on Vercel each warm lambda keeps its own window, good enough to blunt abuse
+// Per-instance memory: on Amplify each warm lambda keeps its own window, good enough to blunt abuse
 const hits = new Map<string, { count: number; reset: number }>();
 
 export function rateLimited(key: string, limit: number, windowMs = 60_000) {

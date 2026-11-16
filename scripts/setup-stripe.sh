@@ -200,11 +200,8 @@ finish() {
 
 LIVE_ENV_FILE=".env.stripe-live.local"
 STRIPE_VARS=(STRIPE_SECRET_KEY STRIPE_WEBHOOK_SECRET
-  STRIPE_PRICE_PERSONAL STRIPE_PRICE_PLUS STRIPE_PRICE_UNLIMITED
-  STRIPE_SALE_COUPON)
+  STRIPE_PRICE_PERSONAL STRIPE_PRICE_PLUS STRIPE_PRICE_UNLIMITED)
 WEBHOOK_EVENTS="checkout.session.completed, checkout.session.async_payment_succeeded, customer.subscription.deleted, charge.refunded, charge.dispute.created"
-
-vc() { npx -y vercel@latest "$@"; }
 
 products() { npx tsx --env-file="$ENV_FILE" scripts/create-stripe-products.ts "$@"; }
 
@@ -233,7 +230,7 @@ products_dry_stage() {
 
 products_apply_stage() {
   local out
-  stage "Stripe $1: create products, prices, coupons"
+  stage "Stripe $1: create products, prices, coupon, promo code"
   say "Idempotent: existing lookup keys and coupon ids are reused."
   warn "Coupons can't be edited after creation. Check the dry run before continuing."
   confirm "Create them in Stripe $1 mode?" || { warn "Aborted."; exit 1; }
@@ -242,42 +239,28 @@ products_apply_stage() {
   if grep -q '<price id>' <<<"$out"; then warn "A price id is missing, aborting."; exit 1; fi
   while IFS='=' read -r key value; do
     write_env "$key" "$value"
-  done < <(grep -E '^STRIPE_(PRICE_[A-Z]+|SALE_COUPON)=' <<<"$out")
+  done < <(grep -E '^STRIPE_PRICE_[A-Z]+=' <<<"$out")
   pause
 }
 
-vercel_push_stage() {
-  local target="$1" name
-  stage "Vercel: push Stripe vars to $target"
-  say "Sets ${#STRIPE_VARS[@]} vars on $target (overwrites existing):"
-  for name in "${STRIPE_VARS[@]}"; do
-    [[ -n "${!name:-}" ]] && note "  $name" || note "  $name (empty, skipped)"
-  done
-  confirm "Push to Vercel $target?" || { SKIPPED+=("Vercel $target env vars"); return; }
-  for name in "${STRIPE_VARS[@]}"; do
-    [[ -n "${!name:-}" ]] || continue
-    printf '%s' "${!name}" | vc env add "$name" --environment "$target" --force --yes >/dev/null
-    printf '  %s✓ set%s %s on %s\n' "$GREEN" "$RESET" "$name" "$target"
-  done
+amplify_env_stage() {
+  local name
+  stage "Amplify: set Stripe vars on production"
+  open_url "https://console.aws.amazon.com/amplify/apps"
+  step "focusmode app → Hosting → Environment variables → Manage variables."
+  step "Set these (values are in $ENV_FILE):"
+  for name in "${STRIPE_VARS[@]}"; do note "  $name"; done
+  step "Redeploy the branch. amplify.yml writes them into .env at build time."
   pause
 }
 
 run_wizard() {
 
-TOTAL_STAGES=12
+TOTAL_STAGES=10
 
 banner "FocusMode v3 Stripe setup (test → live)"
 
-stage "Vercel: link project"
-if [[ -d .vercel ]]; then
-  say "Already linked."
-else
-  say "Logs in if needed, then links this folder to the focusmode Vercel project."
-  vc link
-fi
-pause
-
-# ── Test mode → local .env + Vercel Preview ──
+# ── Test mode → local .env ──
 stripe_key_stage test
 products_dry_stage test
 products_apply_stage test
@@ -289,10 +272,7 @@ pause "Press Enter when logged in"
 whsec=$(stripe listen --print-secret)
 [[ "$whsec" == whsec_* ]] || { warn "stripe listen failed. Run 'stripe login' and re-run."; exit 1; }
 write_env STRIPE_WEBHOOK_SECRET "$whsec"
-note "Preview deploys get no webhook secret: test purchases there won't issue keys."
 pause
-
-vercel_push_stage preview
 
 stage "Smoke test: local test purchase"
 step "Tab 1: stripe listen --forward-to localhost:3000/api/webhook/ --events ${WEBHOOK_EVENTS//, /,}  (match your dev port)"
@@ -301,7 +281,7 @@ step "Open http://localhost:3000/pro (your dev port), buy each tier with 4242 42
 step "Check: license key email arrives, browser count matches the tier."
 confirm "Did all three tiers work?" || { warn "Fix before going live. Re-run this script anytime."; exit 1; }
 
-# ── Live mode → .env.stripe-live.local + Vercel Production ──
+# ── Live mode → .env.stripe-live.local + Amplify ──
 ENV_FILE="$LIVE_ENV_FILE"
 stripe_key_stage live
 products_dry_stage live
@@ -316,7 +296,7 @@ ask_secret STRIPE_WEBHOOK_SECRET "Paste the live signing secret:"
 write_env STRIPE_WEBHOOK_SECRET "$STRIPE_WEBHOOK_SECRET"
 pause
 
-vercel_push_stage production
+amplify_env_stage
 
 finish
 note "Live values are in $LIVE_ENV_FILE (gitignored)."

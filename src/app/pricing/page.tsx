@@ -6,7 +6,7 @@ import { Pricing } from "@/components/home/pricing";
 import { browsersLabel, isSaleActive, TIERS } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Pricing: Free Website Blocker, Lifetime Pro (No Subscription)",
   description: `FocusMode is free for one focus group. Pro is a one-time payment: ${TIERS.map((t) => `${t.name} $${t.price} (${browsersLabel(t).toLowerCase()})`).join(", ")}.`,
 };
 

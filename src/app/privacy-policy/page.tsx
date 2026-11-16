@@ -1,4 +1,11 @@
+import type { Metadata } from "next/types";
 import { Footer } from "@/components/footer";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "What FocusMode keeps in your browser, what the license server stores, and who processes payments and email.",
+};
 
 export default function PrivacyPolicy() {
   return (
@@ -145,7 +152,13 @@ export default function PrivacyPolicy() {
               when you ask through the license page, and revoke it after a
               refund or dispute. Emails are sent through Resend. Stripe and
               Resend process your data on our behalf under their own privacy
-              policies. This website does not use analytics or advertising
+              policies.
+            </p>
+            <p className="mt-3">
+              This website uses Cloudflare Web Analytics to count page views.
+              It sets no cookies, does not track you across sites and does not
+              collect personal data. We see only aggregate numbers such as
+              visits, referring sites and countries. We use no advertising
               trackers.
             </p>
             <p className="mt-3">
@@ -203,7 +216,7 @@ export default function PrivacyPolicy() {
           </section>
         </div>
         <p className="mt-8 text-sm text-muted-foreground">
-          Last updated: 13 November 2026
+          Last updated: 16 November 2026
         </p>
       </main>
       <Footer />

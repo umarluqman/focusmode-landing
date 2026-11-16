@@ -1,20 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LiveShader } from "@/components/shader/live-shader";
-import { FAMILIES } from "@/components/shader/scenes";
 import { BrowserFrame, FakeFeed } from "./browser-frame";
-import { OverlayMock, overlayButton } from "./overlay-mock";
+import { InterventionFrame } from "./intervention-frame";
 
 const SITES = [
-  { url: "x.com", scene: FAMILIES[1].scenes[1] },
-  { url: "reddit.com", scene: FAMILIES[0].scenes[0] },
-  { url: "youtube.com/shorts", scene: FAMILIES[0].scenes[1] },
+  { url: "x.com", variant: "paper-warp" },
+  { url: "reddit.com", variant: "dither-sphere" },
+  { url: "youtube.com/shorts", variant: "marble-ink" },
 ];
 
-const BREAK_MINUTES = [5, 10, 15, 30];
 const DAILY_BREAKS = 3;
 
 const STEPS = [
@@ -28,11 +24,9 @@ type Phase = "idle" | "paused" | "break" | "closed";
 export function BlockedMoment() {
   const [site, setSite] = useState(SITES[0]);
   const [phase, setPhase] = useState<Phase>("idle");
-  const [picking, setPicking] = useState(false);
 
   const visit = (s: (typeof SITES)[number]) => {
     setSite(s);
-    setPicking(false);
     setPhase("paused");
   };
 
@@ -42,7 +36,7 @@ export function BlockedMoment() {
         <div>
           <p className="text-sm font-semibold text-orange-ink">The blocked moment</p>
           <h2 className="mt-3 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.02]">
-            Three seconds is enough to change your mind.
+            A website blocker that gives you three seconds to change your mind.
           </h2>
           <ol className="mt-10 space-y-7">
             {STEPS.map(([title, body], i) => (
@@ -89,57 +83,18 @@ export function BlockedMoment() {
               )}
               {phase === "break" && <FakeFeed />}
 
-              <div
-                className={cn(
-                  "absolute inset-0 transition-opacity duration-700 ease-out",
-                  phase === "paused" ? "opacity-100" : "pointer-events-none opacity-0"
-                )}
-              >
-                {phase !== "idle" && <LiveShader scene={site.scene} reveal={phase === "paused" ? 1 : 0} />}
-                {phase === "paused" && (
-                  <OverlayMock
-                    key={site.url}
-                    text="Are you sure you want to enter this site?"
-                    breaksLeft={DAILY_BREAKS}
-                  >
-                    {picking ? (
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <button
-                          type="button"
-                          aria-label="Back"
-                          onClick={() => setPicking(false)}
-                          className="grid size-9 shrink-0 place-items-center rounded-[8px] text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-950"
-                        >
-                          <ArrowLeft className="size-4" />
-                        </button>
-                        <div className="grid grid-cols-2 gap-px xl:grid-cols-4 overflow-hidden rounded-[8px] border border-zinc-200 bg-zinc-200 shadow-sm">
-                          {BREAK_MINUTES.map((minutes) => (
-                            <button
-                              key={minutes}
-                              type="button"
-                              disabled={minutes !== 5}
-                              title={minutes !== 5 ? "Exclusive for PRO users" : undefined}
-                              onClick={() => setPhase("break")}
-                              className={overlayButton.segment}
-                            >
-                              For {minutes} minutes
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex gap-3">
-                        <button type="button" onClick={() => setPicking(true)} className={overlayButton.outline}>
-                          Let me continue
-                        </button>
-                        <button type="button" onClick={() => setPhase("closed")} className={overlayButton.dark}>
-                          Close tab
-                        </button>
-                      </div>
-                    )}
-                  </OverlayMock>
-                )}
-              </div>
+              {phase === "paused" && (
+                <InterventionFrame
+                  params={{
+                    type: "shader",
+                    variant: site.variant,
+                    duration: 3,
+                    text: "Are you sure you want to enter this site?",
+                    breaks: DAILY_BREAKS,
+                  }}
+                  onAction={(a) => setPhase(a.action === "break" ? "break" : "closed")}
+                />
+              )}
             </div>
           </BrowserFrame>
 

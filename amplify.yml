@@ -13,6 +13,11 @@ frontend:
         - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env
         - echo "STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY" >> .env
         - echo "STRIPE_WEBHOOK_SECRET=$STRIPE_WEBHOOK_SECRET" >> .env
+        - echo "STRIPE_PRICE_PERSONAL=$STRIPE_PRICE_PERSONAL" >> .env
+        - echo "STRIPE_PRICE_PLUS=$STRIPE_PRICE_PLUS" >> .env
+        - echo "STRIPE_PRICE_UNLIMITED=$STRIPE_PRICE_UNLIMITED" >> .env
+        - echo "RESEND_API_KEY=$RESEND_API_KEY" >> .env
+        - echo "RESEND_FROM_EMAIL=$RESEND_FROM_EMAIL" >> .env
         - echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY" >> .env
         - echo "NEXT_PUBLIC_WEBSITE_URL=$NEXT_PUBLIC_WEBSITE_URL" >> .env
         - echo "DATABASE_URL=$DATABASE_URL" >> .env

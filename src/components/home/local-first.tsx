@@ -24,7 +24,7 @@ export function LocalFirst() {
         <div className="max-w-xl">
           <p className="text-sm font-semibold text-orange-ink">Local-first</p>
           <h2 className="mt-3 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.02]">
-            Your browsing stays yours.
+            A private site blocker. Your browsing stays yours.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
             A focus tool sees every site you open. That&apos;s exactly why

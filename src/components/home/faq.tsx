@@ -29,7 +29,7 @@ export const FAQS = [
   },
   {
     q: "Which browsers does it work in?",
-    a: "Chrome, plus Chromium browsers that install from the Chrome Web Store, such as Edge, Brave and Arc.",
+    a: "Chrome and Firefox, plus Chromium browsers that install from the Chrome Web Store, such as Edge, Brave and Arc.",
   },
   {
     q: "Can I block part of a site?",
@@ -65,6 +65,11 @@ export function Faq({ heading: Heading = "h2" }: { heading?: "h1" | "h2" }) {
               <p className="-mt-1 pb-5 pr-10 text-muted-foreground">{a}</p>
             </details>
           ))}
+          {Heading === "h2" && (
+            <a href="/faq/" className="block py-5 text-sm font-semibold underline underline-offset-4">
+              All questions about FocusMode
+            </a>
+          )}
         </div>
       </div>
     </section>

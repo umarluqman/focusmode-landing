@@ -34,9 +34,10 @@ export const TIERS: Tier[] = [
 
 export const SALE = {
   name: "Black Friday",
+  code: "BRIGHTFRIDAY",
   percentOff: 50,
   start: new Date("2026-11-27T00:00:00-08:00"),
-  end: new Date("2026-12-01T23:59:59-08:00"),
+  end: new Date("2026-12-15T23:59:59-08:00"),
 };
 
 export const isSaleActive = (now = new Date()) =>
@@ -79,3 +80,9 @@ export const PRO_FEATURES = [
 
 export const CHROME_STORE_URL =
   "https://chromewebstore.google.com/detail/focus-mode-stay-focused-b/ollmdedpknmlcdmpehclmgbogpifahdc";
+
+// TODO: set once the Firefox Add-ons (AMO) listing is live
+export const FIREFOX_STORE_URL: string | null = null;
+
+export const storeUrl = (placement: string, base = CHROME_STORE_URL) =>
+  `${base}?utm_source=focusmode.app&utm_medium=${placement}&utm_campaign=v3`;

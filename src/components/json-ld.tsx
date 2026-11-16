@@ -1,12 +1,10 @@
 import { browsersLabel, CHROME_STORE_URL, isSaleActive, priceOf, SALE, TIERS } from "@/lib/pricing";
 import { FAQS } from "@/components/home/faq";
-import { getCwsStats } from "@/lib/cws";
 
 const ORG = "https://focusmode.app/#organization";
 
-export async function JsonLd() {
+export function JsonLd({ faq = false }: { faq?: boolean }) {
   const sale = isSaleActive();
-  const stats = await getCwsStats();
   const schemas = [
     {
       "@context": "https://schema.org",
@@ -16,7 +14,11 @@ export async function JsonLd() {
       url: "https://focusmode.app",
       logo: "https://focusmode.app/focusmode-logo.png",
       email: "focusmode.app@gmail.com",
-      sameAs: [CHROME_STORE_URL],
+      sameAs: [
+        CHROME_STORE_URL,
+        "https://alternativeto.net/software/focusmode/about/",
+        "https://www.saashub.com/focusmode",
+      ],
     },
     {
       "@context": "https://schema.org",
@@ -30,14 +32,6 @@ export async function JsonLd() {
       softwareVersion: "3.0",
       installUrl: CHROME_STORE_URL,
       author: { "@id": ORG },
-      ...(stats && {
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: String(stats.ratingValue),
-          bestRating: "5",
-          ratingCount: String(stats.ratingCount),
-        },
-      }),
       offers: [
         { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD" },
         ...TIERS.map((t) => ({
@@ -51,15 +45,19 @@ export async function JsonLd() {
         })),
       ],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: FAQS.map(({ q, a }) => ({
-        "@type": "Question",
-        name: q,
-        acceptedAnswer: { "@type": "Answer", text: a },
-      })),
-    },
+    ...(faq
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map(({ q, a }) => ({
+              "@type": "Question",
+              name: q,
+              acceptedAnswer: { "@type": "Answer", text: a },
+            })),
+          },
+        ]
+      : []),
   ];
 
   return (

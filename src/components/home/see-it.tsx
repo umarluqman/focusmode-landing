@@ -8,7 +8,7 @@ export function SeeIt() {
             FocusMode 3 in 25 seconds.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
-            The pause, the popup and the extension's own shaders, rendered live.
+            The pause, the popup and the extension&apos;s own shaders, rendered live.
           </p>
         </div>
         <video

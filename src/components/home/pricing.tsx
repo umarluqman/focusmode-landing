@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 import {
   browsersLabel,
-  CHROME_STORE_URL,
   formatPrice,
   FREE_FEATURES,
   PRO_FEATURES,
@@ -12,6 +11,7 @@ import {
   TIERS,
 } from "@/lib/pricing";
 import { BuyButton } from "@/components/buy-button";
+import { StoreLink } from "@/components/store-link";
 import { ResendForm } from "@/components/resend-form";
 import { Countdown, useSaleActive } from "@/components/sale";
 
@@ -45,7 +45,7 @@ export function Pricing({
           </div>
           {sale && (
             <div className="self-start rounded-2xl bg-primary px-4 py-3 text-sm text-primary-foreground lg:self-auto">
-              <p className="font-semibold">{SALE.name}: {SALE.percentOff}% off</p>
+              <p className="font-semibold">{SALE.name}: {SALE.percentOff}% off with code {SALE.code}</p>
               <p className="opacity-80">
                 Ends in <Countdown />
               </p>
@@ -66,14 +66,10 @@ export function Pricing({
                 </li>
               ))}
             </ul>
-            <a
-              href={CHROME_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <StoreLink
+              placement="pricing_free"
               className="mb-7 mt-8 inline-flex h-12 items-center justify-center rounded-full border border-input text-[15px] font-semibold transition-colors hover:bg-secondary"
-            >
-              Add to Chrome
-            </a>
+            />
           </article>
 
           {TIERS.map((t) => {
@@ -133,7 +129,11 @@ export function Pricing({
           })}
         </div>
 
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p className="mt-6 text-sm">
+          <b>Pay once</b>, nothing renews · <b>14-day refund</b>, just email us ·{" "}
+          <b>Still local-first</b>, your browsing never leaves the browser
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
           Pro keys work with FocusMode 3.0 and later. On an older version?
           Update it from chrome://extensions before you activate.
         </p>

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { SaleBanner } from "@/components/sale";
-import { isSaleActive, lowestPrice } from "@/lib/pricing";
+import { isSaleActive } from "@/lib/pricing";
 
 export const revalidate = 300;
 
@@ -13,7 +13,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const description = `Block distracting websites with a calm pause instead of a wall. Live shader overlays, 7 interventions, per-group schedules and limits. Local-first, no server tracking. Free Chrome extension, lifetime Pro from $${lowestPrice()}.`;
+const description =
+  "Free Chrome website blocker that pauses distracting sites instead of walling them off. Schedules, limits, 7 interventions. Pay once for Pro.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://focusmode.app"),
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
     template: "%s | FocusMode",
   },
   description,
+  alternates: { canonical: "./" },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FocusMode: a pause before the scroll",
     description,
-    url: "https://focusmode.app",
+    url: "./",
     siteName: "FocusMode",
     locale: "en_US",
     type: "website",

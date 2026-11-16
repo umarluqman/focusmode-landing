@@ -25,6 +25,18 @@ const nextConfig = {
     esmExternals: "loose",
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
   },
+  async redirects() {
+    return [
+      { source: "/pro", destination: "/pricing/", permanent: true },
+      { source: "/partnership", destination: "/", permanent: true },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.focusmode.app" }],
+        destination: "https://focusmode.app/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
