@@ -36,12 +36,6 @@ export async function POST(req: NextRequest) {
       case "checkout.session.completed":
       case "checkout.session.async_payment_succeeded":
         await issueKey(event.data.object);
-        if (event.data.object.mode === "subscription") {
-          await handleSuccessfulCheckout(event.data.object);
-        }
-        break;
-      case "customer.subscription.deleted":
-        await handleSubscriptionDeleted(event.data.object);
         break;
       case "charge.refunded":
         if (event.data.object.refunded) await revokeCharge(event.data.object);
@@ -61,51 +55,6 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ received: true });
 }
-
-const handleSuccessfulCheckout = async (session: Stripe.Checkout.Session) => {
-  let customerId = session.customer as string;
-
-  if (!customerId && session.client_reference_id) {
-    const user = await prisma.user.findUnique({
-      where: { id: session.client_reference_id },
-      select: { stripeCustomerId: true },
-    });
-    customerId = user?.stripeCustomerId || "";
-  }
-
-  if (!customerId) {
-    console.error("Customer ID not found in session or user record");
-    return;
-  }
-
-  const customer = await stripe.customers.retrieve(customerId);
-  if ("deleted" in customer) {
-    console.error("Customer has been deleted");
-    return;
-  }
-  const email = customer.email;
-  if (!email) {
-    console.error("Customer email not found");
-    return;
-  }
-
-  await prisma.user.updateMany({
-    where: { email },
-    data: { isSubscribed: true, stripeCustomerId: customerId },
-  });
-};
-
-const handleSubscriptionDeleted = async (subscription: Stripe.Subscription) => {
-  await prisma.licenseKey.updateMany({
-    where: { stripeSubscriptionId: subscription.id, grandfathered: false },
-    data: { status: "revoked" },
-  });
-
-  await prisma.user.updateMany({
-    where: { stripeCustomerId: idOf(subscription.customer) },
-    data: { isSubscribed: false },
-  });
-};
 
 const idOf = (value: string | { id: string }) =>
   typeof value === "string" ? value : value.id;
