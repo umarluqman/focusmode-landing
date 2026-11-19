@@ -1,4 +1,4 @@
-# FocusMode launch plan (v3 + Black Friday + growth)
+# focusmode launch plan (v3 + Black Friday + growth)
 
 Status: planned 2026-11-16. Waiting for extension 3.0 approval on the Chrome Web Store (CWS).
 Research: OpenSEO project `focusmode.app`, research log 2026-11-16 (~604 credits).
@@ -41,7 +41,7 @@ Baseline (OpenSEO, US): 84 organic visits/mo, 27 keywords (all brand variants), 
 3. **Free tier downgrade:** does v3 Free remove anything v2 free users had? If yes, expect 1-star reviews. Decide the messaging.
 4. **Partnership page:** still active? If not, delete it; if yes, noindex it.
 5. **Edge / Firefox:** can the WXT build ship to Edge Add-ons and Firefox AMO?
-6. **Brand name for AI tracking in OpenSEO:** "FocusMode"?
+6. **Brand name for AI tracking in OpenSEO:** "focusmode"?
 
 ---
 
@@ -76,7 +76,7 @@ Uncommitted: 6 modified files + `src/app/whats-new/`, `public/demo/`, `intervent
 
 ### 0.3 On-page keywords (homepage)
 Keep the poetic H1. Add the functional words around it.
-- Hero eyebrow: "FocusMode 3.0 is here" → "Mindful website blocker for Chrome" (`src/components/home/hero.tsx`).
+- Hero eyebrow: "focusmode 3.0 is here" → "Mindful website blocker for Chrome" (`src/components/home/hero.tsx`).
 - 2–3 H2s: "Block distracting websites like YouTube, Reddit and Instagram", "7 ways to pause, not just block" (`blocked-moment.tsx`, `interventions.tsx`, `groups.tsx`).
 - One plain paragraph using: website blocker, block websites in Chrome, screen time, Focus Mode.
 - Home FAQ: add "See all questions →" link to `/faq/` (`src/components/home/faq.tsx`).
@@ -103,14 +103,14 @@ Keep the poetic H1. Add the functional words around it.
 - Upgrade links → `/pricing/?utm_source=extension&utm_medium=upgrade`.
 
 ### 0.6 CWS listing (prepare now, submit with or right after 3.0)
-- **Title:** "FocusMode: Mindful Website Blocker – Block Sites, Limits & Schedules"
+- **Title:** "focusmode: Mindful Website Blocker – Block Sites, Limits & Schedules"
 - **Short description:** "Block distracting websites with a calm pause, not a wall. Time limits, schedules, breaks & strict mode. Local-first, no tracking."
 - **Long description order:** what it is → 7 interventions + groups → site names (YouTube / Shorts, Reddit, Instagram, X, TikTok, Facebook, news) → use cases (study, work, ADHD) → Free vs Pro ("one-time payment, no subscription") → privacy → `https://focusmode.app/?utm_source=cws&utm_medium=listing`.
 - **Assets:** 5 screenshots 1280×800 with captions (shader pause over YouTube, groups/rules, schedules/limits, breaks/streaks, privacy); 30–45s video from `public/demo/`; 440×280 tile; 1400×560 marquee.
-- Risk: title change can shift CWS ranking for current brand queries briefly. Keep "FocusMode" first.
+- Risk: title change can shift CWS ranking for current brand queries briefly. Keep "focusmode" first.
 
 ### 0.7 Content: write now, publish after launch
-Template: `src/app/block/[site]/page.tsx` with a data file per site (unique intro, steps, screenshots, FAQ). Each page: native how-to first (Chrome settings / hosts / DNS), then the FocusMode way, then CTA. No thin copy-paste pages.
+Template: `src/app/block/[site]/page.tsx` with a data file per site (unique intro, steps, screenshots, FAQ). Each page: native how-to first (Chrome settings / hosts / DNS), then the focusmode way, then CTA. No thin copy-paste pages.
 
 | Order | URL | Target keywords | Vol / KD |
 |---|---|---|---|
@@ -133,11 +133,11 @@ Pitch angle: "mindful, not a hard block" + one-time pricing + free Pro key for t
 1. tooltivity.com: submit extension; ask for inclusion in "Best Site Blocker Browser Extensions (2026)" and StayFocusd alternatives.
 2. alternativeto.net/software/focusmode: rewrite with v3 copy + screenshots; suggest as alternative under StayFocusd, BlockSite, one sec, Freedom, LeechBlock, Mindful Browsing.
 3. saashub.com/focusmode: refresh copy.
-4. Listicles (page 1, no FocusMode): cisdem, productive.fish, creolestudios, techlockdown, juliety, web-highlights, bitrix24, luxafor, dayhub, qrius, educatorstechnology, kivlio.
-5. Product Hunt: "FocusMode 3.0 – the mindful website blocker". Prep assets now. Launch in January (not BF week).
+4. Listicles (page 1, no focusmode): cisdem, productive.fish, creolestudios, techlockdown, juliety, web-highlights, bitrix24, luxafor, dayhub, qrius, educatorstechnology, kivlio.
+5. Product Hunt: "focusmode 3.0 – the mindful website blocker". Prep assets now. Launch in January (not BF week).
 6. Reddit (r/productivity, r/nosurf): helpful, disclosed replies to blocker-recommendation threads only.
 
-Everywhere: "FocusMode – Mindful Website Blocker for Chrome" (8+ CWS extensions are called "Focus Mode").
+Everywhere: "focusmode – Mindful Website Blocker for Chrome" (8+ CWS extensions are called "Focus Mode").
 
 ---
 
@@ -208,7 +208,7 @@ Every var must also be echoed into `.env` in `amplify.yml`, or the server never 
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | live keys (already set) |
 | `STRIPE_PRICE_PERSONAL` / `STRIPE_PRICE_PLUS` / `STRIPE_PRICE_UNLIMITED` | price ids printed by step 3 |
 | `RESEND_API_KEY` | Resend API key (focusmode.app domain verified in Resend) |
-| `RESEND_FROM_EMAIL` | `FocusMode <hey@focusmode.app>` |
+| `RESEND_FROM_EMAIL` | `focusmode <hey@focusmode.app>` |
 
 Email goes through Resend only. Local `.env` still has `PLUNK_API_KEY` / `EMAIL_FROM`, which nothing reads.
 

@@ -1,11 +1,10 @@
 import type { Metadata } from "next/types";
 import { BuyButton } from "@/components/buy-button";
 import { Footer } from "@/components/footer";
-import { Faq } from "@/components/home/faq";
-import { Reviews } from "@/components/home/reviews";
+import { InterventionFrame } from "@/components/home/intervention-frame";
 import { ResendForm } from "@/components/resend-form";
 import { LiveShader } from "@/components/shader/live-shader";
-import { FAMILIES, HERO_SCENE } from "@/components/shader/scenes";
+import { HERO_SCENE } from "@/components/shader/scenes";
 import { Stars } from "@/components/stars";
 import { getCwsStats } from "@/lib/cws";
 import {
@@ -28,22 +27,22 @@ export const metadata: Metadata = {
 const NEW = [
   {
     title: "A pause that moves",
-    body: "A live shader rises over the site and settles while the timer runs. Harder to click past than a grey wall.",
+    body: "A live shader rises over the site while the timer runs. Harder to click past than a grey wall.",
     pro: false,
   },
   {
     title: "Groups with their own rules",
-    body: "News after 15 minutes a day, shopping only at night, work sites all day. Each group gets its own trigger, breaks and pause.",
+    body: "News capped at 15 minutes a day, shopping only at night. Every group sets its own rules.",
     pro: false,
   },
   {
     title: "Strict mode",
-    body: "Need a hard stop? Every group blocks for up to 15 minutes. No breaks, no switching it off.",
+    body: "Every group blocks for up to 15 minutes. No breaks, no off switch.",
     pro: false,
   },
   {
     title: "Breathing pause",
-    body: "Four guided patterns, from 4-7-8 to box breathing, before you decide.",
+    body: "Four guided patterns, from 4-7-8 to box breathing.",
     pro: true,
   },
 ];
@@ -77,11 +76,8 @@ export default async function WhatsNew({
           <ReviewAsk />
         ) : (
           <>
-            <TheMath sale={sale} />
             <Compare />
-            <Reviews />
             <Offer sale={sale} />
-            <Faq />
           </>
         )}
       </main>
@@ -97,7 +93,10 @@ function Hero({
   sale: boolean;
   stats: Awaited<ReturnType<typeof getCwsStats>>;
 }) {
-  const from = formatPrice(priceOf(TIERS[0], sale));
+  const price = priceOf(TIERS[0], sale);
+  const from = formatPrice(price);
+  const hours = Math.round((SAVED_MINUTES_A_DAY * 365) / 60);
+  const cents = Math.round((price / hours) * 100);
 
   return (
     <section className="container grid items-center gap-12 pb-20 pt-12 sm:pt-16 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:pb-28 lg:pt-20">
@@ -107,14 +106,14 @@ function Hero({
           You&apos;re on focusmode 3
         </p>
         <h1 className="text-[clamp(2.4rem,6vw,4.2rem)] leading-[0.98] tracking-[-0.03em]">
-          You updated. Now take your hours back.
+          {SAVED_MINUTES_A_DAY} minutes of &ldquo;quick checks&rdquo; a day
+          is {hours} hours a year.
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-          Your groups, sites and streaks came with you. What&apos;s new is the
-          pause itself: slower, calmer and much harder to click past.{" "}
-          {sale
-            ? `And for ${SALE.name}, lifetime Pro is ${SALE.percentOff}% off with code ${SALE.code}.`
-            : "Pro removes every limit, for one payment."}
+          Your groups and streaks came with you. The new pause is much harder
+          to click past. Win back just those minutes and Pro costs about{" "}
+          {cents}¢ an hour, paid once.
+          {sale && ` ${SALE.percentOff}% off with code ${SALE.code}.`}
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
@@ -148,7 +147,12 @@ function Hero({
           </p>
         )}
       </div>
-      <PauseCard />
+      <div>
+        <p className="mb-4 rounded-2xl border border-border bg-card px-4 py-3 text-sm">
+          <b>Had Pro on v2?</b> You&apos;re Pro on v3 already. No action needed.
+        </p>
+        <PauseCard />
+      </div>
     </section>
   );
 }
@@ -165,12 +169,13 @@ function LifetimeHero() {
           You&apos;re Pro for life. Thank you.
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-          You backed focusmode early, so every v2 Pro account gets an Unlimited
-          key for free, even if your subscription lapsed. Enter the email you
-          paid with and we&apos;ll send it. Then paste it in Settings in the
-          extension.
+          Your v2 Pro is now v3 Pro, on unlimited browsers, even if your
+          subscription lapsed. No action needed.
         </p>
-        <ResendForm className="mt-8 max-w-md" />
+        <p className="mt-8 text-sm text-muted-foreground">
+          Pro not showing, or on a new browser? Get your key by email.
+        </p>
+        <ResendForm className="mt-3 max-w-md" />
       </div>
       <PauseCard />
     </section>
@@ -179,14 +184,14 @@ function LifetimeHero() {
 
 function PauseCard() {
   return (
-    <div className="relative isolate flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[28px] p-6">
-      <LiveShader scene={FAMILIES[3].scenes[1]} className="-z-10" />
-      <div className="rounded-2xl bg-white/70 px-6 py-5 text-center text-foreground shadow-lg backdrop-blur-md">
-        <p className="text-xl font-semibold tracking-tight">Pause. Let the light move first.</p>
-        <p className="mt-1 text-sm text-muted-foreground">
-          You have <b className="text-foreground">2 breaks</b> left today.
-        </p>
-      </div>
+    <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-[#04040a]">
+      <InterventionFrame
+        interactive={false}
+        params={{ type: "shader", variant: "fluid-burst", duration: 5 }}
+      />
+      <p className="absolute bottom-4 left-4 rounded-full bg-[hsl(60_20%_99%/0.8)] px-3.5 py-1.5 text-sm font-semibold backdrop-blur">
+        Fluid · Burst<span className="ml-2 text-primary">Pro</span>
+      </p>
     </div>
   );
 }
@@ -215,32 +220,6 @@ function WhatChanged() {
   );
 }
 
-function TheMath({ sale }: { sale: boolean }) {
-  const price = priceOf(TIERS[0], sale);
-  const hours = Math.round((SAVED_MINUTES_A_DAY * 365) / 60);
-  const cents = Math.round((price / hours) * 100);
-
-  return (
-    <section className="bg-primary text-primary-foreground">
-      <div className="container grid gap-10 py-16 lg:grid-cols-[1fr_1fr] lg:items-center lg:py-20">
-        <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.05]">
-          {SAVED_MINUTES_A_DAY} minutes a day is {hours} hours a year.
-        </h2>
-        <div className="space-y-3 text-lg opacity-90">
-          <p>
-            That&apos;s what a few &ldquo;quick checks&rdquo; add up to. If
-            focusmode stops just that much, Pro costs about {cents}¢ for every
-            hour you get back.
-          </p>
-          <p>
-            Paid once, ${formatPrice(price)}. No subscription waiting to renew.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Compare() {
   return (
     <section className="py-20 lg:py-28">
@@ -248,12 +227,8 @@ function Compare() {
         <div>
           <p className="text-sm font-semibold text-orange-ink">Free vs Pro</p>
           <h2 className="mt-3 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.02]">
-            Free stays free. Pro is for when one group isn&apos;t enough.
+            Free stays free. Pro removes the limits.
           </h2>
-          <p className="mt-5 text-lg text-muted-foreground">
-            Most people outgrow one group in a week: work sites by day,
-            shopping by night, news on a timer.
-          </p>
         </div>
         <div className="rounded-[20px] border border-border bg-card text-sm">
           <div className="grid grid-cols-[1fr_80px_96px] px-5 py-3 text-xs font-semibold text-muted-foreground">
