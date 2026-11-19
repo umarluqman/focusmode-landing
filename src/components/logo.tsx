@@ -1,5 +1,4 @@
-const ARMS = [[50, 30], [30, 50], [70, 50], [50, 70]];
-const CORNERS = [[30, 30], [70, 30], [30, 70], [70, 70]];
+const HALF = "M473.5,51L415.5,51A225,215 0 0 0 190.5,266L14.5,266L14.5,251A220,220 0 0 1 234.5,31L473.5,31Z";
 
 export function Logo({ size = 24, className }: { size?: number; className?: string }) {
   return (
@@ -11,12 +10,10 @@ export function Logo({ size = 24, className }: { size?: number; className?: stri
       className={className}
       aria-hidden="true"
     >
-      {ARMS.map(([cx, cy]) => (
-        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={8.5} />
-      ))}
-      {CORNERS.map(([cx, cy]) => (
-        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={8.5} opacity={0.35} />
-      ))}
+      <g transform="translate(50 50) scale(0.109) translate(-244 0)">
+        <path d={HALF} transform="scale(1 -1)" />
+        <path d={HALF} transform="scale(1 1)" />
+      </g>
     </svg>
   );
 }

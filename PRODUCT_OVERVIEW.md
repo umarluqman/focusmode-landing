@@ -1,4 +1,4 @@
-# FocusMode 3.0: Product Overview
+# focusmode 3.0: Product Overview
 
 > Reference for writing copy, SEO pages and schema for focusmode.app. Every claim here is checked against the landing code (`src/lib/pricing.ts`, `src/components/home/*`, `src/lib/license.ts`) or the extension source (`focusmode-revamp/focusmode-wxt`). If you add a claim, verify it the same way.
 
@@ -6,7 +6,7 @@
 
 ## 1. Product Identity
 
-- **Name**: FocusMode
+- **Name**: focusmode
 - **Tagline**: "A pause before the scroll"
 - **Version**: 3.0 (rewrite of v2.x, WXT + React + TypeScript; Manifest V3 on Chrome)
 - **Category**: Browser extension / website blocker / digital wellness
@@ -21,14 +21,14 @@
 
 ## 2. Core Value Proposition
 
-FocusMode is a **mindful website blocker**. When you open a distracting site it pauses you with a short intervention instead of a hard wall. You can still go through, but you have to choose to.
+focusmode is a **mindful website blocker**. When you open a distracting site it pauses you with a short intervention instead of a hard wall. You can still go through, but you have to choose to.
 
 **Key differentiators:**
 - 7 interventions, rotated within a group so the pause doesn't turn into a reflex
 - Groups of sites, each with its own schedule, time limit, pause, break budget and message
 - Counted breaks per day, with optional escalation when you overdo them
 - Strict mode when you want a real hard stop
-- Local-first: usage data stays on the device; nothing about your browsing is sent to FocusMode
+- Local-first: usage data stays on the device; nothing about your browsing is sent to focusmode
 
 **One-liner**: "Free Chrome website blocker that pauses distracting sites instead of walling them off."
 
@@ -65,7 +65,7 @@ FocusMode is a **mindful website blocker**. When you open a distracting site it 
   - `?` matches one character in a path; `*keyword*` matches the keyword anywhere in host, path or query
   - `!` exception rules let one path or subdomain through (e.g. `!music.youtube.com`)
   - Lines starting with `#` are comments
-- Right-click menu: "Add to FocusMode Group", with every group plus "Create New Group".
+- Right-click menu: "Add to focusmode Group", with every group plus "Create New Group".
 - **Free**: 1 group. **Pro**: unlimited groups.
 
 ### B. 7 interventions
@@ -82,7 +82,7 @@ Names as shown in the extension and on the landing page:
 
 All timed interventions:
 - Duration 3 to 15 seconds per group (default 5)
-- Several can be enabled per group; FocusMode rotates between them
+- Several can be enabled per group; focusmode rotates between them
 - Custom message per intervention type per group
 - Shown as an overlay on the page (overlay mode can be switched off in Settings)
 
@@ -125,7 +125,7 @@ Escalation and each option are separate toggles, all on for new groups. Free.
 
 ### I. Privacy
 - Usage stats, breaks and streaks live in local extension storage on the device
-- Groups (with their site lists), schedules, settings and the license key live in the browser's extension sync storage; if browser sync is on, the browser vendor (e.g. Google) copies them between the user's browsers. FocusMode never receives them (matches `/privacy-policy/`)
+- Groups (with their site lists), schedules, settings and the license key live in the browser's extension sync storage; if browser sync is on, the browser vendor (e.g. Google) copies them between the user's browsers. focusmode never receives them (matches `/privacy-policy/`)
 - No analytics SDK, no trackers, no telemetry, no account
 - One exception: Pro sends the license key, a random install ID and the browser's name to `/api/license/validate`. No browsing data.
 
@@ -158,9 +158,9 @@ Source of truth: `FREE_FEATURES`, `PRO_FEATURES` and `TIERS` in `src/lib/pricing
 | Plus | $30 | 3 |
 | Unlimited | $45 | Unlimited |
 
-- A "browser" is one browser profile with FocusMode installed. Work Chrome and personal Chrome count as two.
+- A "browser" is one browser profile with focusmode installed. Work Chrome and personal Chrome count as two.
 - A seat can be freed from Settings in the extension and reused elsewhere.
-- Keys only work on FocusMode 3.0 and later.
+- Keys only work on focusmode 3.0 and later.
 - Refund: full refund within 14 days, by email to hey@focusmode.app.
 - v2 Pro customers (including lapsed subscriptions) are grandfathered: Pro for life on unlimited browsers, sent a key by email.
 
@@ -188,12 +188,12 @@ Legacy v2 subscription handlers (`customer.subscription.deleted`, NextAuth sign-
 
 ## 7. Competitive Positioning
 
-Angles that hold for FocusMode (check competitor prices on their own sites before publishing anything with numbers):
+Angles that hold for focusmode (check competitor prices on their own sites before publishing anything with numbers):
 
-- **Block-page blockers** (BlockSite, StayFocusd, Cold Turkey): FocusMode pauses instead of walling off, rotates 7 interventions, and still offers strict mode for a hard stop. LeechBlock NG has a countdown "delaying page", so don't call it hard-wall only; the angle there is 7 rotating interventions and per-group breaks.
-- **Subscription pricing**: BlockSite Premium and Freedom are sold mainly as subscriptions (Freedom also sells a separate lifetime plan, so don't claim it has none). FocusMode Pro is a one-time payment.
+- **Block-page blockers** (BlockSite, StayFocusd, Cold Turkey): focusmode pauses instead of walling off, rotates 7 interventions, and still offers strict mode for a hard stop. LeechBlock NG has a countdown "delaying page", so don't call it hard-wall only; the angle there is 7 rotating interventions and per-group breaks.
+- **Subscription pricing**: BlockSite Premium and Freedom are sold mainly as subscriptions (Freedom also sells a separate lifetime plan, so don't claim it has none). focusmode Pro is a one-time payment.
 - Keep comparisons factual and neutral; no claims about competitors' quality, privacy or ratings unless sourced from their own pages.
-- **Timer apps** (Forest): FocusMode works on specific sites and paths, with per-group schedules and time limits, not a single focus timer.
+- **Timer apps** (Forest): focusmode works on specific sites and paths, with per-group schedules and time limits, not a single focus timer.
 - **Privacy**: no account, no browsing data leaves the browser.
 
 ---
@@ -220,7 +220,7 @@ Angles that hold for FocusMode (check competitor prices on their own sites befor
 - website blocker that doesn't fully block sites
 - private website blocker no account
 
-Content pages (`/block/{site}/`, from `src/lib/block-pages.ts`) follow: native how-to first, then the FocusMode way, then CTA.
+Content pages (`/block/{site}/`, from `src/lib/block-pages.ts`) follow: native how-to first, then the focusmode way, then CTA.
 
 ---
 
@@ -265,7 +265,7 @@ All URLs use a trailing slash. Each page self-canonicals (`alternates: { canonic
 Source: `src/components/json-ld.tsx` (`<JsonLd />` on `/` and `/pricing/`, `<JsonLd faq />` on `/faq/`). Organization + SoftwareApplication on each.
 
 ### SoftwareApplication
-- Name: FocusMode
+- Name: focusmode
 - applicationCategory: BrowserApplication
 - operatingSystem: Chrome
 - Offers: Free ($0); Pro $20 / $30 / $45 one-time, built from `TIERS`. During the sale the offers switch to the discounted price with `priceValidUntil` = sale end.

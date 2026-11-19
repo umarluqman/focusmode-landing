@@ -1,6 +1,6 @@
-# FocusMode SEO Analysis & Landing Page Optimization Report
+# focusmode SEO Analysis & Landing Page Optimization Report
 
-> Generated: 2026-02-18 | Site: https://focusmode.app | Product: FocusMode v3.0
+> Generated: 2026-02-18 | Site: https://focusmode.app | Product: focusmode v3.0
 
 ---
 
@@ -60,17 +60,17 @@ Major v3.0 features entirely absent from the page:
 
 ### Title Tag (57 chars)
 ```
-FocusMode - Website Blocker & Focus Mode Chrome Extension
+focusmode - Website Blocker & Focus Mode Chrome Extension
 ```
 
 ### Meta Description (155 chars)
 ```
-Block distracting websites mindfully with FocusMode. 4 intervention types, break management, streak tracking & analytics. Free Chrome extension used by 15k+ people.
+Block distracting websites mindfully with focusmode. 4 intervention types, break management, streak tracking & analytics. Free Chrome extension used by 15k+ people.
 ```
 
 ### Open Graph
 ```html
-<meta property="og:title" content="FocusMode — Mindful Website Blocker for Chrome" />
+<meta property="og:title" content="focusmode — Mindful Website Blocker for Chrome" />
 <meta property="og:description" content="Gentle interventions that help you stay focused. Not a blunt blocker — a mindful browsing companion. Free with optional $20.99 PRO." />
 ```
 
@@ -84,7 +84,7 @@ Block distracting websites mindfully with FocusMode. 4 intervention types, break
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": "https://focusmode.app/#organization",
-  "name": "FocusMode",
+  "name": "focusmode",
   "url": "https://focusmode.app",
   "logo": {
     "@type": "ImageObject",
@@ -106,7 +106,7 @@ Block distracting websites mindfully with FocusMode. 4 intervention types, break
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": "https://focusmode.app/#website",
-  "name": "FocusMode",
+  "name": "focusmode",
   "url": "https://focusmode.app",
   "publisher": { "@id": "https://focusmode.app/#organization" },
   "description": "Reduce mindless browsing with gentle interventions. A Chrome extension for mindful, intentional browsing.",
@@ -120,7 +120,7 @@ Block distracting websites mindfully with FocusMode. 4 intervention types, break
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "@id": "https://focusmode.app/#software",
-  "name": "FocusMode",
+  "name": "focusmode",
   "description": "A Chrome extension that reduces mindless browsing through calming interventions instead of hard blocks. 4 intervention types, break management, streak tracking, and analytics.",
   "url": "https://focusmode.app",
   "applicationCategory": "BrowserApplication",
@@ -192,42 +192,42 @@ Block distracting websites mindfully with FocusMode. 4 intervention types, break
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is FocusMode?",
+      "name": "What is focusmode?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "FocusMode is a Chrome extension that reduces mindless browsing through calming interventions instead of hard blocks. Rather than simply preventing access to websites, it uses 4 unique mindfulness-based approaches to help you make conscious decisions about your browsing habits."
+        "text": "focusmode is a Chrome extension that reduces mindless browsing through calming interventions instead of hard blocks. Rather than simply preventing access to websites, it uses 4 unique mindfulness-based approaches to help you make conscious decisions about your browsing habits."
       }
     },
     {
       "@type": "Question",
-      "name": "Is FocusMode free?",
+      "name": "Is focusmode free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, FocusMode has a free tier that includes 1 group and all 4 intervention types (hold, slide, pixel, and instant). The PRO version is a one-time payment of $20.99 that unlocks unlimited groups, full analytics, flexible break durations, and data export. No subscription required."
+        "text": "Yes, focusmode has a free tier that includes 1 group and all 4 intervention types (hold, slide, pixel, and instant). The PRO version is a one-time payment of $20.99 that unlocks unlimited groups, full analytics, flexible break durations, and data export. No subscription required."
       }
     },
     {
       "@type": "Question",
-      "name": "How is FocusMode different from other website blockers?",
+      "name": "How is focusmode different from other website blockers?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "FocusMode uses 4 unique mindfulness-based interventions (hold, slide, pixel, and instant) instead of simply blocking sites. It respects user autonomy with flexible breaks and progressive escalation, encouraging mindful browsing rather than rigid restriction."
+        "text": "focusmode uses 4 unique mindfulness-based interventions (hold, slide, pixel, and instant) instead of simply blocking sites. It respects user autonomy with flexible breaks and progressive escalation, encouraging mindful browsing rather than rigid restriction."
       }
     },
     {
       "@type": "Question",
-      "name": "Does FocusMode work on all websites?",
+      "name": "Does focusmode work on all websites?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, FocusMode uses Shadow DOM isolation to work on any website without style conflicts. This ensures the intervention overlays display correctly regardless of a website's existing CSS or JavaScript."
+        "text": "Yes, focusmode uses Shadow DOM isolation to work on any website without style conflicts. This ensures the intervention overlays display correctly regardless of a website's existing CSS or JavaScript."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I use FocusMode during work hours only?",
+      "name": "Can I use focusmode during work hours only?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, schedule-based triggering lets you activate blocking during specific time windows. You can configure FocusMode to only intervene during your work hours or study sessions, and browse freely outside those windows."
+        "text": "Yes, schedule-based triggering lets you activate blocking during specific time windows. You can configure focusmode to only intervene during your work hours or study sessions, and browse freely outside those windows."
       }
     },
     {
@@ -240,10 +240,10 @@ Block distracting websites mindfully with FocusMode. 4 intervention types, break
     },
     {
       "@type": "Question",
-      "name": "Does FocusMode collect my data?",
+      "name": "Does focusmode collect my data?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, all data is stored locally in your browser. FocusMode is privacy-respecting with no external tracking. Your browsing data never leaves your device."
+        "text": "No, all data is stored locally in your browser. focusmode is privacy-respecting with no external tracking. Your browsing data never leaves your device."
       }
     },
     {
@@ -251,7 +251,7 @@ Block distracting websites mindfully with FocusMode. 4 intervention types, break
       "name": "Can I block specific pages instead of entire websites?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, FocusMode supports path-based blocking with wildcards. For example, you can block youtube.com/shorts while still allowing access to youtube.com for other content. You can also use exclusion patterns like !allowed.example.com."
+        "text": "Yes, focusmode supports path-based blocking with wildcards. For example, you can block youtube.com/shorts while still allowing access to youtube.com for other content. You can also use exclusion patterns like !allowed.example.com."
       }
     }
   ]
@@ -323,7 +323,7 @@ Block distracting websites mindfully with FocusMode. 4 intervention types, break
 - [ ] Create `robots.txt` allowing all crawlers + AI bots (GPTBot, ClaudeBot, PerplexityBot)
 - [ ] Create `sitemap.xml` with all pages
 - [ ] Add 5 JSON-LD schema blocks (Organization, WebSite, SoftwareApplication, BreadcrumbList, FAQPage)
-- [ ] Fix title tag: `FocusMode - Website Blocker & Focus Mode Chrome Extension`
+- [ ] Fix title tag: `focusmode - Website Blocker & Focus Mode Chrome Extension`
 - [ ] Fix meta description with target keywords
 - [ ] Fix OG/Twitter title from lowercase "focusmode" to proper casing
 - [ ] Add `twitter:description` meta tag
