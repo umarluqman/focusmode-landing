@@ -67,3 +67,46 @@ export function JsonLd({ faq = false }: { faq?: boolean }) {
     />
   );
 }
+
+export function PageJsonLd({
+  parent,
+  name,
+  faqs,
+}: {
+  parent: { name: string; path: string };
+  name: string;
+  faqs: { q: string; a: string }[];
+}) {
+  const crumbs = [{ name: "Home", path: "/" }, parent];
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        ...crumbs.map((c, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: c.name,
+          item: `https://focusmode.app${c.path}`,
+        })),
+        { "@type": "ListItem", position: crumbs.length + 1, name },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    },
+  ];
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
+    />
+  );
+}
