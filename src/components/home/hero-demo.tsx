@@ -4,33 +4,44 @@ import { useEffect, useState } from "react";
 import { BrowserFrame, FakeFeed } from "./browser-frame";
 import { InterventionFrame } from "./intervention-frame";
 
-const BROWSE_MS = 2600;
-const PAUSE_MS = 7400;
+const SCENES = ["feed", "wave", "feed", "breathing"] as const;
+const DWELL_MS = { feed: 2600, wave: 7400, breathing: 7000 };
+// Breathing stays up this long after the visitor's last click.
+const HOLD_MS = 30000;
+const BREATHING = SCENES.indexOf("breathing");
 
 export function HeroDemo() {
-  const [paused, setPaused] = useState(false);
+  const [step, setStep] = useState(0);
+  const [touches, setTouches] = useState(0);
+  const scene = SCENES[step];
+
+  const advance = () => {
+    setStep((s) => (s + 1) % SCENES.length);
+    setTouches(0);
+  };
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setPaused(true);
+      setStep(BREATHING);
       return;
     }
-    let id = setTimeout(function loop(next = true) {
-      setPaused(next);
-      id = setTimeout(() => loop(!next), next ? PAUSE_MS : BROWSE_MS);
-    }, BROWSE_MS);
+    const id = setTimeout(advance, touches ? HOLD_MS : DWELL_MS[scene]);
     return () => clearTimeout(id);
-  }, []);
+  }, [step, touches]);
 
   return (
     <div className="animate-fade-up [animation-delay:120ms]">
-      <BrowserFrame url={paused ? "x.com · paused by focusmode" : "x.com/home"}>
+      <BrowserFrame url={scene === "feed" ? "x.com/home" : "x.com · paused by focusmode"}>
         <div className="relative aspect-[4/3.4] sm:aspect-[4/3]">
           <FakeFeed />
-          {paused && (
+          {scene === "wave" && (
+            <InterventionFrame interactive={false} params={{ type: "slide", variant: "wave", duration: 6 }} />
+          )}
+          {scene === "breathing" && (
             <InterventionFrame
-              interactive={false}
-              params={{ type: "shader", variant: "paper-mesh", duration: 4 }}
+              params={{ type: "breathing", variant: "petals", technique: "505" }}
+              onInteract={() => setTouches((t) => t + 1)}
+              onAction={advance}
             />
           )}
         </div>
