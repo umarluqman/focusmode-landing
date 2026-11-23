@@ -95,9 +95,37 @@ export async function emailKey(license: LicenseKey, intro: string) {
   });
 }
 
+export const GRANDFATHER = {
+  tier: "unlimited",
+  maxActivations: null,
+  grandfathered: true,
+  stripeSubscriptionId: null,
+};
+
 export async function resendKeys(email: string) {
+  const byEmail = { email: { equals: email, mode: "insensitive" as const } };
+
+  // v2 subscribers the backfill hasn't reached yet get their key on demand
+  const user = await prisma.user.findFirst({
+    where: { ...byEmail, isSubscribed: true },
+  });
+  if (user) {
+    const stripeSessionId = `backfill_${user.id}`;
+    await prisma.licenseKey.upsert({
+      where: { stripeSessionId },
+      update: {},
+      create: {
+        ...GRANDFATHER,
+        key: newKey(),
+        email: user.email!,
+        stripeSessionId,
+        stripeCustomerId: user.stripeCustomerId,
+      },
+    });
+  }
+
   const licenses = await prisma.licenseKey.findMany({
-    where: { email: { equals: email, mode: "insensitive" }, status: "granted" },
+    where: { ...byEmail, status: "granted" },
     orderBy: { createdAt: "asc" },
   });
   if (!licenses.length) return;
@@ -106,6 +134,11 @@ export async function resendKeys(email: string) {
     licenses[0].email,
     renderKeysEmail("Here are your focusmode Pro license keys.", licenses)
   );
+
+  await prisma.licenseKey.updateMany({
+    where: { id: { in: licenses.map((l) => l.id) }, emailedAt: null },
+    data: { emailedAt: new Date() },
+  });
 }
 
 async function sendEmail(
@@ -168,32 +201,35 @@ function renderKeysEmail(intro: string, licenses: LicenseKey[]) {
   const keysHtml = licenses
     .map(
       (l) => `
-      <div style="margin:16px 0;padding:16px;border-radius:12px;background:#f2f6f8;border-left:4px solid #ff7c43">
-        <div style="font-size:13px;color:#4a6572">${tierNameOf(l)} · ${browsersOf(l)}</div>
-        <div style="margin-top:6px;font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:700;color:#003f5c;word-break:break-all">${l.key}</div>
-      </div>`
+        <div style="margin:12px 0;padding:16px 18px;border:1px solid #dadad7;border-radius:16px;background:#f3f3f1">
+          <div style="font-size:13px;color:#535f65">${tierNameOf(l)} · ${browsersOf(l)}</div>
+          <div style="margin-top:6px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;font-weight:600;letter-spacing:-0.01em;color:#0b1519;word-break:break-all">${l.key}</div>
+        </div>`
     )
     .join("");
 
   const html = `<!doctype html>
 <html>
-  <body style="margin:0;padding:24px;background:#eef2f4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1c2b33">
-    <div style="max-width:520px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden">
-      <div style="padding:20px 24px;background:#003f5c;color:#ffffff;font-size:20px;font-weight:700">
-        focusmode <span style="color:#ff7c43">Pro</span>
-      </div>
-      <div style="padding:24px">
-        <p style="margin:0 0 8px;font-size:16px">${intro}</p>
+  <body style="margin:0;padding:32px 16px;background:#f3f3f1;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.6;color:#0b1519">
+    <div style="max-width:520px;margin:0 auto">
+      <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 20px 4px">
+        <tr>
+          <td><img src="${SITE_URL}/apple-touch-icon.png" width="28" height="28" alt="" style="display:block;border-radius:7px"></td>
+          <td style="padding-left:8px;font-size:17px;font-weight:600;letter-spacing:-0.02em;color:#0b1519">focusmode</td>
+        </tr>
+      </table>
+      <div style="padding:28px 24px;border:1px solid #dadad7;border-radius:20px;background:#fdfdfc">
+        <p style="margin:0 0 16px;font-size:16px">${intro}</p>
         ${keysHtml}
-        <p style="margin:20px 0 8px;font-weight:600">To activate</p>
-        <ol style="margin:0;padding-left:20px;line-height:1.7">
+        <p style="margin:24px 0 8px;font-weight:600">To activate</p>
+        <ol style="margin:0;padding-left:20px;line-height:1.8">
           ${STEPS.map((s) => `<li>${s}</li>`).join("")}
         </ol>
-        ${notes.map((n) => `<p style="margin:16px 0 0;font-size:14px;color:#1c2b33">${n}</p>`).join("")}
-        <p style="margin:24px 0 0;font-size:13px;color:#4a6572">
-          Lost this email? <a href="${resendUrl}" style="color:#003f5c">Get your keys again</a>.
-        </p>
+        ${notes.map((n) => `<p style="margin:16px 0 0;font-size:14px;color:#535f65">${n}</p>`).join("")}
       </div>
+      <p style="margin:20px 4px 0;font-size:13px;color:#535f65">
+        Lost this email? <a href="${resendUrl}" style="color:#003f5c;font-weight:600">Get your keys again</a>.
+      </p>
     </div>
   </body>
 </html>`;

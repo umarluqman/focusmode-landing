@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { emailKey, newKey } from "@/lib/license";
+import { emailKey, GRANDFATHER, newKey } from "@/lib/license";
 
 const send = process.argv.includes("--send");
 const limitArg = process.argv.indexOf("--limit");
@@ -8,12 +8,6 @@ const limit = limitArg === -1 ? 95 : Number(process.argv[limitArg + 1]);
 if (!Number.isInteger(limit) || limit < 1) throw new Error("--limit must be a positive integer");
 const INTRO =
   "Thank you for being an early focusmode Pro supporter! focusmode v3 is here, and you keep Pro for life. Here's your license key. It works on as many browsers as you like.";
-const GRANDFATHER = {
-  tier: "unlimited",
-  maxActivations: null,
-  grandfathered: true,
-  stripeSubscriptionId: null,
-};
 
 async function main() {
   const users = await prisma.user.findMany({
