@@ -2,6 +2,7 @@ import type { Metadata } from "next/types";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
+import { PageJsonLd } from "@/components/json-ld";
 import { BLOCK_PAGES, getBlockPage } from "@/lib/block-pages";
 import { StoreLink } from "@/components/store-link";
 import { storeUrl } from "@/lib/pricing";
@@ -36,6 +37,7 @@ export default function BlockSitePage({ params }: { params: { site: string } }) 
 
   return (
     <>
+      <PageJsonLd parent={{ name: "Block a site", path: "/block/" }} name={page.name} faqs={page.faqs} />
       <main id="main" className="container max-w-3xl py-12 lg:py-20">
         <nav className="text-sm text-muted-foreground">
           <Link href="/block/" className="hover:text-foreground">

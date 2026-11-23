@@ -2,6 +2,7 @@ import type { Metadata } from "next/types";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
+import { PageJsonLd } from "@/components/json-ld";
 import { StoreLink } from "@/components/store-link";
 import { ALTERNATIVE_PAGES, getAlternativePage } from "@/lib/alternatives";
 
@@ -30,6 +31,7 @@ export default function AlternativePage({ params }: { params: { tool: string } }
 
   return (
     <>
+      <PageJsonLd parent={{ name: "Website blockers", path: "/alternatives/" }} name={page.name} faqs={page.faqs} />
       <main id="main" className="container max-w-3xl py-12 lg:py-20">
         <nav className="text-sm text-muted-foreground">
           <Link href="/alternatives/" className="hover:text-foreground">

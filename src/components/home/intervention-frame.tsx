@@ -11,11 +11,13 @@ export function InterventionFrame({
   params,
   interactive = true,
   onAction,
+  onInteract,
   className,
 }: {
   params: Record<string, string | number>;
   interactive?: boolean;
   onAction?: (action: DemoAction) => void;
+  onInteract?: () => void;
   className?: string;
 }) {
   const host = useRef<HTMLDivElement>(null);
@@ -42,14 +44,14 @@ export function InterventionFrame({
   }, []);
 
   useEffect(() => {
-    if (!onAction) return;
     const onMessage = (e: MessageEvent) => {
       if (e.source !== frame.current?.contentWindow || e.data?.source !== "focusmode-demo") return;
-      onAction(e.data);
+      if (e.data.action === "interact") onInteract?.();
+      else onAction?.(e.data);
     };
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [onAction]);
+  }, [onAction, onInteract]);
 
   const src = `/demo/index.html?${new URLSearchParams(
     Object.entries(params).map(([k, v]) => [k, String(v)])
