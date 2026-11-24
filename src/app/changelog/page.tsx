@@ -22,6 +22,28 @@ const changes: Period[] = [
     date: "November 2026",
     updates: [
       {
+        version: "3.1.1",
+        title: "License activation fix and a group toggle",
+        imageSrc: [],
+        description: [
+          "Fixed: license keys can be activated again. In 3.1.0, activation failed with \"Couldn't reach focusmode.app\".",
+          "New \"Show group toggle\" preference: turn groups on or off from the home list.",
+        ],
+      },
+      {
+        version: "3.1.0",
+        title: "Wave slide, Layers breathing and clearer charts",
+        imageSrc: [],
+        description: [
+          "New wave effect for the Slide intervention (Pro).",
+          "New Layers style for the Breathing intervention: rings that grow as you inhale.",
+          "30-day and 90-day charts show one bar per week, and chart colors are easier to tell apart in light and dark mode.",
+          "Hold to Continue can now last up to 60 seconds (was 15).",
+          "Breathing petals rotate as they open and close, and the exercise is centered on the page.",
+          "Restart is now Reset: it takes you back to the start instead of starting again right away.",
+        ],
+      },
+      {
         version: "3.0.0",
         title: "focusmode 3: groups, shaders and lifetime Pro",
         imageSrc: [],
