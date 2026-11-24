@@ -2,10 +2,12 @@ import { cn } from "@/lib/utils";
 
 export function BrowserFrame({
   url,
+  zoomed,
   className,
   children,
 }: {
-  url: string;
+  url: React.ReactNode;
+  zoomed?: boolean;
   className?: string;
   children: React.ReactNode;
 }) {
@@ -16,17 +18,19 @@ export function BrowserFrame({
         className
       )}
     >
-      <div className="flex h-10 items-center gap-3 border-b border-border px-4">
-        <span className="flex gap-1.5" aria-hidden="true">
-          <span className="size-2.5 rounded-full bg-secondary" />
-          <span className="size-2.5 rounded-full bg-secondary" />
-          <span className="size-2.5 rounded-full bg-secondary" />
-        </span>
-        <span className="flex h-6 flex-1 items-center rounded-full bg-muted px-3 text-xs text-muted-foreground">
-          {url}
-        </span>
+      <div className={cn("origin-[20%_0] transition-transform duration-500 ease-out", zoomed && "scale-[2]")}>
+        <div className="flex h-10 items-center gap-3 border-b border-border px-4">
+          <span className="flex gap-1.5" aria-hidden="true">
+            <span className="size-2.5 rounded-full bg-secondary" />
+            <span className="size-2.5 rounded-full bg-secondary" />
+            <span className="size-2.5 rounded-full bg-secondary" />
+          </span>
+          <span className="flex h-6 flex-1 items-center rounded-full bg-muted px-3 text-xs text-muted-foreground">
+            {url}
+          </span>
+        </div>
+        <div className="relative">{children}</div>
       </div>
-      <div className="relative">{children}</div>
     </div>
   );
 }

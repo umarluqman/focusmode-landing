@@ -5,17 +5,13 @@ import { cn } from "@/lib/utils";
 import { BrowserFrame, FakeFeed } from "./browser-frame";
 import { InterventionFrame } from "./intervention-frame";
 
-const SITES = [
-  { url: "x.com", variant: "paper-warp" },
-  { url: "reddit.com", variant: "dither-sphere" },
-  { url: "youtube.com/shorts", variant: "marble-ink" },
-];
+const SITES = ["x.com", "reddit.com", "youtube.com/shorts"];
 
 const DAILY_BREAKS = 3;
 
 const STEPS = [
   ["Habit reaches for a site", "You open a tab on autopilot. focusmode catches it before the page does."],
-  ["The pause rises", "A shader fills the screen while a short timer runs. Nothing to read, nothing to scroll."],
+  ["The pause rises", "Petals open and close as you breathe in for five and out for five, with a soft chime on each turn."],
   ["You choose, on purpose", "Take a counted break, or close the tab and keep your streak."],
 ];
 
@@ -25,7 +21,7 @@ export function BlockedMoment() {
   const [site, setSite] = useState(SITES[0]);
   const [phase, setPhase] = useState<Phase>("idle");
 
-  const visit = (s: (typeof SITES)[number]) => {
+  const visit = (s: string) => {
     setSite(s);
     setPhase("paused");
   };
@@ -36,7 +32,7 @@ export function BlockedMoment() {
         <div>
           <p className="text-sm font-semibold text-orange-ink">The blocked moment</p>
           <h2 className="mt-3 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.02]">
-            A website blocker that gives you three seconds to change your mind.
+            A website blocker that gives you a few breaths to change your mind.
           </h2>
           <ol className="mt-10 space-y-7">
             {STEPS.map(([title, body], i) => (
@@ -58,27 +54,27 @@ export function BlockedMoment() {
             <span className="mr-1 text-sm text-muted-foreground">Open a site:</span>
             {SITES.map((s) => (
               <button
-                key={s.url}
+                key={s}
                 type="button"
                 onClick={() => visit(s)}
-                aria-pressed={site.url === s.url && phase !== "idle"}
+                aria-pressed={site === s && phase !== "idle"}
                 className={cn(
                   "h-9 rounded-full border px-4 text-sm font-medium transition-colors",
-                  site.url === s.url && phase !== "idle"
+                  site === s && phase !== "idle"
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border bg-background hover:border-foreground/30"
                 )}
               >
-                {s.url}
+                {s}
               </button>
             ))}
           </div>
 
-          <BrowserFrame url={phase === "idle" || phase === "closed" ? "new tab" : site.url}>
-            <div className="relative aspect-[4/3.4] sm:aspect-[16/11]" aria-live="polite">
+          <BrowserFrame url={phase === "idle" || phase === "closed" ? "new tab" : site}>
+            <div className="relative aspect-square sm:aspect-[16/11]" aria-live="polite">
               {phase === "idle" && (
                 <div className="absolute inset-0 grid place-items-center p-6 text-center text-muted-foreground">
-                  <p>Pick a site above and see what focusmode does.</p>
+                  <p>Pick a site above, then press Start breathing. Sound on.</p>
                 </div>
               )}
               {phase === "break" && <FakeFeed />}
@@ -86,10 +82,9 @@ export function BlockedMoment() {
               {phase === "paused" && (
                 <InterventionFrame
                   params={{
-                    type: "shader",
-                    variant: site.variant,
-                    duration: 3,
-                    text: "Are you sure you want to enter this site?",
+                    type: "breathing",
+                    variant: "petals",
+                    technique: "505",
                     breaks: DAILY_BREAKS,
                   }}
                   onAction={(a) => setPhase(a.action === "break" ? "break" : "closed")}

@@ -82,8 +82,18 @@ const config = {
           "0%": { transform: "scaleX(0)" },
           "100%": { transform: "scaleX(1)" },
         },
+        blink: {
+          "50%": { opacity: "0" },
+        },
+        "cursor-click": {
+          "0%": { left: "45%", top: "30%" },
+          "70%": { left: "170px", top: "-1rem", transform: "scale(1)" },
+          "85%": { transform: "scale(0.8)" },
+        },
       },
       animation: {
+        blink: "blink 1s steps(1) infinite",
+        "cursor-click": "cursor-click 0.8s var(--ease-out) both",
         "fade-up": "fade-up 0.7s var(--ease-out) both",
         fill: "fill 5s linear forwards",
       },
