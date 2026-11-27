@@ -16,8 +16,10 @@ export default function PrivacyPolicy() {
           <section>
             <h2 className="text-2xl font-semibold mb-3">1. The Short Version</h2>
             <p>
-              focusmode is a browser extension that blocks or delays the
-              websites you choose. It works without an account. Your groups,
+              focusmode is a browser extension for Microsoft Edge, Google
+              Chrome and Mozilla Firefox that blocks or delays the websites you
+              choose. This policy applies to every version of the extension,
+              in each of these browsers. It works without an account. Your groups,
               settings and browsing statistics stay in your browser and are
               never sent to us. The only thing the extension sends to
               focusmode.app is a license check, and only if you have entered a
@@ -56,9 +58,9 @@ export default function PrivacyPolicy() {
               Your groups (including the sites you list), schedules and
               settings (including your license key, if any) are saved in the
               browser&apos;s own extension sync storage. If you have sync
-              turned on in your browser, the browser vendor (for example
-              Google) copies them between your browsers under its own privacy
-              policy. We do not receive them.
+              turned on in your browser, the browser vendor (Microsoft for
+              Edge, Google for Chrome, Mozilla for Firefox) copies them between
+              your devices under its own privacy policy. We do not receive them.
             </p>
             <p className="mt-3">
               None of this browsing or usage data is transmitted to us or to
@@ -80,7 +82,8 @@ export default function PrivacyPolicy() {
               <li>
                 License check: when you activate a key, and then at most once a
                 day. It sends your license key, the random install ID and the
-                name of your browser (for example &ldquo;Chrome&rdquo;). We
+                name of your browser (for example &ldquo;Edge&rdquo;,
+                &ldquo;Chrome&rdquo; or &ldquo;Firefox&rdquo;). We
                 store the install ID, the browser name, and the time of the
                 first and most recent check, so we can count how many browsers
                 use a key.
@@ -125,8 +128,9 @@ export default function PrivacyPolicy() {
             </ul>
             <p className="mt-3">
               The use of information received from the extension adheres to the
-              Chrome Web Store User Data Policy, including the Limited Use
-              requirements.
+              Microsoft Edge Add-ons developer policies, the Chrome Web Store
+              User Data Policy (including the Limited Use requirements) and the
+              Firefox Add-on Policies.
             </p>
           </section>
 
@@ -216,7 +220,7 @@ export default function PrivacyPolicy() {
           </section>
         </div>
         <p className="mt-8 text-sm text-muted-foreground">
-          Last updated: 16 November 2026
+          Last updated: 27 November 2026
         </p>
       </main>
       <Footer />
